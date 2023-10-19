@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Furion" Version="4.8.8.48" />
+    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.8.8.48" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.8.8.48" />
+    <PackageReference Include="NewLife.Redis" Version="5.5.2023.1001" />
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.Extensions\ZStack.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

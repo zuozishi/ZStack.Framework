@@ -1,0 +1,9 @@
+{
+  "Serilog": {
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithThreadId"
+    ]
+  }
+}
