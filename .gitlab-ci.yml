@@ -15,6 +15,7 @@ build:
 pack:
   stage: pack
   script:
+   - dotnet build -c Release
    - dotnet pack -c Release -o ./dist
    - dotnet nuget add source "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
    - dotnet nuget push "dist/*.nupkg" --source gitlab
