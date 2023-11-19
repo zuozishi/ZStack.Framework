@@ -1,5 +1,4 @@
-﻿using Furion.ConfigurableOptions;
-using NewLife.Caching;
+﻿using NewLife.Caching;
 
 namespace ZStack.AspNetCore.Options;
 

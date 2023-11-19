@@ -1,6 +1,10 @@
-﻿global using FurionApp = Furion.App;
-using Furion;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using System.Collections.Concurrent;
+using System.Reflection;
+using System.Security.Claims;
 
 namespace ZStack.AspNetCore;
 
@@ -9,68 +13,10 @@ namespace ZStack.AspNetCore;
 /// </summary>
 public static class App
 {
-    #region 依赖注入容器
     /// <summary>
-    /// 获取存储根服务
+    /// 存储根服务
     /// </summary>
-    /// <returns></returns>
-    public static IServiceProvider GetRootServiceProvider()
-        => FurionApp.RootServices;
-
-    /// <summary>
-    /// 获取请求生存周期的服务
-    /// </summary>
-    /// <typeparam name="TService"></typeparam>
-    /// <returns></returns>
-    public static TService GetRequiredService<TService>(IServiceProvider? serviceProvider = null) where TService: class
-        => FurionApp.GetRequiredService<TService>(serviceProvider);
-
-    /// <summary>
-    /// 获取请求生存周期的服务
-    /// </summary>
-    /// <typeparam name="TService"></typeparam>
-    /// <returns></returns>
-    public static TService GetService<TService>(IServiceProvider? serviceProvider = null) where TService : class
-        => FurionApp.GetService<TService>(serviceProvider);
-
-    /// <summary>
-    /// 获取请求生存周期的服务
-    /// </summary>
-    /// <typeparam name="TService"></typeparam>
-    /// <returns></returns>
-    public static IEnumerable<TService> GetServices<TService>(IServiceProvider? serviceProvider = null) where TService : class
-        => FurionApp.GetServices<TService>(serviceProvider);
-
-    /// <summary>
-    /// 获取请求生存周期的服务
-    /// </summary>
-    /// <typeparam name="TService"></typeparam>
-    /// <param name="serviceKey"></param>
-    /// <param name="serviceProvider"></param>
-    /// <returns></returns>
-    public static TService GetRequiredKeyedService<TService>(object? serviceKey, IServiceProvider? serviceProvider = null) where TService : class
-        => (serviceProvider ?? FurionApp.RootServices).GetRequiredKeyedService<TService>(serviceKey);
-
-    /// <summary>
-    /// 获取请求生存周期的服务
-    /// </summary>
-    /// <typeparam name="TService"></typeparam>
-    /// <param name="serviceKey"></param>
-    /// <param name="serviceProvider"></param>
-    /// <returns></returns>
-    public static TService? GetKeyedService<TService>(object? serviceKey, IServiceProvider? serviceProvider = null) where TService : class
-        => (serviceProvider ?? FurionApp.RootServices).GetKeyedService<TService>(serviceKey);
-
-    /// <summary>
-    /// 获取请求生存周期的服务
-    /// </summary>
-    /// <typeparam name="TService"></typeparam>
-    /// <param name="serviceKey"></param>
-    /// <param name="serviceProvider"></param>
-    /// <returns></returns>
-    public static IEnumerable<TService> GetKeyedServices<TService>(object? serviceKey, IServiceProvider? serviceProvider = null) where TService : class
-        => (serviceProvider ?? FurionApp.RootServices).GetKeyedServices<TService>(serviceKey);
-    #endregion
+    public static IServiceProvider RootServices { get; } = FurionApp.RootServices;
 
     /// <summary>
     /// 获取选项
@@ -84,4 +30,59 @@ public static class App
     /// 应用全局配置
     /// </summary>
     public static AppSettingsOptions Settings => FurionApp.Settings;
+
+    /// <summary>
+    /// 应用日志记录器
+    /// </summary>
+    public static ILogger Logger { get; } = Log.Logger.ForContext<ZStackApp>();
+
+    /// <summary>
+    /// 获取请求上下文用户
+    /// </summary>
+    public static ClaimsPrincipal? User => FurionApp.User;
+
+    /// <summary>
+    /// 全局配置选项
+    /// </summary>
+    public static IConfiguration Configuration => FurionApp.Configuration;
+
+    /// <summary>
+    /// 获取Web主机环境，如，是否是开发环境，生产环境等
+    /// </summary>
+    public static IWebHostEnvironment WebHostEnvironment => FurionApp.WebHostEnvironment;
+
+    /// <summary>
+    /// 获取泛型主机环境，如，是否是开发环境，生产环境等
+    /// </summary>
+    public static IHostEnvironment HostEnvironment => FurionApp.HostEnvironment;
+
+    /// <summary>
+    /// 判断是否是单文件环境
+    /// </summary>
+    public static bool SingleFileEnvironment => string.IsNullOrWhiteSpace(Assembly.GetEntryAssembly()?.Location);
+
+    /// <summary>
+    /// 应用有效程序集
+    /// </summary>
+    public static IEnumerable<Assembly> Assemblies => FurionApp.Assemblies;
+
+    /// <summary>
+    /// 有效程序集类型
+    /// </summary>
+    public static IEnumerable<Type> EffectiveTypes => FurionApp.EffectiveTypes;
+
+    /// <summary>
+    /// 获取请求上下文
+    /// </summary>
+    public static HttpContext? HttpContext => FurionApp.HttpContext;
+
+    /// <summary>
+    /// 未托管的对象集合
+    /// </summary>
+    public static ConcurrentBag<IDisposable> UnmanagedObjects => FurionApp.UnmanagedObjects;
+}
+
+internal class ZStackApp
+{
+
 }

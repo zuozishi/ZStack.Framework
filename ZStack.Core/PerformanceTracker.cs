@@ -25,7 +25,7 @@ public static class PerformanceTracker
 /// 性能追踪单元
 /// </summary>
 /// <param name="notify"></param>
-public class PerformanceTrackerScope: IDisposable
+public class PerformanceTrackerScope : IDisposable
 {
     private readonly Action<TimeSpan> _notify;
     private readonly Stopwatch _stopWatch = new();

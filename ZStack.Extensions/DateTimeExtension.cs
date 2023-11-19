@@ -27,4 +27,3 @@ public static class DateTimeExtension
         return Convert.ToInt64(timeSpan.TotalMilliseconds);
     }
 }
- 

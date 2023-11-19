@@ -42,6 +42,6 @@ public class Startup : AppStartup
             endpoints.MapRazorPages();
         });
 
-        app.UseInject();
+        app.UseZStackInject();
     }
 }

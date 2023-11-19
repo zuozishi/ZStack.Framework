@@ -1,5 +1,4 @@
 ﻿using Furion.ConfigurableOptions;
-using Yitter.IdGenerator;
 
 namespace ZStack.AspNetCore.SqlSugar.Options;
 

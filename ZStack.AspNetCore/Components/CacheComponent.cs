@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NewLife.Caching;
-using ZStack.AspNetCore.Options;
+﻿using NewLife.Caching;
 
 namespace ZStack.AspNetCore.Components;
 
@@ -18,7 +16,9 @@ public class CacheComponent : IServiceComponent
             case CacheTypes.Redis:
                 if (options.Redis == null)
                     throw new Exception("Redis配置不能为空");
-                Cache.Default = new FullRedis(options.Redis);
+                Cache.Default = string.IsNullOrEmpty(options.Redis.Prefix)
+                    ? new FullRedis(options.Redis)
+                    : new PrefixedRedis(options.Redis);
                 break;
         }
         services.AddSingleton(Cache.Default);

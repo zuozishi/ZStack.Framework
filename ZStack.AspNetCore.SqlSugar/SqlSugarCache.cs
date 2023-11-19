@@ -1,5 +1,4 @@
 ﻿using NewLife.Caching;
-using SqlSugar;
 
 namespace ZStack.AspNetCore.SqlSugar;
 
@@ -23,7 +22,7 @@ public class SqlSugarCache : ICacheService
         => Get<V>(key);
 
     public IEnumerable<string> GetAllKey<V>()
-        => _cache.Keys.Select(key => key).Where(key => key.StartsWith(SqlSugarConst.SqlSugar));
+        => _cache.Keys?.Select(key => key).Where(key => key.StartsWith(SqlSugarConst.SqlSugar)) ?? [];
 
     public V GetOrCreate<V>(string cacheKey, Func<V> create, int cacheDurationInSeconds = int.MaxValue)
         => _cache.GetOrAdd(cacheKey, (key) => create.Invoke(), cacheDurationInSeconds)!;

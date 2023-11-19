@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>仪表盘 - 任务调度控制台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./css/layui.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo layui-bg-black">任务调度控制台</div>
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item layui-this"><a href="./">仪表盘</a></li>
+                <li class="layui-nav-item"><a href="./job">作业</a></li>
+                <li class="layui-nav-item"><a href="./history">执行记录</a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-more-vertical"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-body" style="left: 30px;">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <blockquote class="layui-elem-quote layui-text">
+                    Layui 框体布局内容主体区域
+                </blockquote>
+                <div class="layui-card layui-panel">
+                    <div class="layui-card-header">
+                        下面是充数内容，为的是出现滚动条
+                    </div>
+                    <div class="layui-card-body">
+                        充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>你还真滑到了底部呀
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="layui-footer" style="left: 0;">
+            <!-- 底部固定区域 -->
+            底部固定区域
+        </div>
+    </div>
+
+    <script src="./js/layui.js"></script>
+    <script>
+        layui.use(['element', 'layer', 'util'], function () {
+            var element = layui.element;
+            var layer = layui.layer;
+            var util = layui.util;
+            var $ = layui.$;
+
+            util.event('lay-header-event', {
+                menuRight: function () {  // 右侧菜单事件
+                    layer.open({
+                        type: 1,
+                        title: '更多',
+                        content: '<div style="padding: 15px;">处理右侧面板的操作</div>',
+                        area: ['260px', '100%'],
+                        offset: 'rt', // 右上角
+                        anim: 'slideLeft', // 从右侧抽屉滑出
+                        shadeClose: true,
+                        scrollbar: false
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

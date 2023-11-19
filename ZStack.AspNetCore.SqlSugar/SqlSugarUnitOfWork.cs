@@ -1,6 +1,4 @@
-﻿using Furion.DatabaseAccessor;
-using Microsoft.AspNetCore.Mvc.Filters;
-using SqlSugar;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ZStack.AspNetCore.SqlSugar;
 
@@ -10,7 +8,6 @@ namespace ZStack.AspNetCore.SqlSugar;
 /// <param name="sqlSugarClient"></param>
 public sealed class SqlSugarUnitOfWork(ISqlSugarClient sqlSugarClient) : IUnitOfWork
 {
-
     /// <summary>
     /// 开启工作单元处理
     /// </summary>

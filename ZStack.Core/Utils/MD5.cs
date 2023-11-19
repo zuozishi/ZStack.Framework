@@ -33,4 +33,21 @@ public static class MD5
         }
         return sb.ToString();
     }
+
+    /// <summary>
+    /// 获取MD5
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <returns></returns>
+    public static string GetMD5(Stream stream)
+    {
+        stream.Position = 0;
+        var hashBytes = System.Security.Cryptography.MD5.HashData(stream);
+        var sb = new StringBuilder();
+        foreach (var t in hashBytes)
+        {
+            sb.Append(t.ToString("X2"));
+        }
+        return sb.ToString();
+    }
 }

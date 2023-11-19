@@ -1,0 +1,13 @@
+﻿global using Furion.DatabaseAccessor;
+global using Furion.FriendlyException;
+global using Microsoft.Extensions.Logging;
+global using SqlSugar;
+global using System.Collections;
+global using System.Collections.Concurrent;
+global using System.Reflection;
+global using Yitter.IdGenerator;
+global using ZStack.AspNetCore.SqlSugar;
+global using ZStack.AspNetCore.SqlSugar.Options;
+global using ZStack.Extensions;
+global using FurionApp = Furion.App;
+global using App = ZStack.AspNetCore.App;

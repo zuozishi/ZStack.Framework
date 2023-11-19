@@ -1,0 +1,22 @@
+﻿image: mcr.microsoft.com/dotnet/sdk:8.0
+
+stages:
+  - build
+  - pack
+
+variables:
+  TZ: "Asia/Shanghai"
+
+build:
+  stage: build
+  script:
+    - dotnet build -c Release
+
+pack:
+  stage: pack
+  script:
+   - dotnet pack -c Release -o ./dist
+   - dotnet nuget add source "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
+   - dotnet nuget push "dist/*.nupkg" --source gitlab
+  only:
+   - net8

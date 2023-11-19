@@ -61,7 +61,7 @@ public static class ObjectExtension
             else if (oldValue?.ToString() != newValue?.ToString())
             {
                 if (updateValue)
-                    property.SetValue(curObj, newValue);
+                    property.SetValue(curObj, property.GetValue(newObj));
                 diffList.Add(property, newValue, oldValue);
             }
         }
@@ -72,10 +72,10 @@ public static class ObjectExtension
     /// 对象转JSON字符串
     /// </summary>
     /// <param name="obj"></param>
-    /// <param name="writeIndented"></param>
+    /// <param name="indented"></param>
     /// <returns></returns>
-    public static string ToJson(this object obj, bool writeIndented = true)
-        => JsonSerializer.Serialize(obj, writeIndented ? WriteIndentedJsonSerializerOptions : JsonSerializerOptions);
+    public static string ToJson(this object obj, bool indented = true)
+        => JsonSerializer.Serialize(obj, indented ? WriteIndentedJsonSerializerOptions : JsonSerializerOptions);
 
     /// <summary>
     /// 对象转JSON字符串
