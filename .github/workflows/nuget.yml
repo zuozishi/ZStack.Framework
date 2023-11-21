@@ -9,9 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
     steps:
       - uses: actions/checkout@v2
-      - name: Setup .NET Core
+      - name: 设置dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 8.0.x
@@ -32,11 +36,11 @@ jobs:
           nuget-version: ${{ github.ref }}
           source: https://api.nuget.org/v3/index.json
           package: nupkgs/*.nupkg
-       - name: 上传到GitHub Release
-         uses: actions/upload-release-asset@v1
-         with:
-           upload_url: ${{ github.event.release.upload_url }}
-           asset_path: nupkgs/*.nupkg
-           asset_name: ${{ github.event.release.tag_name }}.nupkg
-           asset_content_type: application/zip
-           api-key: ${{ secrets.GITHUB_TOKEN }}
+      - name: 上传到GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: nupkgs/*.nupkg
+          asset_name: ${{ github.event.release.tag_name }}.nupkg
+          asset_content_type: application/zip
+          api-key: ${{ secrets.GITHUB_TOKEN }}
