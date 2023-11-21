@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Zuozishi",
+    "classifications": [
+        "C#",
+        ".NET",
+        "Console",
+        "ZStack.Framework"
+    ],
+    "name": "ZStack.Framework 控制台应用程序",
+    "shortName": "zstack-console",
+    "identity": "ZStack.Framework.Template.ConsoleApp",
+    "defaultName": "ConsoleApp",
+    "tags": {
+        "language": "csharp",
+        "type": "project"
+    },
+    "sourceName": "ConsoleApp",
+    "description": "ZStack.Framework 控制台应用程序模板",
+    "preferNameDirectory": true
+}
