@@ -30,5 +30,7 @@ jobs:
         run: dotnet test --no-restore --verbosity normal
       - name: 打包
         run: dotnet pack --no-restore --no-build --configuration Release --output nupkgs
-      - name: 发布
+      - name: 发布到GitHub Packages
+        run: dotnet nuget push nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+      - name: 发布到NuGet
         run: dotnet nuget push nupkgs/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
