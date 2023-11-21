@@ -35,7 +35,6 @@ jobs:
       - name: 上传到GitHub Release
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ github.event.release.upload_url }}
           asset_path: nupkgs/*.nupkg
           asset_name: ${{ github.event.release.tag_name }}.nupkg
           asset_content_type: application/zip
