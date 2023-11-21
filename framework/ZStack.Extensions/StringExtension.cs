@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using ZStack.Core.Utils;
 
@@ -17,6 +18,26 @@ public static class StringExtension
     /// <returns></returns>
     public static string GetMD5(this string str)
         => MD5.GetMD5(str);
+
+    /// <summary>
+    /// 将字符串URL编码
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string UrlEncode(this string str)
+    {
+        return string.IsNullOrEmpty(str) ? "" : System.Web.HttpUtility.UrlEncode(str, Encoding.UTF8);
+    }
+
+    /// <summary>
+    /// 将字符串URL解码
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string UrlDecode(this string str)
+    {
+        return string.IsNullOrEmpty(str) ? "" : System.Web.HttpUtility.UrlDecode(str, Encoding.UTF8);
+    }
 
     #region JSON相关
     /// <summary>

@@ -1,9 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<PackageId>ZStack.Extensions</PackageId>
-		<Description>ZStack框架 类型方法拓展</Description>
-		<Version>1.0.0</Version>
+		<Description>ZStack框架 拓展方法库</Description>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
+
+  <ItemGroup>
+	<None Include="README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ZStack.Core\ZStack.Core.csproj" />

@@ -9,7 +9,7 @@ public class CacheJobDetailRepo(ICache _cache) : IJobDetailRepo
 
     public List<JobDetail> GetJobs()
     {
-        var keys = _cache.Keys(_jobDetailPrefix);
+        var keys = _cache.Search(_jobDetailPrefix + "*");
         var jobs = new List<JobDetail>();
         foreach (var key in keys)
         {
@@ -37,7 +37,7 @@ public class CacheJobDetailRepo(ICache _cache) : IJobDetailRepo
 
     public List<JobTrigger> GetTriggers()
     {
-        var keys = _cache.Keys(_jobTriggerPrefix);
+        var keys = _cache.Search(_jobTriggerPrefix + "*");
         var triggers = new List<JobTrigger>();
         foreach (var key in keys)
         {

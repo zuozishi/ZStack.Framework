@@ -57,4 +57,15 @@ public static class IEnumerableExtension
     /// <returns></returns>
     public static string ToString<T>(this IEnumerable<T> enumerable, string separator)
         => string.Join(separator, enumerable);
+
+    /// <summary>
+    /// 将字典转化为QueryString格式
+    /// </summary>
+    /// <param name="dict"></param>
+    /// <param name="urlEncode"></param>
+    /// <returns></returns>
+    public static string ToQueryString(this IDictionary<string, string> dict, bool urlEncode = true)
+    {
+        return string.Join("&", dict.Select(p => $"{(urlEncode ? p.Key?.UrlEncode() : "")}={(urlEncode ? p.Value?.UrlEncode() : "")}"));
+    }
 }

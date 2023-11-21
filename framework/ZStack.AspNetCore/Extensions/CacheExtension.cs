@@ -1,19 +1,37 @@
-﻿namespace NewLife.Caching;
+﻿using System.Text.RegularExpressions;
+
+namespace NewLife.Caching;
 
 public static class CacheExtension
 {
     /// <summary>
-    /// 根据前缀获取所有的Key
+    /// 模糊搜索Key，支持?和*
     /// </summary>
     /// <param name="cache"></param>
-    /// <param name="prefix"></param>
+    /// <param name="pattern"></param>
     /// <returns></returns>
-    public static IEnumerable<string> Keys(this ICache cache, string prefix)
+    public static IEnumerable<string> Search(this ICache cache, string pattern)
     {
         var options = App.GetOptions<CacheOptions>();
-        var redisPrefix = options.Redis?.Prefix;
-        if (!string.IsNullOrEmpty(redisPrefix))
-            prefix = redisPrefix + prefix;
-        return cache.Keys.Where(x => x.StartsWith(prefix));
+        IEnumerable<string> keys;
+        if (options.CacheType == CacheTypes.Redis)
+        {
+            var redis = cache as FullRedis
+                ?? throw new NotSupportedException();
+            redis.Db = options.Redis?.Db ?? 0;
+            if (!string.IsNullOrEmpty(options.Redis?.Prefix))
+                pattern = options.Redis?.Prefix + pattern;
+            keys = redis.Execute(rds => rds.Execute<string[]>("KEYS", pattern));
+        }
+        else
+        {
+            keys = (cache.Keys ?? []);
+            if (!string.IsNullOrEmpty(pattern))
+            {
+                var reg = pattern.Replace("?", ".").Replace("*", ".*");
+                keys = keys.Where(k => Regex.IsMatch(k, reg));
+            }
+        }
+        return keys;
     }
 }

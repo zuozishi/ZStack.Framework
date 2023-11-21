@@ -116,41 +116,13 @@ public static class ObjectExtension
     }
 
     /// <summary>
-    /// 将字典转化为QueryString格式
-    /// </summary>
-    /// <param name="dict"></param>
-    /// <param name="urlEncode"></param>
-    /// <returns></returns>
-    public static string ToQueryString(this Dictionary<string, string> dict, bool urlEncode = true)
-    {
-        return string.Join("&", dict.Select(p => $"{(urlEncode ? p.Key?.UrlEncode() : "")}={(urlEncode ? p.Value?.UrlEncode() : "")}"));
-    }
-
-    /// <summary>
-    /// 将字符串URL编码
-    /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static string UrlEncode(this string str)
-    {
-        return string.IsNullOrEmpty(str) ? "" : System.Web.HttpUtility.UrlEncode(str, Encoding.UTF8);
-    }
-
-    /// <summary>
     /// 将object转换为long，若失败则返回0
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static long ParseToLong(this object obj)
+    public static long ToLongOrDefault(this object obj)
     {
-        try
-        {
-            return long.Parse(obj.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return 0L;
-        }
+        return ToLongOrDefault(obj, 0);
     }
 
     /// <summary>
@@ -159,16 +131,11 @@ public static class ObjectExtension
     /// <param name="str"></param>
     /// <param name="defaultValue"></param>
     /// <returns></returns>
-    public static long ParseToLong(this string str, long defaultValue)
+    public static long ToLongOrDefault(this object obj, long defaultValue)
     {
-        try
-        {
-            return long.Parse(str);
-        }
-        catch
-        {
-            return defaultValue;
-        }
+        if (long.TryParse(obj.ToString(), out long result))
+            return result;
+        return defaultValue;
     }
 
     /// <summary>
@@ -178,14 +145,7 @@ public static class ObjectExtension
     /// <returns></returns>
     public static double ParseToDouble(this object obj)
     {
-        try
-        {
-            return double.Parse(obj.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return 0;
-        }
+        return ParseToDouble(obj, 0);
     }
 
     /// <summary>
@@ -196,14 +156,9 @@ public static class ObjectExtension
     /// <returns></returns>
     public static double ParseToDouble(this object str, double defaultValue)
     {
-        try
-        {
-            return double.Parse(str.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return defaultValue;
-        }
+        if (double.TryParse(str.ToString(), out double result))
+            return result;
+        return defaultValue;
     }
 
     /// <summary>

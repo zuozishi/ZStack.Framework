@@ -35,8 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZStack.AspNetCore.Schedule.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{F651BACD-5383-4B32-BB7B-F7CF3195BAC7}"
 	ProjectSection(SolutionItems) = preProject
-		.gitlab-ci.yml = .gitlab-ci.yml
-		README.md = README.md
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global
@@ -57,14 +56,6 @@ Global
 		{5FBA691F-2BCE-431C-9AE9-731178999A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FBA691F-2BCE-431C-9AE9-731178999A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FBA691F-2BCE-431C-9AE9-731178999A85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D18F4BC3-6B0E-4CA5-B71C-B74D12ADBAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D18F4BC3-6B0E-4CA5-B71C-B74D12ADBAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D18F4BC3-6B0E-4CA5-B71C-B74D12ADBAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D18F4BC3-6B0E-4CA5-B71C-B74D12ADBAB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8B7286D-D016-4595-8578-24B6A49DF03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8B7286D-D016-4595-8578-24B6A49DF03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8B7286D-D016-4595-8578-24B6A49DF03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8B7286D-D016-4595-8578-24B6A49DF03E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CED9C5AF-FC1B-4957-8BB2-D115EC301491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CED9C5AF-FC1B-4957-8BB2-D115EC301491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CED9C5AF-FC1B-4957-8BB2-D115EC301491}.Release|Any CPU.ActiveCfg = Release|Any CPU

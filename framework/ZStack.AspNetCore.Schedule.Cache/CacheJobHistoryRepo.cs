@@ -43,7 +43,7 @@ public class CacheJobHistoryRepo(ICache _cache) : IJobHistoryRepo
     /// <returns></returns>
     public Task<List<JobHistory>> GetPagedAsync(string jobId, string? triggerId, int pageIndex, int pageSize, RefAsync<int> total)
     {
-        var keys = _cache.Keys(_prefix + jobId).ToArray();
+        var keys = _cache.Search(_prefix + jobId + "|*").ToArray();
         if (keys.Length == 0)
         {
             total.Value = 0;
@@ -86,7 +86,7 @@ public class CacheJobHistoryRepo(ICache _cache) : IJobHistoryRepo
     {
         if (maxHistoryCount == null && maxHistoryDays == null)
             return Task.CompletedTask;
-        var keys = _cache.Keys(_prefix).ToArray();
+        var keys = _cache.Search(_prefix + "*").ToArray();
         var histories = _cache.GetAll<JobHistory>(keys)
             .Values
             .Where(x => x != null)

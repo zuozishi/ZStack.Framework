@@ -8,7 +8,7 @@ public class CacheJobClusterRepo(ICache _cache) : IJobClusterRepo
 
     public List<JobCluster> List()
     {
-        var keys = _cache.Keys(_prefix).ToArray();
+        var keys = _cache.Search(_prefix + "*").ToArray();
         if (keys.Length == 0) return [];
         return _cache.GetAll<JobCluster>(keys)
             .Values
