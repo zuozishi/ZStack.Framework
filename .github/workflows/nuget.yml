@@ -21,6 +21,8 @@ jobs:
           dotnet-version: 8.0.x
       - name: 进入项目目录
         run: cd framework
+      - name: 查看目录
+        run: ls -al
       - name: 还原NuGet包
         run: dotnet restore
       - name: 编译
