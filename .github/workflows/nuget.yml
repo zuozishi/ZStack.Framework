@@ -30,9 +30,5 @@ jobs:
         run: dotnet test --no-restore --verbosity normal
       - name: 打包
         run: dotnet pack --no-restore --no-build --configuration Release --output nupkgs
-      - name: 设置NuGet源
-        run: dotnet nuget add source "https://nuget.pkg.github.com/zuozishi/index.json" --name github --username zuozishi --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
-      - name: 发布到GitHub Packages
-        run: dotnet nuget push nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
       - name: 发布到NuGet
         run: dotnet nuget push nupkgs/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
