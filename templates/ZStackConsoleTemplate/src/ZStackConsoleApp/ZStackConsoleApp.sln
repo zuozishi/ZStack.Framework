@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34227.203
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZStackConsoleApp", "ZStackConsoleApp.csproj", "{A6940947-D8E6-4837-A239-205E19F5ADEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6940947-D8E6-4837-A239-205E19F5ADEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6940947-D8E6-4837-A239-205E19F5ADEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6940947-D8E6-4837-A239-205E19F5ADEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6940947-D8E6-4837-A239-205E19F5ADEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E3D3949-3F39-4A1B-9995-8D77517C1FCC}
+	EndGlobalSection
+EndGlobal

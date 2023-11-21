@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore.EventBus</PackageId>
+		<Description>ZStack.AspNetCore框架 事件总线插件(EasyNetQ)</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="7.7.0" />
+    <PackageReference Include="EasyNetQ.DI.Microsoft" Version="7.7.0" />
+    <PackageReference Include="EasyNetQ.Management.Client" Version="2.0.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore.Hangfire</PackageId>
+		<Description>ZStack.AspNetCore框架 Hangfire调度插件</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.6" />
+    <PackageReference Include="Hangfire.Console" Version="1.4.2" />
+    <PackageReference Include="Hangfire.Console.Extensions" Version="1.2.0" />
+    <PackageReference Include="Hangfire.Console.Extensions.Serilog" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

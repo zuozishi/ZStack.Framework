@@ -1,0 +1,419 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "JSON schema for ZStack.AspNetCore.SqlSugar",
+    "type": "object",
+    "properties": {
+        "IdGenerator": {
+            "$ref": "#/definitions/IdGenerator"
+        },
+        "DbConnection": {
+            "title": "数据库配置选项",
+            "type": "object",
+            "properties": {
+                "CommandTimeOut": {
+                    "type": "integer",
+                    "title": "数据库命令执行超时时间（秒）",
+                    "description": "默认30秒",
+                    "default": 30
+                },
+                "ConnectionConfigs": {
+                    "type": "array",
+                    "title": "数据库连接配置",
+                    "items": {
+                        "$ref": "#/definitions/DbConnection"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "IdGenerator": {
+            "title": "雪花Id生成器配置",
+            "type": "object",
+            "properties": {
+                "Method": {
+                    "type": "integer",
+                    "title": "雪花计算方法",
+                    "description": "（1-漂移算法|2-传统算法），默认1",
+                    "default": 1,
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "BaseTime": {
+                    "type": "string",
+                    "title": "基础时间（UTC格式）",
+                    "description": "不能超过当前系统时间",
+                    "default": "2020-02-20T02:20:02.02Z",
+                    "format": "date-time"
+                },
+                "WorkerId": {
+                    "type": "integer",
+                    "title": "机器码",
+                    "description": "必须由外部设定，最大值 2^WorkerIdBitLength-1",
+                    "default": 0
+                },
+                "SeqBitLength": {
+                    "type": "integer",
+                    "title": "序列数位长",
+                    "description": "默认值6，取值范围 [3, 21]（要求：序列数位长+机器码位长不超过22）",
+                    "default": 6,
+                    "minimum": 3,
+                    "maximum": 21
+                },
+                "MaxSeqNumber": {
+                    "type": "integer",
+                    "title": "最大序列数（含）",
+                    "description": "设置范围 [MinSeqNumber, 2^SeqBitLength-1]，默认值0，表示最大序列数取最大值（2^SeqBitLength-1]）",
+                    "default": 0
+                },
+                "MinSeqNumber": {
+                    "type": "integer",
+                    "title": "最小序列数（含）",
+                    "description": "默认值5，取值范围 [5, MaxSeqNumber]，每毫秒的前5个序列数对应编号0-4是保留位，其中1-4是时间回拨相应预留位，0是手工新值预留位",
+                    "default": 5
+                },
+                "TopOverCostCount": {
+                    "type": "integer",
+                    "title": "最大漂移次数（含）",
+                    "description": "默认2000，推荐范围500-10000（与计算能力有关）",
+                    "default": 2000,
+                    "minimum": 500,
+                    "maximum": 10000
+                },
+                "DataCenterId": {
+                    "type": "integer",
+                    "title": "数据中心ID（默认0）",
+                    "default": 0,
+                    "minimum": 0
+                },
+                "DataCenterIdBitLength": {
+                    "type": "integer",
+                    "title": "数据中心ID长度（默认0）",
+                    "default": 0
+                },
+                "TimestampType": {
+                    "type": "integer",
+                    "title": "时间戳类型",
+                    "description": "（0-毫秒，1-秒），默认0",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1
+                }
+            }
+        },
+        "DbConnection": {
+            "type": "object",
+            "properties": {
+                "ConfigId": {
+                    "type": "string",
+                    "title": "配置Id",
+                    "description": "必须唯一",
+                    "default": "Main"
+                },
+                "DbType": {
+                    "type": "string",
+                    "title": "数据库类型",
+                    "enum": [
+                        "MySql",
+                        "SqlServer",
+                        "Sqlite",
+                        "Oracle",
+                        "PostgreSQL",
+                        "Dm",
+                        "Kdbndp",
+                        "Oscar",
+                        "MySqlConnector",
+                        "Access",
+                        "OpenGauss",
+                        "QuestDB",
+                        "HG",
+                        "ClickHouse",
+                        "GBase",
+                        "Odbc",
+                        "OceanBaseForOracle",
+                        "TDengine",
+                        "GaussDB",
+                        "OceanBase",
+                        "Tidb",
+                        "Vastbase",
+                        "Custom"
+                    ]
+                },
+                "ConnectionString": {
+                    "type": "string",
+                    "title": "连接字符串"
+                },
+                "DbLinkName": {
+                    "type": "string",
+                    "title": "QueryableWithAttr查询转到DbLinkName，它通常用于跨库查询"
+                },
+                "IsAutoCloseConnection": {
+                    "type": "boolean",
+                    "title": "是否自动关闭连接",
+                    "description": "默认 true",
+                    "default": true
+                },
+                "LanguageType": {
+                    "type": "string",
+                    "title": "异常提示语言",
+                    "description": "默认 Default",
+                    "enum": [
+                        "Default",
+                        "Chinese",
+                        "English"
+                    ],
+                    "default": "Default"
+                },
+                "SlaveConnectionConfigs": {
+                    "type": "array",
+                    "title": "从库连接配置",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "HitRate": {
+                                "type": "number",
+                                "title": "命中率",
+                                "description": "默认 1",
+                                "default": 1,
+                                "minimum": 0,
+                                "maximum": 1
+                            },
+                            "ConnectionString": {
+                                "type": "string",
+                                "title": "连接字符串"
+                            }
+                        },
+                        "required": [
+                            "ConnectionString"
+                        ]
+                    }
+                },
+                "IndexSuffix": {
+                    "type": "string",
+                    "title": "索引后缀"
+                },
+                "DbSettings": {
+                    "$ref": "#/definitions/DbSettings"
+                },
+                "TableSettings": {
+                    "$ref": "#/definitions/TableSettings"
+                },
+                "SeedSettings": {
+                    "$ref": "#/definitions/SeedSettings"
+                },
+                "AopSettings": {
+                    "$ref": "#/definitions/AopSettings"
+                },
+                "MoreSettings": {
+                    "$ref": "#/definitions/ConnMoreSettings"
+                }
+            },
+            "required": [
+                "ConfigId",
+                "DbType",
+                "ConnectionString"
+            ]
+        },
+        "DbSettings": {
+            "type": "object",
+            "title": "数据库设置",
+            "properties": {
+                "EnableInitDb": {
+                    "type":"boolean",
+                    "title": "启用库表初始化",
+                    "description": "默认 false",
+                    "default": false
+                },
+                "EnableUnderLine": {
+                    "type":"boolean",
+                    "title": "启用驼峰转下划线",
+                    "description": "默认 false",
+                    "default": false
+                }
+            }
+        },
+        "TableSettings": {
+            "type": "object",
+            "title": "表设置",
+            "properties": {
+                "EnableInitTable": {
+                    "type":"boolean",
+                    "title": "启用表初始化",
+                    "description": "默认 false",
+                    "default": false
+                },
+                "EnableIncreTable": {
+                    "type":"boolean",
+                    "title": "启用表增量更新",
+                    "description": "默认 false",
+                    "default": false
+                }
+            }
+        },
+        "SeedSettings": {
+            "type": "object",
+            "title": "种子设置",
+            "properties": {
+                "EnableInitSeed": {
+                    "type":"boolean",
+                    "title": "启用种子初始化",
+                    "description": "默认 false",
+                    "default": false
+                },
+                "EnableIncreSeed": {
+                    "type":"boolean",
+                    "title": "启用种子增量更新",
+                    "description": "默认 false",
+                    "default": false
+                }
+            }
+        },
+        "AopSettings": {
+            "type": "object",
+            "title": "拦截器设置",
+            "properties": {
+                "EnableSqlLog": {
+                    "type":"boolean",
+                    "title": "启用Sql日志",
+                    "description": "默认 false",
+                    "default": false
+                },
+                "EnableErrorSqlLog": {
+                    "type":"boolean",
+                    "title": "启用错误Sql日志",
+                    "description": "默认 true",
+                    "default": true
+                },
+                "EnableSlowSqlLog": {
+                    "type":"boolean",
+                    "title": "启用慢Sql日志",
+                    "description": "默认 false",
+                    "default": false
+                },
+                "SlowSqlTime": {
+                    "type": "integer",
+                    "title": "慢Sql时间（毫秒）",
+                    "description": "默认 5000",
+                    "default": 5000
+                },
+                "EnableIdAutoFill": {
+                    "type":"boolean",
+                    "title": "启用Id自动填充",
+                    "description": "默认 true",
+                    "default": true
+                },
+                "CreateTimeFields": {
+                    "type": "array",
+                    "title": "创建时间字段",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "UpdateTimeFields": {
+                    "type": "array",
+                    "title": "更新时间字段",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ConnMoreSettings": {
+            "type": "object",
+            "title": "连接更多设置",
+            "properties": {
+                "IsAutoRemoveDataCache": {
+                    "type":"boolean",
+                    "title": "是否自动移除数据缓存"
+                },
+                "IsWithNoLockQuery": {
+                    "type":"boolean",
+                    "title": "是否查询默认带NoLock"
+                },
+                "IsWithNoLockSubquery": {
+                    "type":"boolean",
+                    "title": "是否子查询默认带NoLock"
+                },
+                "DisableNvarchar": {
+                    "type":"boolean",
+                    "title": "是否禁用Nvarchar"
+                },
+                "DisableMillisecond": {
+                    "type":"boolean",
+                    "title": "是否禁用毫秒"
+                },
+                "PgSqlIsAutoToLower": {
+                    "type":"boolean",
+                    "title": "是否PgSql自动转小写"
+                },
+                "PgSqlIsAutoToLowerCodeFirst": {
+                    "type":"boolean",
+                    "title": "是否PgSql自动转小写CodeFirst",
+                    "description": "默认 true",
+                    "default": true
+                },
+                "IsAutoToUpper": {
+                    "type":"boolean",
+                    "title": "是否自动转大写",
+                    "description": "默认 true",
+                    "default": true
+                },
+                "DefaultCacheDurationInSeconds": {
+                    "type": "integer",
+                    "title": "默认缓存时间（秒）"
+                },
+                "TableEnumIsString": {
+                    "type":"boolean",
+                    "title": "表枚举是否为字符串"
+                },
+                "DbMinDate": {
+                    "type": "string",
+                    "title": "数据库最小时间",
+                    "description": "默认 1900-01-01 00:00:00",
+                    "default": "1900-01-01 00:00:00",
+                    "format": "date-time"
+                },
+                "IsNoReadXmlDescription": {
+                    "type":"boolean",
+                    "title": "是否不读取Xml描述"
+                },
+                "SqlServerCodeFirstNvarchar": {
+                    "type":"boolean",
+                    "title": "SqlServerCodeFirst是否Nvarchar"
+                },
+                "SqliteCodeFirstEnableDefaultValue": {
+                    "type":"boolean",
+                    "title": "Sqlite CodeFirst是否启用默认值"
+                },
+                "SqliteCodeFirstEnableDescription": {
+                    "type":"boolean",
+                    "title": "Sqlite CodeFirst是否启用描述"
+                },
+                "IsAutoUpdateQueryFilter": {
+                    "type":"boolean",
+                    "title": "是否自动更新查询过滤器"
+                },
+                "IsAutoDeleteQueryFilter": {
+                    "type":"boolean",
+                    "title": "是否自动删除查询过滤器"
+                },
+                "EnableModelFuncMappingColumn": {
+                    "type":"boolean",
+                    "title": "是否启用模型函数映射列"
+                },
+                "EnableOracleIdentity": {
+                    "type":"boolean",
+                    "title": "是否启用Oracle自增"
+                },
+                "EnableCodeFirstUpdatePrecision": {
+                    "type":"boolean",
+                    "title": "是否启用CodeFirst更新精度"
+                },
+                "IsCorrectErrorSqlParameterName": {
+                    "type":"boolean",
+                    "title": "是否修正错误的SqlParameter名称"
+                }
+            }
+        }
+    }
+}

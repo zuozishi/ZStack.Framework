@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore.Hangfire.Schedule.Cache</PackageId>
+		<Description>ZStack.AspNetCore框架 Sundial调度插件【NewLife.Redis】</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.AspNetCore.Schedule\ZStack.AspNetCore.Schedule.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZStack.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:ZStack.Extensions.DateTimeExtension">
+            <summary>
+            DateTime扩展方法
+            </summary>
+        </member>
+        <member name="M:ZStack.Extensions.DateTimeExtension.ToTimestampSeconds(System.DateTime)">
+            <summary>
+            获取时间戳（秒）
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.DateTimeExtension.ToTimestampMilliseconds(System.DateTime)">
+            <summary>
+            获取时间戳（毫秒）
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Extensions.IEnumerableExtension">
+            <summary>
+            集合拓展方法
+            </summary>
+        </member>
+        <member name="M:ZStack.Extensions.IEnumerableExtension.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+            <summary>
+            遍历集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:ZStack.Extensions.IEnumerableExtension.ForEachAsync``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Threading.Tasks.Task})">
+            <summary>
+            遍历集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.IEnumerableExtension.ToString``1(System.Collections.Generic.IEnumerable{``0},System.Char)">
+            <summary>
+            集合转分隔符字符串
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.IEnumerableExtension.ToString``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            集合转分隔符字符串
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Extensions.Models.PropertiesValueDiffList">
+            <summary>
+            属性值差异列表
+            </summary>
+        </member>
+        <member name="M:ZStack.Extensions.Models.PropertiesValueDiffList.#ctor(System.Type)">
+            <summary>
+            属性值差异列表
+            </summary>
+        </member>
+        <member name="T:ZStack.Extensions.Models.ValueDiffItem">
+            <summary>
+            差异项
+            </summary>
+            <param name="property"></param>
+        </member>
+        <member name="M:ZStack.Extensions.Models.ValueDiffItem.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            差异项
+            </summary>
+            <param name="property"></param>
+        </member>
+        <member name="T:ZStack.Extensions.ObjectExtension">
+            <summary>
+            对象拓展方法
+            </summary>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.Diff(System.Object,System.Object,System.Boolean)">
+            <summary>
+            对比对象属性值差异
+            </summary>
+            <param name="curObj">当前对象</param>
+            <param name="newObj">新值对象</param>
+            <param name="updateValue">是否将新值更新到原始对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ToJson(System.Object,System.Boolean)">
+            <summary>
+            对象转JSON字符串
+            </summary>
+            <param name="obj"></param>
+            <param name="indented"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ToJson(System.Object,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            对象转JSON字符串
+            </summary>
+            <param name="obj"></param>
+            <param name="serializerOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.HasImplementedRawGeneric(System.Type,System.Type)">
+            <summary>
+            判断类型是否实现某个泛型
+            </summary>
+            <param name="type">类型</param>
+            <param name="generic">泛型类型</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ToQueryString(System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            将字典转化为QueryString格式
+            </summary>
+            <param name="dict"></param>
+            <param name="urlEncode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.UrlEncode(System.String)">
+            <summary>
+            将字符串URL编码
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ParseToLong(System.Object)">
+            <summary>
+            将object转换为long，若失败则返回0
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ParseToLong(System.String,System.Int64)">
+            <summary>
+            将object转换为long，若失败则返回指定值
+            </summary>
+            <param name="str"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ParseToDouble(System.Object)">
+            <summary>
+            将object转换为double，若失败则返回0
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ParseToDouble(System.Object,System.Double)">
+            <summary>
+            将object转换为double，若失败则返回指定值
+            </summary>
+            <param name="str"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ParseToDateTime(System.String)">
+            <summary>
+            将string转换为DateTime，若失败则返回日期最小值
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.ParseToDateTime(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            将string转换为DateTime，若失败则返回默认值
+            </summary>
+            <param name="str"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.ObjectExtension.IsNullOrEmpty(System.Object)">
+            <summary>
+            判断是否有值
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Extensions.StringExtension">
+            <summary>
+            字符串拓展方法
+            </summary>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.GetMD5(System.String)">
+            <summary>
+            获取MD5
+            <see cref="M:ZStack.Core.Utils.MD5.GetMD5(System.String)"/>
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.FromJson``1(System.String)">
+            <summary>
+            JSON字符串转对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.FromJson``1(System.String,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            JSON字符串转对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <param name="serializerOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.ToJsonObject(System.String)">
+            <summary>
+            JSON字符串转JsonObject
+            </summary>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.ToJsonArray(System.String)">
+            <summary>
+            JSON字符串转JsonArray
+            </summary>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.ToJsonValue(System.String)">
+            <summary>
+            JSON字符串转JsonValue
+            </summary>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.TryToJsonObject(System.String,System.Text.Json.Nodes.JsonObject@)">
+            <summary>
+            JSON字符串转JsonNode
+            </summary>
+            <param name="json"></param>
+            <param name="jsonObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.TryToJsonArray(System.String,System.Text.Json.Nodes.JsonArray@)">
+            <summary>
+            JSON字符串转JsonArray
+            </summary>
+            <param name="json"></param>
+            <param name="jsonArray"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.TryToJsonValue(System.String,System.Text.Json.Nodes.JsonValue@)">
+            <summary>
+            JSON字符串转JsonValue
+            </summary>
+            <param name="json"></param>
+            <param name="jsonValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.IsValidMobile(System.String)">
+            <summary>
+            验证是否为有效的手机号
+            <see cref="M:ZStack.Core.Utils.DataValidator.IsValidMobile(System.String)"/>
+            </summary>
+            <param name="mobile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.IsValidEmail(System.String)">
+            <summary>
+            验证是否为有效的邮箱
+            <see cref="M:ZStack.Core.Utils.DataValidator.IsValidEmail(System.String)"/>
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.IsValidIdCard(System.String)">
+            <summary>
+            验证是否为有效的身份证号
+            <see cref="M:ZStack.Core.Utils.DataValidator.IsValidIdCard(System.String)"/>
+            </summary>
+            <param name="idCard"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

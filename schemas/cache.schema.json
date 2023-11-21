@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "JSON schema for ZStack.AspNetCore CacheComponent",
+    "type": "object",
+    "properties": {
+        "Cache": {
+            "type": "object",
+            "properties": {
+                "CacheType": {
+                    "type": "string",
+                    "title": "缓存类型",
+                    "description": "默认 Memory",
+                    "default": "Memory",
+                    "enum": [
+                        "Memory",
+                        "Redis"
+                    ]
+                },
+                "Redis": {
+                    "type": "object",
+                    "title": "Redis配置",
+                    "properties": {
+                        "InstanceName": {
+                            "type": "string",
+                            "title": "实例名",
+                            "description": "默认 hangfire",
+                            "default": "hangfire"
+                        },
+                        "ConnectionString": {
+                            "type": "string",
+                            "title": "配置字符串",
+                            "description": "例如 server=127.0.0.1:6379;password=123456;db=3;timeout=3000"
+                        },
+                        "Server": {
+                            "type": "string",
+                            "title": "服务器"
+                        },
+                        "Db": {
+                            "type": "integer",
+                            "title": "数据库",
+                            "default": 0,
+                            "minimum": 0
+                        },
+                        "Password": {
+                            "type": "string",
+                            "title": "密码"
+                        },
+                        "Timeout": {
+                            "type": "integer",
+                            "title": "超时时间"
+                        },
+                        "Prefix": {
+                            "type": "string",
+                            "title": "前缀"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,129 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "JSON schema for ZStack.AspNetCore.Hangfire",
+    "type": "object",
+    "properties": {
+        "Hangfire": {
+            "type": "object",
+            "properties": {
+                "Server": {
+                    "$ref": "#/definitions/BackgroundJobServerOptions"
+                },
+                "Console": {
+                    "$ref": "#/definitions/ConsoleOptions"
+                },
+                "ConnectionString": {
+                    "type": "string",
+                    "title": "数据库连接字符串",
+                    "description": "默认值 [空]",
+                    "default": ""
+                },
+                "MemoryStorage": {
+                    "$ref": "#/definitions/MemoryStorageOptions"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "BackgroundJobServerOptions": {
+            "type": "object",
+            "properties": {
+                "ServerName": {
+                    "type": "string",
+                    "title": "服务器名称",
+                    "description": "默认值 [主机名]"
+                },
+                "Queues": {
+                    "type": "array",
+                    "title": "队列名称",
+                    "description": "默认值 [default]",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "default"
+                    ]
+                }
+            }
+        },
+        "ConsoleOptions": {
+            "type": "object",
+            "properties": {
+                "ExpireIn": {
+                    "type": "string",
+                    "title": "控制台消息的过期时间",
+                    "description": "默认值 1天",
+                    "default": "1.00:00:00",
+                    "format": "regex",
+                    "pattern": "^\\d{1,2}\\.\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "FollowJobRetentionPolicy": {
+                    "type": "boolean",
+                    "title": "是否跟随任务的保留策略",
+                    "description": "默认值 true",
+                    "default": true
+                },
+                "PollInterval": {
+                    "type": "integer",
+                    "title": "控制台消息的轮询间隔(毫秒)",
+                    "description": "默认值 1秒",
+                    "default": 1000,
+                    "minimum": 100
+                },
+                "BackgroundColor": {
+                    "type": "string",
+                    "title": "控制台消息的背景色",
+                    "description": "默认值 #0d3163",
+                    "default": "#0d3163",
+                    "format": "regex",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
+                },
+                "TextColor": {
+                    "type": "string",
+                    "title": "控制台消息的文本颜色",
+                    "description": "默认值 #ffffff",
+                    "default": "#ffffff",
+                    "format": "regex",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
+                },
+                "TimestampColor": {
+                    "type": "string",
+                    "title": "控制台消息的时间戳颜色",
+                    "description": "默认值 #00aad7",
+                    "default": "#00aad7",
+                    "format": "regex",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
+                }
+            }
+        },
+        "MemoryStorageOptions": {
+            "type": "object",
+            "properties": {
+                "JobExpirationCheckInterval": {
+                    "type": "string",
+                    "title": "作业过期检查间隔",
+                    "description": "默认值 1小时",
+                    "default": "01:00:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "CountersAggregateInterval": {
+                    "type": "string",
+                    "title": "计数器聚合间隔",
+                    "description": "默认值 5分钟",
+                    "default": "00:05:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "FetchNextJobTimeout": {
+                    "type": "string",
+                    "title": "获取下一个作业的超时时间",
+                    "description": "默认值 30分钟",
+                    "default": "00:30:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                }
+            }
+        }
+    }
+}

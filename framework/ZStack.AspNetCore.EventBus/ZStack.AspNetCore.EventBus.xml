@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZStack.AspNetCore.EventBus</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Extensions.DependencyInjection.EventBusSetup.AddZStackEventBus(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{ZStack.AspNetCore.EventBus.EventBusOptions})">
+            <summary>
+            注册EasyNetQ
+            </summary>
+            <param name="service"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.EventBusSetup.AddEventBusErrorHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册异常事件处理器
+            </summary>
+            <typeparam name="IHandler"></typeparam>
+            <param name="service"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.EventBusSetup.AddEventBusErrorHandler(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{EasyNetQ.SystemMessages.Error,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
+            <summary>
+            注册异常事件处理器
+            </summary>
+            <param name="service"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

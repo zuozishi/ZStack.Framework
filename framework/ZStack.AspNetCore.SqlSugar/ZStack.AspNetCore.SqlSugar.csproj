@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore.SqlSugar</PackageId>
+		<Description>ZStack.AspNetCore框架 SqlSugar插件</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.123" />
+    <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

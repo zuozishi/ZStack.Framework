@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZStack.Core</name>
+    </assembly>
+    <members>
+        <member name="T:ZStack.Core.DependencyInjection">
+            <summary>
+            依赖注入
+            </summary>
+        </member>
+        <member name="M:ZStack.Core.DependencyInjection.CreateConsoleAppServiceProvider(System.Action{Microsoft.Extensions.DependencyInjection.ServiceCollection},System.Boolean,System.Action{Serilog.LoggerConfiguration})">
+            <summary>
+            创建控制台应用程序依赖注入容器
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Core.PerformanceTracker">
+            <summary>
+            性能追踪器
+            </summary>
+        </member>
+        <member name="M:ZStack.Core.PerformanceTracker.CreateScope(System.Action{System.TimeSpan})">
+            <summary>
+            开始性能追踪单元
+            </summary>
+            <param name="callback">结束回调</param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Core.PerformanceTrackerScope">
+            <summary>
+            性能追踪单元
+            </summary>
+            <param name="notify"></param>
+        </member>
+        <member name="T:ZStack.Core.SerilogLogger">
+            <summary>
+            日志记录器
+            </summary>
+        </member>
+        <member name="M:ZStack.Core.SerilogLogger.CreateConsoleAppLogger(System.Action{Serilog.LoggerConfiguration},System.String)">
+            <summary>
+            创建控制台应用程序日志记录器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.SerilogLogger.CreateConfigurationLogger(System.Action{Serilog.LoggerConfiguration},System.String)">
+            <summary>
+            创建通过配置文件配置的日志记录器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.SerilogLogger.CreateConfigurationLogger(Microsoft.Extensions.Configuration.IConfigurationRoot,System.Action{Serilog.LoggerConfiguration})">
+            <summary>
+            创建通过配置文件配置的日志记录器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Core.Utils.DataValidator">
+            <summary>
+            数据验证器
+            </summary>
+        </member>
+        <member name="M:ZStack.Core.Utils.DataValidator.IsValidMobile(System.String)">
+            <summary>
+            验证是否为有效的手机号
+            </summary>
+            <param name="mobile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.Utils.DataValidator.IsValidEmail(System.String)">
+            <summary>
+            验证是否为有效的邮箱
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.Utils.DataValidator.IsValidIdCard(System.String)">
+            <summary>
+            验证是否为有效的身份证号
+            </summary>
+            <param name="idCard"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.Utils.DataValidator.RegexMobile">
+            <remarks>
+            Pattern:<br/>
+            <code>^1[3456789]\\d{9}$</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at the beginning of the string.<br/>
+            ○ Match '1'.<br/>
+            ○ Match a character in the set [3-9].<br/>
+            ○ Match a Unicode digit exactly 9 times.<br/>
+            ○ Match if at the end of the string or if before an ending newline.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:ZStack.Core.Utils.DataValidator.RegexEmail">
+            <remarks>
+            Pattern:<br/>
+            <code>^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at the beginning of the string.<br/>
+            ○ Loop greedily at least once.<br/>
+                ○ 1st capture group.<br/>
+                    ○ Match a character in the set [-0-9A-Z_a-z].<br/>
+            ○ Match '@'.<br/>
+            ○ Loop greedily at least once.<br/>
+                ○ 2nd capture group.<br/>
+                    ○ Match a character in the set [-0-9A-Z_a-z].<br/>
+            ○ Loop greedily and atomically at least once.<br/>
+                ○ 3rd capture group.<br/>
+                    ○ Match any character other than '\n'.<br/>
+                    ○ Match a character in the set [-0-9A-Z_a-z].<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:ZStack.Core.Utils.MD5">
+            <summary>
+            MD5工具类
+            </summary>
+        </member>
+        <member name="M:ZStack.Core.Utils.MD5.GetMD5(System.String)">
+            <summary>
+            获取MD5
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.Utils.MD5.GetMD5(System.Byte[])">
+            <summary>
+            获取MD5
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Core.Utils.MD5.GetMD5(System.IO.Stream)">
+            <summary>
+            获取MD5
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.RegexMobile_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the RegexMobile method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.RegexMobile_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexMobile_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.RegexMobile_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexMobile_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.RegexMobile_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexMobile_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexMobile_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexMobile_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.RegexEmail_1">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the RegexEmail method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.RegexEmail_1.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexEmail_1.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.RegexEmail_1.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexEmail_1.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.RegexEmail_1.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexEmail_1.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexEmail_1.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.RegexEmail_1.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPush(System.Int32[]@,System.Int32@,System.Int32,System.Int32)">
+            <summary>Pushes 2 values onto the backtracking stack.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZStack.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:ZStack.AspNetCore.App">
+            <summary>
+            全局应用类
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.RootServices">
+            <summary>
+            存储根服务
+            </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.App.GetOptions``1">
+            <summary>
+            获取选项
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.Settings">
+            <summary>
+            应用全局配置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.Logger">
+            <summary>
+            应用日志记录器
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.User">
+            <summary>
+            获取请求上下文用户
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.Configuration">
+            <summary>
+            全局配置选项
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.WebHostEnvironment">
+            <summary>
+            获取Web主机环境，如，是否是开发环境，生产环境等
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.HostEnvironment">
+            <summary>
+            获取泛型主机环境，如，是否是开发环境，生产环境等
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.SingleFileEnvironment">
+            <summary>
+            判断是否是单文件环境
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.Assemblies">
+            <summary>
+            应用有效程序集
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.EffectiveTypes">
+            <summary>
+            有效程序集类型
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.HttpContext">
+            <summary>
+            获取请求上下文
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.App.UnmanagedObjects">
+            <summary>
+            未托管的对象集合
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.ClaimConst">
+            <summary>
+            Claim相关常量
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.RealName">
+            <summary>
+            真实姓名
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.AccountType">
+            <summary>
+            账号类型
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.TenantId">
+            <summary>
+            租户Id
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.OrgId">
+            <summary>
+            组织机构Id
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.OrgName">
+            <summary>
+            组织机构名称
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.OrgType">
+            <summary>
+            组织机构类型
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.OpenId">
+            <summary>
+            微信OpenId
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.ClaimConst.LoginMode">
+            <summary>
+            登录模式PC、APP
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.Components.CacheComponent">
+            <summary>
+            缓存组件
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.Options.CacheOptions">
+            <summary>
+            缓存配置类
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.Options.CacheOptions.CacheType">
+            <summary>
+            缓存类型
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.Options.CacheOptions.Redis">
+            <summary>
+            Redis缓存配置
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.Options.CacheTypes">
+            <summary>
+            缓存类型
+            </summary>
+        </member>
+        <member name="M:NewLife.Caching.CacheExtension.Keys(NewLife.Caching.ICache,System.String)">
+            <summary>
+            根据前缀获取所有的Key
+            </summary>
+            <param name="cache"></param>
+            <param name="prefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.InjectZStack(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Microsoft.AspNetCore.Builder.WebApplicationBuilder,Furion.InjectOptions},System.Action{Serilog.LoggerConfiguration},System.Type[],System.Type[])">
+            <summary>
+            服务注入
+            </summary>
+            <param name="builder"></param>
+            <param name="configure"></param>
+            <param name="loggerConfigure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.UseZStackInject(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.Action{Furion.UseInjectOptions})">
+            <summary>
+            中间件注入
+            </summary>
+            <param name="app"></param>
+            <param name="routePrefix"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.AddZStackSerilog(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Serilog.LoggerConfiguration})">
+            <summary>
+            注册Serilog
+            </summary>
+            <param name="builder"></param>
+            <param name="configure"></param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.AddZStackComponents(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Type[],System.Type[])">
+            <summary>
+            注册ZStack服务组件
+            </summary>
+            <param name="builder"></param>
+            <param name="components"></param>
+            <param name="ignoreComponents"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.UseZStackComponents(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Type[],System.Type[])">
+            <summary>
+            注册ZStack服务中间件
+            </summary>
+            <param name="app"></param>
+            <param name="components"></param>
+            <param name="ignoreComponents"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

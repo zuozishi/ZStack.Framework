@@ -1,0 +1,206 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "JSON schema for ZStack.AspNetCore.EventBus",
+    "type": "object",
+    "properties": {
+        "EventBus": {
+            "type": "object",
+            "properties": {
+                "Prefix": {
+                    "type": "string",
+                    "description": "队列/交换机名称前缀"
+                },
+                "ManagementUrl": {
+                    "type": "string",
+                    "description": "Web控制台URL",
+                    "format": "regex",
+                    "pattern": "^http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$"
+                },
+                "Port": {
+                    "type": "integer",
+                    "description": "端口号，默认 5672",
+                    "default": "5672",
+                    "minimum": 1,
+                    "maximum": 65535
+                },
+                "VirtualHost": {
+                    "type": "string",
+                    "description": "虚拟主机，默认 /",
+                    "default": "/"
+                },
+                "UserName": {
+                    "type": "string",
+                    "description": "用户名，默认 guest",
+                    "default": "guest"
+                },
+                "Password": {
+                    "type": "string",
+                    "description": "密码，默认 guest",
+                    "default": "guest"
+                },
+                "RequestedHeartbeat": {
+                    "type": "string",
+                    "description": "心跳发送间隔，默认 10秒",
+                    "default": "00:00:10",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "PrefetchCount": {
+                    "type": "integer",
+                    "description": "预读取的单条消息内容大小上限，默认 50",
+                    "default": "50",
+                    "minimum": 0
+                },
+                "ClientProperties": {
+                    "type": "object",
+                    "properties": {},
+                    "description": "额外客户端属性",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "Hosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "Host": {
+                                "type": "string",
+                                "description": "主机名"
+                            },
+                            "Port": {
+                                "type": "integer",
+                                "description": "端口号",
+                                "minimum": 1,
+                                "maximum": 65535
+                            },
+                            "Ssl": {
+                                "$ref": "#/definitions/SslOption"
+                            }
+                        },
+                        "required": [
+                            "Host",
+                            "Port"
+                        ]
+                    },
+                    "description": "用于连接的主机列表"
+                },
+                "Ssl": {
+                    "$ref": "#/definitions/SslOption"
+                },
+                "Timeout": {
+                    "type": "string",
+                    "description": "超时时间，默认 10秒",
+                    "default": "00:00:10",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "PublisherConfirms": {
+                    "type": "boolean",
+                    "description": "是否启用发布者确认，默认 False",
+                    "default": false
+                },
+                "PersistentMessages": {
+                    "type": "boolean",
+                    "description": "是否启用持久化消息，默认 True",
+                    "default": true
+                },
+                "Product": {
+                    "type": "string",
+                    "description": "产品名称"
+                },
+                "Platform": {
+                    "type": "string",
+                    "description": "平台名称"
+                },
+                "Name": {
+                    "type": "string",
+                    "description": "用于连接的名称"
+                },
+                "ConnectIntervalAttempt": {
+                    "type": "string",
+                    "description": "连接失败后重试间隔，默认 5秒",
+                    "default": "00:00:05",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "MandatoryPublish": {
+                    "type": "boolean",
+                    "description": "是否启用强制发布，默认 False",
+                    "default": false
+                },
+                "RequestedChannelMax": {
+                    "type": "integer",
+                    "description": "每个连接的最大通道数，默认 2047",
+                    "default": "2047",
+                    "minimum": 0
+                },
+                "ConsumerDispatcherConcurrency": {
+                    "type": "integer",
+                    "description": "Value greater than one enables concurrent processing for consumers.\nIf it is not set, a value of PrefetchCount is used due to backward compatibility"
+                }
+            }
+        }
+    },
+    "required": [
+        "Hosts"
+    ],
+    "definitions": {
+        "SslOption": {
+            "type": "object",
+            "properties": {
+                "CheckCertificateRevocation": {
+                    "type": "boolean",
+                    "description": "尝试检查证书吊销状态，默认 False",
+                    "default": false
+                },
+                "Enabled": {
+                    "type": "boolean",
+                    "description": "是否使用TLS",
+                    "default": false
+                },
+                "ServerName": {
+                    "type": "string",
+                    "description": "服务器名称（这必须与对等方 (服务器) 叶证书上的主题备用名称 (SAN) 或CN匹配，否则TLS连接将失败）",
+                    "default": ""
+                },
+                "Version": {
+                    "type": "string",
+                    "description": "TLS版本，默认 None",
+                    "default": "None",
+                    "enum": [
+                        "None",
+                        "Ssl2",
+                        "Ssl3",
+                        "Tls",
+                        "Default",
+                        "Tls11",
+                        "Tls12",
+                        "Tls13"
+                    ]
+                },
+                "AcceptablePolicyErrors": {
+                    "type": "string",
+                    "description": "指定在建立连接时是否接受特定类型的证书错误，默认 None",
+                    "default": "None",
+                    "enum": [
+                        "None",
+                        "RemoteCertificateNotAvailable",
+                        "RemoteCertificateNameMismatch",
+                        "RemoteCertificateChainErrors"
+                    ]
+                },
+                "CertPassphrase": {
+                    "type": "string",
+                    "description": "客户端证书密码"
+                },
+                "CertPath": {
+                    "type": "string",
+                    "description": "客户端证书路径",
+                    "default": ""
+                }
+            },
+            "description": "主机的TLS配置"
+        }
+    }
+}

@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZStack.AspNetCore.SqlSugar</name>
+    </assembly>
+    <members>
+        <member name="T:ZStack.AspNetCore.SqlSugar.ISqlSugarEntitySeedData`1">
+            <summary>
+            实体种子数据接口
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.ISqlSugarEntitySeedData`1.HasData">
+            <summary>
+            种子数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.ISqlSugarInitializer.Options">
+            <summary>
+            数据库连接配置
+            </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.ISqlSugarInitializer.SetDbConfig(ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig)">
+            <summary>
+            初始化数据库连接配置
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.ISqlSugarInitializer.InitDatabase(ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig,SqlSugar.SqlSugarScope)">
+            <summary>
+            初始化数据库
+            </summary>
+            <param name="config"></param>
+            <param name="db"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.ISqlSugarInitializer.SetDbAop(ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig,SqlSugar.SqlSugarClient)">
+            <summary>
+            配置过滤器
+            </summary>
+            <param name="db"></param>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.ISqlSugarService.Options">
+            <summary>
+            数据库连接配置
+            </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.ISqlSugarService.Get(System.String)">
+            <summary>
+            获取数据库上下文
+            </summary>
+            <param name="configId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.DbConnectionOptions">
+            <summary>
+            数据库配置选项
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbConnectionOptions.CommandTimeOut">
+            <summary>
+            执行超时时间(秒)
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbConnectionOptions.ConnectionConfigs">
+            <summary>
+            数据库集合
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig">
+            <summary>
+            数据库连接配置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig.DbSettings">
+            <summary>
+            数据库设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig.TableSettings">
+            <summary>
+            表设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig.SeedSettings">
+            <summary>
+            种子设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbConnectionConfig.AopSettings">
+            <summary>
+            拦截器设置
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.DbSettings">
+            <summary>
+            数据库设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbSettings.EnableInitDb">
+            <summary>
+            启用库表初始化
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.DbSettings.EnableUnderLine">
+            <summary>
+            启用驼峰转下划线
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.TableSettings">
+            <summary>
+            表设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.TableSettings.EnableInitTable">
+            <summary>
+            启用表初始化
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.TableSettings.EnableIncreTable">
+            <summary>
+            启用表增量更新
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.SeedSettings">
+            <summary>
+            种子设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.SeedSettings.EnableInitSeed">
+            <summary>
+            启用种子初始化
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.SeedSettings.EnableIncreSeed">
+            <summary>
+            启用种子增量更新
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.AopSettings">
+            <summary>
+            拦截器设置
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.EnableSqlLog">
+            <summary>
+            启用Sql日志，默认：否
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.EnableErrorSqlLog">
+            <summary>
+            启用Sql错误日志，默认：是
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.EnableSlowSqlLog">
+            <summary>
+            启用慢Sql日志，默认：否
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.SlowSqlTime">
+            <summary>
+             慢Sql时间(毫秒)，默认：5000
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.EnableIdAutoFill">
+            <summary>
+            启用Id自动填充，默认：是
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.CreateTimeFields">
+            <summary>
+            创建时间字段
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.Options.AopSettings.UpdateTimeFields">
+            <summary>
+            更新时间字段
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.Options.SnowIdOptions">
+            <summary>
+            雪花Id配置选项
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.SqlSugarCache">
+            <summary>
+            SqlSugar二级缓存 NewLife.Caching 实现
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.SqlSugar.SqlSugarConst.SqlSugar">
+            <summary>
+            SqlSugar二级缓存
+            </summary>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1">
+            <summary>
+            分页泛型集合
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.Page">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.PageSize">
+            <summary>
+            页容量
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.Total">
+            <summary>
+            总条数
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.TotalPages">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.Items">
+            <summary>
+            当前页集合
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.HasPrevPage">
+            <summary>
+            是否有上一页
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.HasNextPage">
+            <summary>
+            是否有下一页
+            </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1.Cast``1">
+            <summary>
+            转换元素类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions">
+            <summary>
+            分页拓展类
+            </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions.ToPagedList``2(SqlSugar.ISugarQueryable{``0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            分页拓展
+            </summary>
+            <param name="query"><see cref="T:SqlSugar.ISugarQueryable`1"/>对象</param>
+            <param name="pageIndex">当前页码，从1开始</param>
+            <param name="pageSize">页码容量</param>
+            <param name="expression">查询结果 Select 表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions.ToPagedList``1(SqlSugar.ISugarQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            分页拓展
+            </summary>
+            <param name="query"><see cref="T:SqlSugar.ISugarQueryable`1"/>对象</param>
+            <param name="pageIndex">当前页码，从1开始</param>
+            <param name="pageSize">页码容量</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions.ToPagedListAsync``2(SqlSugar.ISugarQueryable{``0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            分页拓展
+            </summary>
+            <param name="query"><see cref="T:SqlSugar.ISugarQueryable`1"/>对象</param>
+            <param name="pageIndex">当前页码，从1开始</param>
+            <param name="pageSize">页码容量</param>
+            <param name="expression">查询结果 Select 表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions.ToPagedListAsync``1(SqlSugar.ISugarQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            分页拓展
+            </summary>
+            <param name="query"><see cref="T:SqlSugar.ISugarQueryable`1"/>对象</param>
+            <param name="pageIndex">当前页码，从1开始</param>
+            <param name="pageSize">页码容量</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions.ToPagedList``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>
+            分页拓展
+            </summary>
+            <param name="list">集合对象</param>
+            <param name="pageIndex">当前页码，从1开始</param>
+            <param name="pageSize">页码容量</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarPagedExtensions.CreateSqlSugarPagedList``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            创建 <see cref="T:ZStack.AspNetCore.SqlSugar.SqlSugarPagedList`1"/> 对象
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="items">分页内容的对象集合</param>
+            <param name="total">总条数</param>
+            <param name="pageIndex">当前页码，从1开始</param>
+            <param name="pageSize">页码容量</param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.SqlSugarRepository`1">
+            <summary>
+            SqlSugar 实体仓储
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarService.Get(System.String)">
+            <summary>
+            获取数据库上下文
+            </summary>
+            <param name="configId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork">
+            <summary>
+            SqlSugar 事务和工作单元
+            </summary>
+            <param name="sqlSugarClient"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.#ctor(SqlSugar.ISqlSugarClient)">
+            <summary>
+            SqlSugar 事务和工作单元
+            </summary>
+            <param name="sqlSugarClient"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.BeginTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
+            <summary>
+            开启工作单元处理
+            </summary>
+            <param name="context"></param>
+            <param name="unitOfWork"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.CommitTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
+            <summary>
+            提交工作单元处理
+            </summary>
+            <param name="resultContext"></param>
+            <param name="unitOfWork"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.RollbackTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
+            <summary>
+            回滚工作单元处理
+            </summary>
+            <param name="resultContext"></param>
+            <param name="unitOfWork"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.OnCompleted(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Microsoft.AspNetCore.Mvc.Filters.FilterContext)">
+            <summary>
+            执行完毕（无论成功失败）
+            </summary>
+            <param name="context"></param>
+            <param name="resultContext"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.SqlSugarSetup.AddZStackSqlSugar(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            SqlSugar 上下文初始化
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.SqlSugarSetup.AddZStackSqlSugar``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            SqlSugar 上下文初始化
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>

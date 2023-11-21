@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore.Hangfire.MemoryStorage</PackageId>
+		<Description>ZStack.AspNetCore框架Hangfire调度插件【内存存储】</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ZStack.AspNetCore.Hangfire\ZStack.AspNetCore.Hangfire.csproj" />
+	</ItemGroup>
+
+</Project>

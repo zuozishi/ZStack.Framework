@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore</PackageId>
+		<Description>ZStack.AspNetCore框架</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Furion.Pure" Version="4.9.1.5" />
+    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.9.1.5" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.9.1.5" />
+    <PackageReference Include="NewLife.Redis" Version="5.5.2023.1102" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.Extensions\ZStack.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

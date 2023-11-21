@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.AspNetCore.Hangfire.Redis</PackageId>
+		<Description>ZStack.AspNetCore框架Hangfire调度插件【Redis】</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.9.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.AspNetCore.Hangfire\ZStack.AspNetCore.Hangfire.csproj" />
+  </ItemGroup>
+
+</Project>

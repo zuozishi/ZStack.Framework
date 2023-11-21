@@ -1,0 +1,29 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+		<IncludeSource>true</IncludeSource>
+        <Authors>Zuozishi</Authors>
+		<Company />
+        <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeSymbols>true</IncludeSymbols>
+		<!--<SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/zuozishi/ZStack.Framework</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\icon.png" Pack="true" PackagePath="\"/>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+    
+</Project>
