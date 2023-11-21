@@ -30,12 +30,7 @@ jobs:
       - name: 打包
         run: dotnet pack --no-restore --no-build --configuration Release --output nupkgs
       - name: 发布
-        uses: nuget/nuget-push-action@v1
-        with:
-          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-          nuget-version: ${{ github.ref }}
-          source: https://api.nuget.org/v3/index.json
-          package: nupkgs/*.nupkg
+        uses: dotnet nuget push nupkgs/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
       - name: 上传到GitHub Release
         uses: actions/upload-release-asset@v1
         with:
