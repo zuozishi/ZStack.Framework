@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<PackageId>ZStack.AspNetCore.SqlSugar</PackageId>
 		<Description>ZStack.AspNetCore框架 SqlSugar插件</Description>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
   <ItemGroup>

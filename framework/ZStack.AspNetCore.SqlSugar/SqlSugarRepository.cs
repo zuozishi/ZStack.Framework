@@ -1,4 +1,6 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace ZStack.AspNetCore.SqlSugar;
 
 /// <summary>
 /// SqlSugar 实体仓储
@@ -6,8 +8,10 @@
 /// <typeparam name="T"></typeparam>
 public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
 {
-    public SqlSugarRepository(ISqlSugarService sqlSugarService)
+    public SqlSugarRepository()
     {
+        var sqlSugarService = App.RootServices.GetRequiredService<ISqlSugarService>();
+
         Context = sqlSugarService.Get();
 
         // 若实体贴有系统表特性，则返回默认库连接
