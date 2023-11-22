@@ -12,9 +12,7 @@
                 },
                 "ManagementUrl": {
                     "type": "string",
-                    "description": "Web控制台URL",
-                    "format": "regex",
-                    "pattern": "^http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$"
+                    "description": "Web控制台URL"
                 },
                 "Port": {
                     "type": "integer",

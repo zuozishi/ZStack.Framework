@@ -20,6 +20,12 @@
                 },
                 "MemoryStorage": {
                     "$ref": "#/definitions/MemoryStorageOptions"
+                },
+                "Redis": {
+                    "$ref": "#/definitions/RedisStorageOptions"
+                },
+                "PostgreSql": {
+                    "$ref": "#/definitions/PostgreSqlStorageOptions"
                 }
             }
         }
@@ -122,6 +128,167 @@
                     "default": "00:30:00",
                     "format": "regex",
                     "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                }
+            }
+        },
+        "RedisStorageOptions": {
+            "type": "object",
+            "properties": {
+                "InvisibilityTimeout": {
+                    "type": "string",
+                    "title": "不可见超时",
+                    "description": "默认值 30分钟",
+                    "default": "00:30:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "FetchTimeout": {
+                    "type": "string",
+                    "title": "获取超时",
+                    "description": "默认值 3分钟",
+                    "default": "00:03:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "ExpiryCheckInterval": {
+                    "type": "string",
+                    "title": "过期检查间隔",
+                    "description": "默认值 1小时",
+                    "default": "01:00:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "Db": {
+                    "type": "integer",
+                    "title": "数据库",
+                    "description": "默认值 0",
+                    "default": 0,
+                    "minimum": 0
+                },
+                "Prefix": {
+                    "type": "string",
+                    "title": "前缀",
+                    "description": "默认值 {hangfire}:",
+                    "default": "{hangfire}:"
+                },
+                "SucceededListSize": {
+                    "type": "integer",
+                    "title": "成功列表大小",
+                    "description": "默认值 499",
+                    "default": 499,
+                    "minimum": 0
+                },
+                "DeletedListSize": {
+                    "type": "integer",
+                    "title": "删除列表大小",
+                    "description": "默认值 499",
+                    "default": 499,
+                    "minimum": 0
+                },
+                "LifoQueues": {
+                    "type": "array",
+                    "title": "后进先出队列",
+                    "description": "默认值 []",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": []
+                },
+                "UseTransactions": {
+                    "type": "boolean",
+                    "title": "使用事务",
+                    "description": "默认值 true",
+                    "default": true
+                }
+            }
+        },
+        "PostgreSqlStorageOptions": {
+            "type": "object",
+            "properties": {
+                "QueuePollInterval": {
+                    "type": "string",
+                    "title": "队列轮询间隔",
+                    "description": "默认值 15秒",
+                    "default": "00:00:15",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "InvisibilityTimeout": {
+                    "type": "string",
+                    "title": "不可见超时",
+                    "description": "默认值 30分钟",
+                    "default": "00:30:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "DistributedLockTimeout": {
+                    "type": "string",
+                    "title": "分布式锁超时",
+                    "description": "默认值 10分钟",
+                    "default": "00:10:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "TransactionSynchronisationTimeout": {
+                    "type": "string",
+                    "title": "事务同步超时",
+                    "description": "默认值 500秒",
+                    "default": "00:08:20",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "JobExpirationCheckInterval": {
+                    "type": "string",
+                    "title": "作业过期检查间隔",
+                    "description": "默认值 1小时",
+                    "default": "01:00:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "CountersAggregateInterval": {
+                    "type": "string",
+                    "title": "计数器聚合间隔",
+                    "description": "默认值 5分钟",
+                    "default": "00:05:00",
+                    "format": "regex",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "SchemaName": {
+                    "type": "string",
+                    "title": "模式名称",
+                    "description": "默认值 hangfire",
+                    "default": "hangfire"
+                },
+                "AllowUnsafeValues": {
+                    "type": "boolean",
+                    "title": "允许不安全的值",
+                    "description": "默认值 false",
+                    "default": false
+                },
+                "UseNativeDatabaseTransactions": {
+                    "type": "boolean",
+                    "title": "使用原生数据库事务",
+                    "description": "默认值 true",
+                    "default": true
+                },
+                "PrepareSchemaIfNecessary": {
+                    "type": "boolean",
+                    "title": "初始化数据库模式",
+                    "description": "默认值 true",
+                    "default": true
+                },
+                "EnableTransactionScopeEnlistment": {
+                    "type": "boolean",
+                    "title": "启用事务范围登记",
+                    "description": "默认值 true",
+                    "default": true
+                },
+                "DeleteExpiredBatchSize": {
+                    "type": "integer",
+                    "title": "删除过期批量大小",
+                    "description": "默认值 1000",
+                    "default": 1000,
+                    "minimum": 0
                 }
             }
         }

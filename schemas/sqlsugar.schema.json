@@ -52,6 +52,14 @@
                     "description": "必须由外部设定，最大值 2^WorkerIdBitLength-1",
                     "default": 0
                 },
+                "WorkerIdBitLength": {
+                    "type": "integer",
+                    "title": "机器码位长",
+                    "description": "默认值6，取值范围 [1, 15]（要求：序列数位长+机器码位长不超过22）",
+                    "default": 6,
+                    "minimum": 1,
+                    "maximum": 15
+                },
                 "SeqBitLength": {
                     "type": "integer",
                     "title": "序列数位长",
