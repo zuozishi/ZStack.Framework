@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <PackageId>ZStack.Framework.Templates.WebApi</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Title>ZStack.Framework WebApi模板</Title>
+      <Authors>Zuozishi</Authors>
+      <Description>基于 ZStack 框架快速搭建 WebApi。</Description>
+      <PackageTags>dotnet-new;templates;zstack</PackageTags>
+      <PackageProjectUrl>https://github.com/zuozishi/ZStack.Framework</PackageProjectUrl>
+  
+      <PackageType>Template</PackageType>
+      <TargetFramework>net8.0</TargetFramework>
+      <IncludeContentInPack>true</IncludeContentInPack>
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+      <ContentTargetFolders>content</ContentTargetFolders>
+      <NoWarn>$(NoWarn);NU5128</NoWarn>
+      <NoDefaultExcludes>true</NoDefaultExcludes>
+      <PackageIcon>icon.png</PackageIcon>
+    </PropertyGroup>
+  
+    <ItemGroup>
+      <Content Include="src\**\*" Exclude="src\**\bin\**;src\**\obj\**" />
+      <Compile Remove="**\*" />
+      <None Include="..\icon.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+  
+  </Project>

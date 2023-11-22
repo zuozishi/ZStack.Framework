@@ -1,0 +1,17 @@
+{
+    "$schema": "http://gitee.com/Zuozishi/ZStack.Framework/raw/net8/schemas/eventbus.schema.json",
+    "EventBus": {
+        "Prefix": "ZStack",
+        "Hosts": [
+            {
+                "Host": "127.0.0.1",
+                "Port": 5672
+            }
+        ],
+        "Port": 5672,
+        "UserName": "guest",
+        "Password": "guest",
+        "PrefetchCount": 50,
+        "ManagementUrl": "http://127.0.0.1:15672"
+    }
+}

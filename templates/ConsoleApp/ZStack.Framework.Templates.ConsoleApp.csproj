@@ -22,7 +22,7 @@
   <ItemGroup>
     <Content Include="src\**\*" Exclude="src\**\bin\**;src\**\obj\**" />
     <Compile Remove="**\*" />
-    <None Include="icon.png" Pack="true" PackagePath="\"/>
+    <None Include="..\icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

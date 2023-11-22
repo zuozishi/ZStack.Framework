@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Zuozishi",
+    "classifications": [
+        "C#",
+        ".NET",
+        "Web",
+        "ASP.NET",
+        "MVC",
+        "ZStack.Framework"
+    ],
+    "name": "ZStack.Framework WebApi",
+    "shortName": "zstack-webapi",
+    "identity": "ZStack.Framework.Template.WebApi",
+    "defaultName": "WebApi",
+    "tags": {
+        "language": "csharp",
+        "type": "project"
+    },
+    "sourceName": "WebApi",
+    "description": "ZStack.Framework WebApi项目",
+    "preferNameDirectory": true
+}

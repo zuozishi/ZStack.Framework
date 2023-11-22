@@ -1,0 +1,15 @@
+﻿global using Furion;
+global using Furion.DependencyInjection;
+global using Furion.DynamicApiController;
+global using Furion.FriendlyException;
+global using Mapster;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;
+global using Newtonsoft.Json;
+global using ZStack.AspNetCore;
+global using ZStack.AspNetCore.Restful;
+global using App = ZStack.AspNetCore.App;

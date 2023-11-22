@@ -1,0 +1,47 @@
+{
+    "$schema": "http://gitee.com/Zuozishi/ZStack.Framework/raw/net8/schemas/sqlsugar.schema.json",
+    "IdGenerator": {
+        "WorkerId": 1,
+        "WorkerIdBitLength": 2,
+        "SeqBitLength": 8
+    },
+    "DbConnection": {
+        "CommandTimeOut": 30,
+        "ConnectionConfigs": [
+            {
+                "ConfigId": "Main",
+                "DbType": "SqlServer",
+                "ConnectionString": "",
+                "LanguageType": "Chinese",
+                "IsAutoCloseConnection": true,
+                "DbSettings": {
+                    "EnableInitDb": true,
+                    "EnableUnderLine": true
+                },
+                "TableSettings": {
+                    "EnableInitTable": true,
+                    "EnableIncreTable": false
+                },
+                "SeedSettings": {
+                    "EnableInitSeed": true,
+                    "EnableIncreSeed": false
+                },
+                "AopSettings": {
+                    "EnableIdAutoFill": true,
+                    "EnableSqlLog": false,
+                    "EnableErrorSqlLog": true,
+                    "EnableSlowSqlLog": false,
+                    "SlowSqlTime": 5000,
+                    "CreateTimeFields": [
+                        "CreateTime",
+                        "CreatedTime"
+                    ],
+                    "UpdateTimeFields": [
+                        "UpdateTime",
+                        "UpdatedTime"
+                    ]
+                }
+            }
+        ]
+    }
+}
