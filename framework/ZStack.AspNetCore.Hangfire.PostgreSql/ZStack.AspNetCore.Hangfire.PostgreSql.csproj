@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<PackageId>ZStack.AspNetCore.Hangfire.PostgreSql</PackageId>
 		<Description>ZStack.AspNetCore框架Hangfire调度插件【PostgreSql】</Description>
-		<Version>1.0.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

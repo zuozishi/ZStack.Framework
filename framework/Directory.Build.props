@@ -7,17 +7,18 @@
 
     <PropertyGroup>
         <IncludeSymbols>true</IncludeSymbols>
-		<IncludeSource>true</IncludeSource>
+		    <IncludeSource>true</IncludeSource>
         <Authors>Zuozishi</Authors>
-		<Company />
+			  <Version>1.0.1.10</Version>
+		    <Company />
         <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		    <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<IncludeSymbols>true</IncludeSymbols>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/zuozishi/ZStack.Framework</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageIcon>icon.png</PackageIcon>
+		    <IncludeSymbols>true</IncludeSymbols>
+		    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+		    <PackageProjectUrl>https://github.com/zuozishi/ZStack.Framework</PackageProjectUrl>
+		    <PackageReadmeFile>README.md</PackageReadmeFile>
+		    <PackageIcon>icon.png</PackageIcon>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <DebugType>embedded</DebugType>
     </PropertyGroup>

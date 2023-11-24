@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<PackageId>ZStack.AspNetCore</PackageId>
 		<Description>ZStack.AspNetCore框架</Description>
-		<Version>1.0.1.2</Version>
 	</PropertyGroup>
 
   <ItemGroup>

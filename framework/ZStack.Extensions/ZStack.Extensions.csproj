@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<PackageId>ZStack.Extensions</PackageId>
 		<Description>ZStack框架 拓展方法库</Description>
-		<Version>1.0.1.1</Version>
 	</PropertyGroup>
 
   <ItemGroup>
