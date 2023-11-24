@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using ZStack.Core.Attributes;
+using ZStack.Core.Utils;
 using ZStack.Extensions.Models;
 
 namespace ZStack.Extensions;
@@ -56,9 +56,7 @@ public static class ObjectExtension
             {
                 newValue = newValue.ToJson(false);
             }
-            if (oldValue == null && newValue == null)
-                continue;
-            else if (oldValue?.ToString() != newValue?.ToString())
+            if (!DataUtils.IsEqual(oldValue, newValue))
             {
                 if (updateValue)
                     property.SetValue(curObj, property.GetValue(newObj));
