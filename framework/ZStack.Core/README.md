@@ -86,3 +86,10 @@ MD5.GetMD5(string input);
 MD5.GetMD5(byte[] bytes);
 MD5.GetMD5(Stream stream);
 ```
+
+**DataUtils.cs**
+
+```c#
+// 对比对象是否相等
+bool IsEqual(object? value1, object? value2);
+```

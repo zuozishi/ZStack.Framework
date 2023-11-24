@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<PackageId>ZStack.Core</PackageId>
 		<Description>ZStack框架核心库</Description>
-		<Version>1.0.1</Version>
+		<Version>1.0.1.1</Version>
 	</PropertyGroup>
 
   <ItemGroup>
