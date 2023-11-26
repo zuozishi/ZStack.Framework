@@ -10,7 +10,7 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
 {
     public SqlSugarRepository()
     {
-        var sqlSugarService = App.RootServices.GetRequiredService<ISqlSugarService>();
+        var sqlSugarService = App.GetRequiredService<ISqlSugarService>();
 
         Context = sqlSugarService.Get();
 

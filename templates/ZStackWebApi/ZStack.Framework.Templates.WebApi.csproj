@@ -2,7 +2,7 @@
 
     <PropertyGroup>
       <PackageId>ZStack.Framework.Templates.WebApi</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1.1</PackageVersion>
       <Title>ZStack.Framework WebApi模板</Title>
       <Authors>Zuozishi</Authors>
       <Description>基于 ZStack 框架快速搭建 WebApi。</Description>
