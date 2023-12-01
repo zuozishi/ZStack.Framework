@@ -12,12 +12,12 @@
     "name": "ZStack.Framework WebApi",
     "shortName": "zstack-webapi",
     "identity": "ZStack.Framework.Template.WebApi",
-    "defaultName": "WebApi",
+    "defaultName": "ZStackWebApi",
     "tags": {
         "language": "csharp",
         "type": "project"
     },
-    "sourceName": "WebApi",
+    "sourceName": "ZStackWebApi",
     "description": "ZStack.Framework WebApi项目",
     "preferNameDirectory": true
 }
