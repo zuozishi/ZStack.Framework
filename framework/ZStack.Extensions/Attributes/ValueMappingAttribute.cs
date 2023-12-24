@@ -1,4 +1,4 @@
-﻿namespace ZStack.Core.Attributes;
+﻿namespace ZStack.Extensions.Attributes;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 public class ValueMappingAttribute(object? origin, object? value) : Attribute

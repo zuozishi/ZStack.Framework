@@ -13,7 +13,7 @@ public class SqlSugarService : ISqlSugarService
         _logger = logger;
         _initializer = initializer;
         if (Options.ConnectionConfigs.GroupBy(x => x.ConfigId).Any(x => x.Count() > 1))
-            throw Oops.Bah("存在重复的数据库配置项, 请检查 ConfigId 是否重复");
+            throw new Exception("存在重复的数据库配置项, 请检查 ConfigId 是否重复");
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public class SqlSugarService : ISqlSugarService
         if (_scopes.TryGetValue(configId, out var scope))
             return scope;
         var config = Options.ConnectionConfigs.FirstOrDefault(x => x.ConfigId?.ToString() == configId)
-            ?? throw Oops.Bah("数据源配置不存在, configId={ConfigId}", configId);
+            ?? throw new Exception($"数据源配置不存在, configId={configId}");
         _initializer.SetDbConfig(config);
         scope = new SqlSugarScope(config, db =>
         {

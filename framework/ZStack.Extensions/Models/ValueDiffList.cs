@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
-using ZStack.Core.Attributes;
+using ZStack.Extensions.Attributes;
 
 namespace ZStack.Extensions.Models;
 
 /// <summary>
 /// 属性值差异列表
 /// </summary>
-public class PropertiesValueDiffList(Type type)
+public class ValueDiffList(Type type)
 {
     public Type Type { get; } = type;
 

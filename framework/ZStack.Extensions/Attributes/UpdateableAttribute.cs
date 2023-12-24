@@ -1,4 +1,4 @@
-﻿namespace ZStack.Core.Attributes;
+﻿namespace ZStack.Extensions.Attributes;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
 public class UpdateableAttribute : Attribute

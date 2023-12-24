@@ -18,7 +18,7 @@ public static class EventBusSetup
     public static IServiceCollection AddZStackEventBus(this IServiceCollection service, Action<EventBusOptions>? configure = null)
     {
         var options = App.GetOptions<EventBusOptions>();
-        service.AddConfigurableOptions<EventBusOptions>();
+        ServiceCollectionExtensions.AddZStackOptions<EventBusOptions>(service);
         service.AddSingleton<IConventions, QueueNamingConventions>();
         service.RegisterEasyNetQ(_ =>
         {

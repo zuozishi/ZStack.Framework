@@ -1,9 +1,8 @@
 ﻿using EasyNetQ;
-using Furion.ConfigurableOptions;
 
 namespace ZStack.AspNetCore.EventBus;
 
-public class EventBusOptions : ConnectionConfiguration, IConfigurableOptions
+public class EventBusOptions : ConnectionConfiguration
 {
     public string? Prefix { get; set; }
 

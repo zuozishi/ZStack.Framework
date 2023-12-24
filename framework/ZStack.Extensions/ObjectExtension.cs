@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using ZStack.Core.Attributes;
 using ZStack.Core.Utils;
+using ZStack.Extensions.Attributes;
 using ZStack.Extensions.Models;
 
 namespace ZStack.Extensions;
@@ -32,12 +32,12 @@ public static class ObjectExtension
     /// <param name="newObj">新值对象</param>
     /// <param name="updateValue">是否将新值更新到原始对象</param>
     /// <returns></returns>
-    public static PropertiesValueDiffList Diff(this object curObj, object newObj, bool updateValue)
+    public static ValueDiffList Diff(this object curObj, object newObj, bool updateValue)
     {
         var objType = curObj.GetType();
         var typeAttr = objType.GetCustomAttribute<UpdateableAttribute>();
         var typeUpdateable = typeAttr != null && !typeAttr.IsIgnore;
-        var diffList = new PropertiesValueDiffList(objType);
+        var diffList = new ValueDiffList(objType);
         var properties = objType.GetProperties();
         foreach (var property in properties)
         {

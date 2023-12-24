@@ -16,8 +16,8 @@ public static class SqlSugarSetup
     public static void AddZStackSqlSugar<TInitializer>(this IServiceCollection services)
         where TInitializer : class, ISqlSugarInitializer
     {
-        services.AddConfigurableOptions<SnowIdOptions>();
-        services.AddConfigurableOptions<DbConnectionOptions>();
+        ServiceCollectionExtensions.AddZStackOptions<SnowIdOptions>(services);
+        ServiceCollectionExtensions.AddZStackOptions<DbConnectionOptions>(services);
 
         // 注册雪花Id
         YitIdHelper.SetIdGenerator(App.GetOptions<SnowIdOptions>());
@@ -33,6 +33,5 @@ public static class SqlSugarSetup
         services.AddSingleton<ISqlSugarService, SqlSugarService>();
         services.AddSingleton<ISqlSugarClient>(sp => sp.GetRequiredService<ISqlSugarService>().Get());
         services.AddSingleton(typeof(SqlSugarRepository<>));
-        services.AddUnitOfWork<SqlSugarUnitOfWork>();
     }
 }

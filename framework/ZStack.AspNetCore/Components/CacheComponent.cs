@@ -9,8 +9,8 @@ public class CacheComponent : IServiceComponent
 {
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
-        services.AddConfigurableOptions<CacheOptions>();
-        var options = FurionApp.GetOptions<CacheOptions>();
+        services.AddZStackOptions<CacheOptions>();
+        var options = App.GetOptions<CacheOptions>();
         switch (options.CacheType)
         {
             case CacheTypes.Redis:
