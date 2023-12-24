@@ -164,6 +164,10 @@ internal static class InternalApp
                 Configuration.Bind(options);
             else
                 Configuration.Bind(sectionName, options);
+            if (options is IConfigureOptions<T> configureOptions)
+                configureOptions.Configure(options);
+            else if (options is IPostConfigureOptions<T> postConfigureOptions)
+                postConfigureOptions.PostConfigure(sectionName, options);
             return options;
         }
         return new T();
