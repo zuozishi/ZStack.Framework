@@ -22,11 +22,11 @@ public static class ServiceCollectionExtensions
     /// 自动注册服务组件
     /// </summary>
     /// <param name="services"></param>
-    /// <param name="scan"></param>
+    /// <param name="autoLoad"></param>
     /// <param name="components"></param>
     /// <param name="ignoreComponents"></param>
     /// <returns></returns>
-    public static IServiceCollection AddComponents(this IServiceCollection services, bool autoLaod = true, Type[]? components = null, Type[]? ignoreComponents = null)
+    public static IServiceCollection AddComponents(this IServiceCollection services, bool autoLoad = true, Type[]? components = null, Type[]? ignoreComponents = null)
     {
         var componentList = new List<Type>();
         components?.ForEach((type, _) =>
@@ -35,7 +35,7 @@ public static class ServiceCollectionExtensions
                 return;
             componentList.Add(type);
         });
-        if (autoLaod)
+        if (autoLoad)
             App.EffectiveTypes
                 .Where(t => (typeof(IServiceComponent).IsAssignableFrom(t)) && !t.IsInterface && !t.IsAbstract)
                 .ForEach((type, _) =>

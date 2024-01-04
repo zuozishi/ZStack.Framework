@@ -27,11 +27,20 @@ public static class HangireSetup
         services.AddHangfireConsoleExtensions();
         services.AddHangfireServer(config =>
         {
-            config.HeartbeatInterval = options.Server.HeartbeatInterval;
-            config.ServerCheckInterval = options.Server.ServerCheckInterval;
-            config.SchedulePollingInterval = options.Server.SchedulePollingInterval;
-            config.ServerName = options.Server.ServerName;
             config.WorkerCount = options.Server.WorkerCount;
+            config.Queues = options.Server.Queues;
+            config.StopTimeout = options.Server.StopTimeout;
+            config.ShutdownTimeout = options.Server.ShutdownTimeout;
+            config.SchedulePollingInterval = options.Server.SchedulePollingInterval;
+            config.HeartbeatInterval = options.Server.HeartbeatInterval;
+            config.ServerTimeout = options.Server.ServerTimeout;
+            config.ServerCheckInterval = options.Server.ServerCheckInterval;
+            config.CancellationCheckInterval = options.Server.CancellationCheckInterval;
+            config.FilterProvider = options.Server.FilterProvider;
+            config.Activator = options.Server.Activator;
+            config.TimeZoneResolver = options.Server.TimeZoneResolver;
+            config.TaskScheduler = options.Server.TaskScheduler;
+            config.ServerName = options.Server.ServerName;
         });
         return services;
     }

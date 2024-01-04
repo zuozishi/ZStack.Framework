@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using System.Reflection;
 using ZStack.AspNetCore.Attributes;
 using ZStack.Core.Utils;
+using ILogger = Serilog.ILogger;
 
 namespace ZStack.AspNetCore;
 

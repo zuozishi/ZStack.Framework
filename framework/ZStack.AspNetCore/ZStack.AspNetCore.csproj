@@ -2,7 +2,12 @@
 	<PropertyGroup>
 		<PackageId>ZStack.AspNetCore</PackageId>
 		<Description>ZStack.AspNetCore框架</Description>
+		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
   <ItemGroup>
     <!--
@@ -13,7 +18,7 @@
 		<PackageReference Include="IGeekFan.AspNetCore.Knife4jUI" Version="0.0.16" />
 		<PackageReference Include="Mapster" Version="7.4.0" />
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
-    <PackageReference Include="NewLife.Redis" Version="5.5.2023.1201" />
+    <PackageReference Include="NewLife.Redis" Version="5.6.2024.104" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />

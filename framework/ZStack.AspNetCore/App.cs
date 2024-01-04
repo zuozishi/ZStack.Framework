@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Profiling;
 using System.Reflection;
+using ILogger = Serilog.ILogger;
 
 namespace ZStack.AspNetCore;
 
@@ -115,7 +116,7 @@ public partial class App
     /// <summary>
     /// 获取服务注册的生命周期类型
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="serviceType"></param>
     /// <returns></returns>
     public static ServiceLifetime? GetServiceLifetime(Type serviceType)
         => InternalApp.GetServiceLifetime(serviceType);

@@ -9,7 +9,7 @@
         <IncludeSymbols>true</IncludeSymbols>
 		    <IncludeSource>true</IncludeSource>
         <Authors>Zuozishi</Authors>
-			  <Version>1.0.1.11</Version>
+			  <Version>2.0.0-dev</Version>
 		    <Company />
         <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
 		    <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -20,7 +20,7 @@
 		    <PackageReadmeFile>README.md</PackageReadmeFile>
 		    <PackageIcon>icon.png</PackageIcon>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <DebugType>embedded</DebugType>
+			  <EmbedAllSources>true</EmbedAllSources>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">

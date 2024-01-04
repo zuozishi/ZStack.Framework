@@ -63,12 +63,20 @@
             <param name="separator"></param>
             <returns></returns>
         </member>
-        <member name="T:ZStack.Extensions.Models.PropertiesValueDiffList">
+        <member name="M:ZStack.Extensions.IEnumerableExtension.ToQueryString(System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            将字典转化为QueryString格式
+            </summary>
+            <param name="dict"></param>
+            <param name="urlEncode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZStack.Extensions.Models.ValueDiffList">
             <summary>
             属性值差异列表
             </summary>
         </member>
-        <member name="M:ZStack.Extensions.Models.PropertiesValueDiffList.#ctor(System.Type)">
+        <member name="M:ZStack.Extensions.Models.ValueDiffList.#ctor(System.Type)">
             <summary>
             属性值差异列表
             </summary>
@@ -123,29 +131,14 @@
             <param name="generic">泛型类型</param>
             <returns>bool</returns>
         </member>
-        <member name="M:ZStack.Extensions.ObjectExtension.ToQueryString(System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
-            <summary>
-            将字典转化为QueryString格式
-            </summary>
-            <param name="dict"></param>
-            <param name="urlEncode"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ZStack.Extensions.ObjectExtension.UrlEncode(System.String)">
-            <summary>
-            将字符串URL编码
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ZStack.Extensions.ObjectExtension.ParseToLong(System.Object)">
+        <member name="M:ZStack.Extensions.ObjectExtension.ToLongOrDefault(System.Object)">
             <summary>
             将object转换为long，若失败则返回0
             </summary>
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="M:ZStack.Extensions.ObjectExtension.ParseToLong(System.String,System.Int64)">
+        <member name="M:ZStack.Extensions.ObjectExtension.ToLongOrDefault(System.Object,System.Int64)">
             <summary>
             将object转换为long，若失败则返回指定值
             </summary>
@@ -199,6 +192,20 @@
             <summary>
             获取MD5
             <see cref="M:ZStack.Core.Utils.MD5.GetMD5(System.String)"/>
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.UrlEncode(System.String)">
+            <summary>
+            将字符串URL编码
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.Extensions.StringExtension.UrlDecode(System.String)">
+            <summary>
+            将字符串URL解码
             </summary>
             <param name="str"></param>
             <returns></returns>

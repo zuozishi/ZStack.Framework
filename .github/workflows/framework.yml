@@ -2,9 +2,9 @@ name: framework
 
 on:
   push:
-    branches: [ net8 ]
+    branches: [ net8, dev ]
   pull_request:
-    branches: [ net8 ]
+    branches: [ net8, dev ]
 
 jobs:
   build:

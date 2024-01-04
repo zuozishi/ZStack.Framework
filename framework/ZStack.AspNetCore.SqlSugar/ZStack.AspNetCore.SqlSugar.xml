@@ -316,50 +316,6 @@
             <param name="configId"></param>
             <returns></returns>
         </member>
-        <member name="T:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork">
-            <summary>
-            SqlSugar 事务和工作单元
-            </summary>
-            <param name="sqlSugarClient"></param>
-        </member>
-        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.#ctor(SqlSugar.ISqlSugarClient)">
-            <summary>
-            SqlSugar 事务和工作单元
-            </summary>
-            <param name="sqlSugarClient"></param>
-        </member>
-        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.BeginTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
-            <summary>
-            开启工作单元处理
-            </summary>
-            <param name="context"></param>
-            <param name="unitOfWork"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.CommitTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
-            <summary>
-            提交工作单元处理
-            </summary>
-            <param name="resultContext"></param>
-            <param name="unitOfWork"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.RollbackTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
-            <summary>
-            回滚工作单元处理
-            </summary>
-            <param name="resultContext"></param>
-            <param name="unitOfWork"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:ZStack.AspNetCore.SqlSugar.SqlSugarUnitOfWork.OnCompleted(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Microsoft.AspNetCore.Mvc.Filters.FilterContext)">
-            <summary>
-            执行完毕（无论成功失败）
-            </summary>
-            <param name="context"></param>
-            <param name="resultContext"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
         <member name="M:Microsoft.Extensions.DependencyInjection.SqlSugarSetup.AddZStackSqlSugar(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             SqlSugar 上下文初始化
