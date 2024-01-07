@@ -8,9 +8,8 @@ public static class WebApplicationBuilderExtensions
     /// 服务注入
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="configure"></param>
     /// <param name="loggerConfigure"></param>
-    /// <param name="scan">自动扫描注册组件</param>
+    /// <param name="autoLoadComponents">自动扫描注册组件</param>
     /// <param name="components">手动注册组件列表</param>
     /// <param name="ignoreComponents">忽略自动注册组件列表</param>
     /// <returns></returns>

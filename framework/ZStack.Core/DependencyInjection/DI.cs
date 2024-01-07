@@ -13,7 +13,9 @@ public static class DI
     /// <summary>
     /// 创建控制台应用程序依赖注入容器
     /// </summary>
-    /// <param name="configure"></param>
+    /// <param name="servicesConfigure"></param>
+    /// <param name="addLogger"></param>
+    /// <param name="loggerConfigure"></param>
     /// <returns></returns>
     public static IServiceProvider CreateConsoleAppServiceProvider(
         Action<ServiceCollection> servicesConfigure,
@@ -40,17 +42,17 @@ public static class DI
     {
         var types = Reflection.GetTypes();
         var injectTypes = types
-            .Where(x => x.IsAssignableFrom(typeof(IPrivateDependency)) && !x.IsAbstract)
+            .Where(x => x.IsAssignableTo(typeof(IPrivateDependency)) && !x.IsAbstract)
             .OrderBy(x => x.GetCustomAttribute<InjectionAttribute>()?.Order ?? 0)
             .ToArray();
         void addService(Type type, object? key, Type? implType)
         {
             var lifetime = ServiceLifetime.Scoped;
-            if (type.IsAssignableFrom(typeof(ISingleton)))
+            if (type.IsAssignableTo(typeof(ISingleton)))
                 lifetime = ServiceLifetime.Singleton;
-            else if (type.IsAssignableFrom(typeof(IScoped)))
+            else if (type.IsAssignableTo(typeof(IScoped)))
                 lifetime = ServiceLifetime.Scoped;
-            else if (type.IsAssignableFrom(typeof(ITransient)))
+            else if (type.IsAssignableTo(typeof(ITransient)))
                 lifetime = ServiceLifetime.Transient;
             else
                 throw new Exception($"未知的生命周期 {type.FullName}");

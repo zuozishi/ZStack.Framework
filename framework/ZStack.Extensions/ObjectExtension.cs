@@ -126,7 +126,7 @@ public static class ObjectExtension
     /// <summary>
     /// 将object转换为long，若失败则返回指定值
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="obj"></param>
     /// <param name="defaultValue"></param>
     /// <returns></returns>
     public static long ToLongOrDefault(this object obj, long defaultValue)

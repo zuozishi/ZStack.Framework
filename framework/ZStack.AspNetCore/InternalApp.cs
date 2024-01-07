@@ -141,8 +141,6 @@ internal static class InternalApp
     /// 获取配置选项
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="configuration"></param>
-    /// <param name="sectionName"></param>
     /// <returns></returns>
     internal static T GetOptions<T>()
         where T : class, new()

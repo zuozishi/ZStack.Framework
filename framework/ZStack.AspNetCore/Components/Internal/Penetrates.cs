@@ -15,7 +15,7 @@ internal class Penetrates
     /// <exception cref="InvalidOperationException"></exception>
     internal static void AddWebComponent(IHostApplicationBuilder builder, Type componentType, object? options = null)
     {
-        if (!componentType.IsAssignableFrom(typeof(IWebComponent)))
+        if (!componentType.IsAssignableTo(typeof(IWebComponent)))
             throw new InvalidOperationException("组件类型必须实现 IWebComponent 接口!");
         if (componentType.IsAbstract || componentType.IsInterface)
             throw new InvalidOperationException("组件类型不能是抽象类或接口!");
@@ -36,7 +36,7 @@ internal class Penetrates
     /// <exception cref="InvalidOperationException"></exception>
     internal static void AddServiceComponent(IServiceCollection services, Type componentType, object? options = null)
     {
-        if (!componentType.IsAssignableFrom(typeof(IServiceComponent)))
+        if (!componentType.IsAssignableTo(typeof(IServiceComponent)))
             throw new InvalidOperationException("组件类型必须实现 IServiceComponent 接口!");
         if (componentType.IsAbstract || componentType.IsInterface)
             throw new InvalidOperationException("组件类型不能是抽象类或接口!");
@@ -56,7 +56,7 @@ internal class Penetrates
     /// <param name="options">组件参数</param>
     internal static void AddApplicationComponent(IApplicationBuilder app, Type componentType, object? options = null)
     {
-        if (!componentType.IsAssignableFrom(typeof(IApplicationComponent)))
+        if (!componentType.IsAssignableTo(typeof(IApplicationComponent)))
             throw new InvalidOperationException("组件类型必须实现 IApplicationComponent 接口!");
         if (componentType.IsAbstract || componentType.IsInterface)
             throw new InvalidOperationException("组件类型不能是抽象类或接口!");
@@ -70,8 +70,17 @@ internal class Penetrates
         {
             if (method.Name != "Load" && method.Name != "LoadAsync")
                 continue;
+
+            var parameters = method.GetParameters();
+
+            // 忽略主机和服务组件的 Load 方法
+            if (method.Name == "Load" && parameters.Length == 2
+                && (parameters[0].ParameterType == typeof(IHostApplicationBuilder) || parameters[0].ParameterType == typeof(IServiceCollection))
+                && parameters[1].ParameterType == typeof(ComponentContext))
+                continue;
+
             var args = new List<object?>();
-            foreach (var parameter in method.GetParameters())
+            foreach (var parameter in parameters)
             {
                 if (parameter.ParameterType == typeof(IApplicationBuilder))
                     args.Add(app);
@@ -93,6 +102,7 @@ internal class Penetrates
     /// </summary>
     /// <param name="componentType">组件类型</param>
     /// <param name="options">组件参数</param>
+    /// <param name="calledContext">调用上下文</param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
     private static ComponentContext AddComponent(Type componentType, object? options = null, ComponentContext? calledContext = null)
