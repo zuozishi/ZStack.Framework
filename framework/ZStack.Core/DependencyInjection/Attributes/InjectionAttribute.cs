@@ -28,7 +28,7 @@ public class InjectionAttribute(InjectionActions action, params Type[] exceptInt
     /// <summary>
     /// 注册选项
     /// </summary>
-    public InjectionPatterns Pattern { get; set; } = InjectionPatterns.SelfWithFirstInterface;
+    public InjectionPatterns Pattern { get; set; } = InjectionPatterns.Self;
 
     /// <summary>
     /// 注册别名
@@ -45,6 +45,11 @@ public class InjectionAttribute(InjectionActions action, params Type[] exceptInt
     /// 排除接口
     /// </summary>
     public Type[] ExceptInterfaces { get; set; } = exceptInterfaces ?? [];
+
+    /// <summary>
+    /// 指定接口, 仅在 Pattern 为 FirstInterface 和 SelfWithFirstInterface 时有效
+    /// </summary>
+    public Type? SpecifiedInterface { get; set; }
 
     /// <summary>
     /// 代理类型，必须继承 DispatchProxy、IDispatchProxy

@@ -1,4 +1,5 @@
 ﻿using ZStack.AspNetCore;
+using ZStack.Core.Utils;
 
 namespace Microsoft.AspNetCore.Builder;
 
@@ -20,6 +21,9 @@ public static class WebApplicationBuilderExtensions
         Type[]? components = null,
         Type[]? ignoreComponents = null)
     {
+        // 加载ZStack程序集
+        Reflection.LoadZStackAssemblies();
+
         // 配置主机
         InternalApp.ConfigureHostApplication(builder);
 

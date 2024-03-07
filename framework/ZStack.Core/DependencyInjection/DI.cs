@@ -48,11 +48,11 @@ public static class DI
         void addService(Type type, object? key, Type? implType)
         {
             var lifetime = ServiceLifetime.Scoped;
-            if (type.IsAssignableTo(typeof(ISingleton)))
+            if ((implType ?? type).IsAssignableTo(typeof(ISingleton)))
                 lifetime = ServiceLifetime.Singleton;
-            else if (type.IsAssignableTo(typeof(IScoped)))
+            else if ((implType ?? type).IsAssignableTo(typeof(IScoped)))
                 lifetime = ServiceLifetime.Scoped;
-            else if (type.IsAssignableTo(typeof(ITransient)))
+            else if ((implType ?? type).IsAssignableTo(typeof(ITransient)))
                 lifetime = ServiceLifetime.Transient;
             else
                 throw new Exception($"未知的生命周期 {type.FullName}");
@@ -73,15 +73,15 @@ public static class DI
                     addService(type, injectAttr.Key, null);
                     break;
                 case InjectionPatterns.FirstInterface:
-                    if (interfances.Length == 0)
+                    if (injectAttr.SpecifiedInterface == null && interfances.Length == 0)
                         throw new Exception($"类型 {type.FullName} 没有实现接口");
-                    addService(interfances.First(), injectAttr.Key, type);
+                    addService(injectAttr.SpecifiedInterface ?? interfances.First(), injectAttr.Key, type);
                     break;
                 case InjectionPatterns.SelfWithFirstInterface:
                     addService(type, injectAttr.Key, null);
-                    if (interfances.Length == 0)
+                    if (injectAttr.SpecifiedInterface == null && interfances.Length == 0)
                         throw new Exception($"类型 {type.FullName} 没有实现接口");
-                    addService(interfances.First(), injectAttr.Key, type);
+                    addService(injectAttr.SpecifiedInterface ?? interfances.First(), injectAttr.Key, type);
                     break;
                 case InjectionPatterns.ImplementedInterfaces:
                     foreach (var interfance in interfances)
