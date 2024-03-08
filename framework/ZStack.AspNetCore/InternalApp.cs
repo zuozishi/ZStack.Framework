@@ -60,9 +60,9 @@ internal static class InternalApp
     internal static void ConfigureHostApplication(WebApplicationBuilder builder,
         Action<LoggerConfiguration>? loggerConfiguration = null)
     {
+        ConfigureConfiguration(builder.Environment, builder.Configuration);
         ConfigureSerilog(builder, loggerConfiguration);
         ConfigureHostEnvironment(builder.Environment);
-        ConfigureConfiguration(builder.Environment, builder.Configuration);
         ConfigureServices(builder.Services);
     }
 

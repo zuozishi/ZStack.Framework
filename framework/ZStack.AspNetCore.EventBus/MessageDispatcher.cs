@@ -12,10 +12,10 @@ public class MessageDispatcher(IServiceProvider _sp) : IAutoSubscriberMessageDis
         consumer.Consume(message, cancellationToken);
     }
 
-    Task IAutoSubscriberMessageDispatcher.DispatchAsync<TMessage, TConsumer>(TMessage message, CancellationToken cancellationToken)
+    async Task IAutoSubscriberMessageDispatcher.DispatchAsync<TMessage, TConsumer>(TMessage message, CancellationToken cancellationToken)
     {
         using var scope = _sp.CreateScope();
         var consumer = scope.ServiceProvider.GetRequiredService<TConsumer>();
-        return consumer.ConsumeAsync(message, cancellationToken);
+        await consumer.ConsumeAsync(message, cancellationToken).ConfigureAwait(false);
     }
 }
