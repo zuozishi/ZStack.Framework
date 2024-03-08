@@ -27,7 +27,6 @@ public static class Reflection
     /// <summary>
     /// 加载 ZStack 程序集
     /// </summary>
-    /// <param name="throwException"></param>
     public static void LoadZStackAssemblies()
     {
         var baseDir = AppDomain.CurrentDomain.BaseDirectory;

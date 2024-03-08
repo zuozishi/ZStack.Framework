@@ -105,11 +105,12 @@ internal static class InternalApp
     {
         Configuration = configuration;
         var env = environment.EnvironmentName;
-        var configurationDirectory = configuration["ConfigurationDirectory"]
-            ?? "Configuration";
+        var configurationDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            configuration["ConfigurationDirectory"] ?? "Configuration");
         var files = new Matcher()
             .AddInclude("*.json")
             .AddInclude("*.ini")
+            .AddExclude("*.schema.json")
             .GetResultsInFullPath(configurationDirectory);
         foreach (var file in files)
         {
