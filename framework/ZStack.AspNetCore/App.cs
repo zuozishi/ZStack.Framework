@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Profiling;
 using System.Reflection;
+using System.Security.Claims;
 using ILogger = Serilog.ILogger;
 
 namespace ZStack.AspNetCore;
@@ -51,6 +52,11 @@ public partial class App
     /// 获取请求上下文
     /// </summary>
     public static HttpContext? HttpContext => InternalApp.ServiceProvider?.GetService<IHttpContextAccessor>()?.HttpContext;
+
+    /// <summary>
+    /// 获取请求上下文的用户
+    /// </summary>
+    public static ClaimsPrincipal? User => HttpContext?.User;
 
     /// <summary>
     /// 组件列表
