@@ -102,16 +102,19 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                 var seedData = ((IEnumerable)hasDataMethod?.Invoke(instance, null)!)?.Cast<object>();
                 if (seedData == null) continue;
 
+                
+
                 var seedDataAttr = hasDataMethod?.GetCustomAttribute<SeedDataAttribute>()
                     ?? seedType.GetCustomAttribute<SeedDataAttribute>()
                     ?? new();
                 var entityInfo = db.EntityMaintenance.GetEntityInfo(entityType);
-                if (!string.IsNullOrEmpty(seedDataAttr.UniqueField))
+                if (seedDataAttr.ByConditional)
                 {
-                    // 按唯一字段进行增加和更新
+                    // 按指定条件进行增加和更新
                     foreach (var item in seedData)
                     {
-                        var entity = db.QueryableByObject(entityType).Where([new ConditionalModel()]).FirstAsync();
+                        var conds = ((IEnumerable)seedType.GetMethod("GetConditionals")?.Invoke(instance, [item])!).Cast<ConditionalModel>();
+                        var entity = db.QueryableByObject(entityType).Where([.. conds]).FirstAsync();
                         if (entity == null)
                             db.InsertableByObject(item).ExecuteCommand();
                         else if (seedDataAttr.Update && entity.Diff(item, true).HasChange)
