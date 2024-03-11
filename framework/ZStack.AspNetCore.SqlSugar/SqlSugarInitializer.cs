@@ -111,7 +111,7 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                     foreach (var item in seedData)
                     {
                         var conds = ((IEnumerable)seedType.GetMethod("GetConditionals")?.Invoke(instance, [item])!).Cast<ConditionalModel>();
-                        var entity = v.QueryableByObject(entityType).Where([.. conds]).FirstAsync();
+                        var entity = db.CopyNew().QueryableByObject(entityType).Where([.. conds]).FirstAsync();
                         if (entity == null)
                             db.CopyNew().InsertableByObject(item).ExecuteCommand();
                         else if (seedDataAttr.Update && entity.Diff(item, true).HasChange)
