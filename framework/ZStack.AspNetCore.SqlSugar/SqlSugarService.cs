@@ -1,4 +1,6 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ZStack.AspNetCore.SqlSugar;
 
 public class SqlSugarService : ISqlSugarService
 {
@@ -15,6 +17,14 @@ public class SqlSugarService : ISqlSugarService
         if (Options.ConnectionConfigs.GroupBy(x => x.ConfigId).Any(x => x.Count() > 1))
             throw new Exception("存在重复的数据库配置项, 请检查 ConfigId 是否重复");
     }
+
+    /// <summary>
+    /// 是否包含指定的数据库配置
+    /// </summary>
+    /// <param name="configId"></param>
+    /// <returns></returns>
+    public bool Contains(string configId = SqlSugarConst.MainConfigId)
+        => Options.ConnectionConfigs.Any(x => x.ConfigId?.ToString() == configId);
 
     /// <summary>
     /// 获取数据库上下文
@@ -36,5 +46,21 @@ public class SqlSugarService : ISqlSugarService
         _initializer.InitDatabase(config, scope);
         _scopes.AddOrUpdate(configId, scope, (_, _) => scope);
         return scope;
+    }
+
+    /// <summary>
+    /// 尝试获取数据库上下文
+    /// </summary>
+    /// <param name="configId"></param>
+    /// <param name="scope"></param>
+    /// <returns></returns>
+    public bool TryGet(string? configId, [MaybeNullWhen(false)] out SqlSugarScope scope)
+    {
+        if (configId == null)
+        {
+            scope = Get();
+            return true;
+        }
+        return _scopes.TryGetValue(configId, out scope);
     }
 }
