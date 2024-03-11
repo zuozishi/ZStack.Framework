@@ -1,4 +1,5 @@
-﻿using ZStack.AspNetCore;
+﻿using System.Reflection;
+using ZStack.AspNetCore;
 
 namespace Microsoft.AspNetCore.Builder;
 
@@ -55,5 +56,64 @@ public static class ApplicationBuilderExtension
             app.UseComponent(type);
         });
         return app;
+    }
+
+    /// <summary>
+    /// 调用自定义Startups处理程序
+    /// </summary>
+    /// <param name="app"></param>
+    /// <returns></returns>
+    public static IApplicationBuilder UseStartups(this IApplicationBuilder app)
+    {
+        // 反转，处理排序
+        var startups = InternalApp.AppStartups.Reverse();
+        if (!startups.Any()) return app;
+
+        // 遍历所有
+        foreach (var startup in startups)
+        {
+            var type = startup.GetType();
+
+            // 获取所有符合依赖注入格式的方法，如返回值 void，且第一个参数是 IApplicationBuilder 类型
+            var configureMethods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                .Where(u => u.ReturnType == typeof(void)
+                    && u.GetParameters().Length > 0
+                    && u.GetParameters().First().ParameterType == typeof(IApplicationBuilder));
+
+            if (!configureMethods.Any()) continue;
+
+            // 自动安装属性调用
+            foreach (var method in configureMethods)
+            {
+                method.Invoke(startup, ResolveMethodParameterInstances(app, method));
+            }
+        }
+
+        // 释放内存
+        InternalApp.AppStartups.Clear();
+        return app;
+    }
+
+    /// <summary>
+    /// 解析方法参数实例
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="method"></param>
+    /// <returns></returns>
+    private static object[] ResolveMethodParameterInstances(IApplicationBuilder app, MethodInfo method)
+    {
+        // 获取方法所有参数
+        var parameters = method.GetParameters();
+        var parameterInstances = new object[parameters.Length];
+        parameterInstances[0] = app;
+
+        // 解析服务
+        for (var i = 1; i < parameters.Length; i++)
+        {
+            var parameter = parameters[i];
+            parameterInstances[i] = app.ApplicationServices.GetRequiredService(parameter.ParameterType);
+        }
+
+        return parameterInstances;
     }
 }

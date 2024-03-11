@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using System.Collections.Concurrent;
 using System.Reflection;
 using ZStack.AspNetCore.Attributes;
 using ZStack.Core.Utils;
@@ -51,6 +52,11 @@ internal static class InternalApp
     /// 组件列表
     /// </summary>
     internal static List<ComponentContext> Components { get; } = [];
+
+    /// <summary>
+    /// 应用所有启动配置对象
+    /// </summary>
+    internal static ConcurrentBag<AppStartup> AppStartups { get; } = [];
 
     /// <summary>
     /// 配置主机应用

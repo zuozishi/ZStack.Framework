@@ -82,7 +82,6 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         {
             var seedDataTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarEntitySeedData<>))))
                 .WhereIF(config.SeedSettings.EnableIncreSeed, u => u.IsDefined(typeof(IncreSeedAttribute), false)).ToList();
-            var client = db.CopyNew();
             foreach (var seedType in seedDataTypes)
             {
                 var entityType = seedType.GetInterfaces().First().GetGenericArguments().First();
@@ -105,24 +104,24 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                 var seedDataAttr = hasDataMethod?.GetCustomAttribute<SeedDataAttribute>()
                     ?? seedType.GetCustomAttribute<SeedDataAttribute>()
                     ?? new();
-                var entityInfo = client.EntityMaintenance.GetEntityInfo(entityType);
+                var entityInfo = db.CopyNew().EntityMaintenance.GetEntityInfo(entityType);
                 if (seedDataAttr.ByConditional)
                 {
                     // 按指定条件进行增加和更新
                     foreach (var item in seedData)
                     {
                         var conds = ((IEnumerable)seedType.GetMethod("GetConditionals")?.Invoke(instance, [item])!).Cast<ConditionalModel>();
-                        var entity = client.QueryableByObject(entityType).Where([.. conds]).FirstAsync();
+                        var entity = v.QueryableByObject(entityType).Where([.. conds]).FirstAsync();
                         if (entity == null)
-                            client.InsertableByObject(item).ExecuteCommand();
+                            db.CopyNew().InsertableByObject(item).ExecuteCommand();
                         else if (seedDataAttr.Update && entity.Diff(item, true).HasChange)
-                            client.UpdateableByObject(entity).ExecuteCommand();
+                            db.CopyNew().UpdateableByObject(entity).ExecuteCommand();
                     }
                 }
                 else if (entityInfo.Columns.Any(u => u.IsPrimarykey))
                 {
                     // 按主键进行批量增加和更新
-                    var storage = client.StorageableByObject(seedData.ToList()).ToStorage();
+                    var storage = db.CopyNew().StorageableByObject(seedData.ToList()).ToStorage();
                     storage.AsInsertable.ExecuteCommand();
                     if (seedDataAttr.Update)
                         storage.AsUpdateable.ExecuteCommand();
@@ -130,8 +129,8 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                 else
                 {
                     // 无主键则只进行插入
-                    if (!client.Queryable(entityInfo.DbTableName, entityInfo.DbTableName).Any())
-                        client.InsertableByObject(seedData.ToList()).ExecuteCommand();
+                    if (!db.CopyNew().Queryable(entityInfo.DbTableName, entityInfo.DbTableName).Any())
+                        db.CopyNew().InsertableByObject(seedData.ToList()).ExecuteCommand();
                 }
             }
         }
