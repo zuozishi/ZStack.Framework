@@ -9,6 +9,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class HangireSetup
 {
+    private static IServiceScope? Scope;
+
     /// <summary>
     /// 注册Hangfire服务
     /// </summary>
@@ -52,7 +54,10 @@ public static class HangireSetup
     /// <returns></returns>
     public static IApplicationBuilder RegisterHangireJobs(this IApplicationBuilder app)
     {
-        var jobs = app.ApplicationServices.GetServices<IHangfireJob>();
+        if (Scope != null)
+            return app;
+        Scope = app.ApplicationServices.CreateScope();
+        var jobs = Scope.ServiceProvider.GetServices<IHangfireJob>();
         foreach (var job in jobs)
         {
             App.Logger.Information("注册定时任务：{JobId} [{Type}][{Cron}]", job.JobId, job.GetType().FullName, job.Cron);
