@@ -13,22 +13,22 @@ public static class UnifyContext
     /// <summary>
     /// 是否启用规范化结果
     /// </summary>
-    internal static bool EnabledUnifyHandler = false;
+    public static bool EnabledUnifyHandler = false;
 
     /// <summary>
     /// 规范化结果额外数据键
     /// </summary>
-    internal static string UnifyResultExtrasKey = "UNIFY_RESULT_EXTRAS";
+    public static string UnifyResultExtrasKey = "UNIFY_RESULT_EXTRAS";
 
     /// <summary>
     /// 规范化结果提供器
     /// </summary>
-    internal static ConcurrentDictionary<string, UnifyMetadata> UnifyProviders = new();
+    public static ConcurrentDictionary<string, UnifyMetadata> UnifyProviders = new();
 
     /// <summary>
     /// 跳过规范化处理的 Response Content-Type
     /// </summary>
-    internal static string[] ResponseContentTypesOfNonUnify =
+    public static string[] ResponseContentTypesOfNonUnify =
     [
         "text/event-stream",
         "application/pdf",
@@ -64,7 +64,7 @@ public static class UnifyContext
     /// <param name="result"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    internal static bool CheckVaildResult(IActionResult? result, out object? data)
+    public static bool CheckVaildResult(IActionResult? result, out object? data)
     {
         data = default;
 
@@ -112,7 +112,7 @@ public static class UnifyContext
     /// <remarks>如果追求性能，这里理应缓存起来，避免每次请求去检测</remarks>
     /// <param name="method"></param>
     /// <returns></returns>
-    internal static UnifyMetadata? GetMethodUnityMetadata(MethodInfo method)
+    public static UnifyMetadata? GetMethodUnityMetadata(MethodInfo method)
     {
         var unityProviderAttribute = method.GetFoundAttribute<UnifyProviderAttribute>(true);
 
@@ -134,7 +134,7 @@ public static class UnifyContext
     /// <param name="method"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
-    internal static TAttribute? GetFoundAttribute<TAttribute>(this MethodInfo method, bool inherit)
+    public static TAttribute? GetFoundAttribute<TAttribute>(this MethodInfo method, bool inherit)
         where TAttribute : Attribute
     {
         // 获取方法所在类型
@@ -161,7 +161,7 @@ public static class UnifyContext
     /// <param name="unifyResult"></param>
     /// <param name="isWebRequest"></param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-    internal static bool CheckSucceededNonUnify(MethodInfo method, out IUnifyResultProvider? unifyResult, bool isWebRequest = true)
+    public static bool CheckSucceededNonUnify(MethodInfo method, out IUnifyResultProvider? unifyResult, bool isWebRequest = true)
     {
         // 解析规范化元数据
         var unityMetadata = GetMethodUnityMetadata(method);
@@ -197,7 +197,7 @@ public static class UnifyContext
     /// <param name="context"></param>
     /// <param name="unifyResult"></param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-    internal static bool CheckStatusCodeNonUnify(HttpContext context, out IUnifyResultProvider? unifyResult)
+    public static bool CheckStatusCodeNonUnify(HttpContext context, out IUnifyResultProvider? unifyResult)
     {
         // 获取终点路由特性
         var endpointFeature = context.Features.Get<IEndpointFeature>();

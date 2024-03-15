@@ -3,7 +3,7 @@
 /// <summary>
 /// 规范化元数据
 /// </summary>
-internal sealed class UnifyMetadata(string providerName, Type providerType, Type resultType)
+public sealed class UnifyMetadata(string providerName, Type providerType, Type resultType)
 {
     /// <summary>
     /// 提供器名称
