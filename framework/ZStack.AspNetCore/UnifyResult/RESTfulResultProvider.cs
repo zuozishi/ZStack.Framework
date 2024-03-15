@@ -30,6 +30,7 @@ public class RESTfulResultProvider : IUnifyResultProvider
             statusCode = exception.ErrorCode;
         else if (ex is BadHttpRequestException requestException)
             statusCode = requestException.StatusCode;
+        activity?.SetStatus(ActivityStatusCode.Error);
         activity?.SetTag("statusCode", statusCode);
         activity?.AddEvent(new ActivityEvent("Exception", default, new ActivityTagsCollection
         {
@@ -93,6 +94,7 @@ public class RESTfulResultProvider : IUnifyResultProvider
             }
         }
         var message = $"参数验证失败：{Environment.NewLine}{string.Join(Environment.NewLine, errors)}";
+        activity?.SetStatus(ActivityStatusCode.Error);
         activity?.SetTag("statusCode", 400);
         activity?.AddEvent(new ActivityEvent("ValidationInfo", default, new ActivityTagsCollection
         {
