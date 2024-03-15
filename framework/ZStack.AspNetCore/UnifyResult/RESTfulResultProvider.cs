@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Diagnostics;
 using ZStack.AspNetCore.Exceptions;
 
 namespace ZStack.AspNetCore.UnifyResult;
@@ -11,6 +12,10 @@ namespace ZStack.AspNetCore.UnifyResult;
 [UnifyModel(typeof(RESTfulResult<>))]
 public class RESTfulResultProvider : IUnifyResultProvider
 {
+    public const string ActivityName = "RESTfulResultActivitySource";
+
+    private static readonly ActivitySource _activitySource = new(ActivityName);
+
     /// <summary>
     /// 异常返回值
     /// </summary>
@@ -18,12 +23,22 @@ public class RESTfulResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public IActionResult OnException(ExceptionContext context)
     {
+        using var activity = _activitySource.StartActivity("RESTfulResult.OnException");
         var ex = context.Exception;
         int statusCode = 500;
         if (ex is AppException exception)
             statusCode = exception.ErrorCode;
         else if (ex is BadHttpRequestException requestException)
             statusCode = requestException.StatusCode;
+        activity?.SetTag("statusCode", statusCode);
+        activity?.AddEvent(new ActivityEvent("Exception", default, new ActivityTagsCollection
+        {
+            { "code", statusCode },
+            { "message", ex.Message },
+            { "stackTrace", ex.StackTrace },
+            { "source", ex.Source },
+            { "helpLink", ex.HelpLink }
+        }));
         return new JsonResult(new RESTfulResult<object>
         {
             Code = statusCode,
@@ -68,6 +83,7 @@ public class RESTfulResultProvider : IUnifyResultProvider
     /// <exception cref="NotImplementedException"></exception>
     public IActionResult OnValidateFailed(ActionContext context)
     {
+        using var activity = _activitySource.StartActivity("RESTfulResult.OnValidateFailed");
         var errors = new List<string>();
         foreach (var item in context.ModelState)
         {
@@ -76,6 +92,14 @@ public class RESTfulResultProvider : IUnifyResultProvider
                 errors.Add($"[{item.Key}]{error.ErrorMessage}");
             }
         }
+        var message = $"参数验证失败：{Environment.NewLine}{string.Join(Environment.NewLine, errors)}";
+        activity?.SetTag("statusCode", 400);
+        activity?.AddEvent(new ActivityEvent("ValidationInfo", default, new ActivityTagsCollection
+        {
+            { "code", 400 },
+            { "message", message },
+            { "modelState", context.ModelState.ToJson() }
+        }));
         return new JsonResult(new RESTfulResult<object>
         {
             Code = 400,
