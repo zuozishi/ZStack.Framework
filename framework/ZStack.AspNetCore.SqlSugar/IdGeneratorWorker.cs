@@ -8,7 +8,7 @@ using ZStack.AspNetCore.Options;
 namespace ZStack.AspNetCore.SqlSugar;
 
 /// <summary>
-/// 分布式WorkId生成
+/// 分布式WorkId生成器
 /// </summary>
 /// <param name="_logger"></param>
 /// <param name="_cacheOptions"></param>
@@ -26,7 +26,7 @@ public class IdGeneratorWorker(ILogger<IdGeneratorWorker> _logger, IOptions<Cach
         redisClient = new FullRedis(_cacheOptions.Value.Redis);
         var workerId = GetLook()
             ?? throw Oops.Bah("IdGenerator配置失败, 无可用WorkerId");
-        _logger.LogInformation("IdGeneratorWorkerId: {WorkerId}", workerId);
+        _logger.LogInformation("IdGenerator WorkerId: {WorkerId}", workerId);
         _snowIdOptions.Value.WorkerId = workerId;
         YitIdHelper.SetIdGenerator(_snowIdOptions.Value);
         return Task.Run(async () =>
