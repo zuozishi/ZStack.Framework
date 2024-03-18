@@ -18,6 +18,7 @@ public static class SqlSugarSetup
     {
         ServiceCollectionExtensions.AddZStackOptions<SnowIdOptions>(services);
         ServiceCollectionExtensions.AddZStackOptions<DbConnectionOptions>(services);
+        services.AddHostedService<IdGeneratorWorker>();
 
         // 注册雪花Id
         YitIdHelper.SetIdGenerator(App.GetOptions<SnowIdOptions>());
