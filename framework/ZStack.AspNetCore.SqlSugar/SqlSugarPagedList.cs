@@ -71,7 +71,7 @@ public static class SqlSugarPagedExtensions
     {
         var total = 0;
         var items = query.ToPageList(pageIndex, pageSize, ref total, expression);
-        return CreateSqlSugarPagedList(items, total, pageIndex, pageSize);
+        return Create(items, total, pageIndex, pageSize);
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ public static class SqlSugarPagedExtensions
     {
         var total = 0;
         var items = query.ToPageList(pageIndex, pageSize, ref total);
-        return CreateSqlSugarPagedList(items, total, pageIndex, pageSize);
+        return Create(items, total, pageIndex, pageSize);
     }
 
     /// <summary>
@@ -101,7 +101,7 @@ public static class SqlSugarPagedExtensions
     {
         RefAsync<int> total = 0;
         var items = await query.ToPageListAsync(pageIndex, pageSize, total, expression);
-        return CreateSqlSugarPagedList(items, total, pageIndex, pageSize);
+        return Create(items, total, pageIndex, pageSize);
     }
 
     /// <summary>
@@ -110,12 +110,13 @@ public static class SqlSugarPagedExtensions
     /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>对象</param>
     /// <param name="pageIndex">当前页码，从1开始</param>
     /// <param name="pageSize">页码容量</param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task<SqlSugarPagedList<TEntity>> ToPagedListAsync<TEntity>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize)
+    public static async Task<SqlSugarPagedList<TEntity>> ToPagedListAsync<TEntity>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
     {
         RefAsync<int> total = 0;
-        var items = await query.ToPageListAsync(pageIndex, pageSize, total);
-        return CreateSqlSugarPagedList(items, total, pageIndex, pageSize);
+        var items = await query.ToPageListAsync(pageIndex, pageSize, total, cancellationToken);
+        return Create(items, total, pageIndex, pageSize);
     }
 
     /// <summary>
@@ -129,7 +130,7 @@ public static class SqlSugarPagedExtensions
     {
         var total = list.Count();
         var items = list.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-        return CreateSqlSugarPagedList(items, total, pageIndex, pageSize);
+        return Create(items, total, pageIndex, pageSize);
     }
 
     /// <summary>
@@ -141,7 +142,7 @@ public static class SqlSugarPagedExtensions
     /// <param name="pageIndex">当前页码，从1开始</param>
     /// <param name="pageSize">页码容量</param>
     /// <returns></returns>
-    private static SqlSugarPagedList<TEntity> CreateSqlSugarPagedList<TEntity>(IEnumerable<TEntity> items, int total, int pageIndex, int pageSize)
+    public static SqlSugarPagedList<TEntity> Create<TEntity>(IEnumerable<TEntity> items, int total, int pageIndex, int pageSize)
     {
         var totalPages = pageSize > 0 ? (int)Math.Ceiling(total / (double)pageSize) : 0;
         return new SqlSugarPagedList<TEntity>
