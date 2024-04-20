@@ -23,6 +23,7 @@ public class IdGeneratorWorker(ILogger<IdGeneratorWorker> _logger, IOptions<Cach
             return Task.CompletedTask;
         var redisOption = _cacheOptions.Value.Redis.Adapt<RedisOptions>();
         redisOption.Db = 0;
+        redisOption.Prefix = null;
         redisClient = new FullRedis(redisOption);
         var workerId = GetLook()
             ?? throw Oops.Bah("IdGenerator配置失败, 无可用WorkerId");
