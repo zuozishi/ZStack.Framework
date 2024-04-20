@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ZStack.AspNetCore.Exceptions;
+using ZStack.Core.Exceptions;
 
 namespace ZStackWebApplication.Controller;
 
@@ -22,7 +22,8 @@ public class TestController : ControllerBase
         await Task.Delay(1);
         if (q == "123")
             throw new AppException(400, "测试错误");
-        return new {
+        return new
+        {
             A = q,
             B = DateTime.Now,
             C = DateTime.Now.Date,
