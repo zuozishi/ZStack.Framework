@@ -1,4 +1,4 @@
-﻿namespace ZStack.QingTui;
+﻿namespace ZStack.AspNetCore.QingTui;
 
 public class QingTuiClientOptions
 {

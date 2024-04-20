@@ -75,7 +75,10 @@ public partial class QingTuiApiClient
             return;
         string? token = _tokenPersister.GetToken(AppId);
         if (!QingTuiUtils.VerifyToken(token, AppId))
+        {
             await RefreshTokenAsync();
+            token = _tokenPersister.GetToken(AppId);
+        }
         call.Request.Url.SetQueryParam("access_token", token);
     }
 }
