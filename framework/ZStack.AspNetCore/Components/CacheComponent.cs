@@ -16,9 +16,7 @@ public class CacheComponent : IServiceComponent
             case CacheTypes.Redis:
                 if (options.Redis == null)
                     throw new Exception("Redis配置不能为空");
-                Cache.Default = string.IsNullOrEmpty(options.Redis.Prefix)
-                    ? new FullRedis(options.Redis)
-                    : new PrefixedRedis(options.Redis);
+                Cache.Default = new FullRedis(options.Redis);
                 break;
         }
         services.AddSingleton(Cache.Default);

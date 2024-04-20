@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<PackageId>ZStack.QingTui</PackageId>
+		<Description>ZStack框架 轻推SDK</Description>
+		<PackageIcon>qingtui.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
+    <PackageReference Include="MimeTypesMap" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZStack.Extensions\ZStack.Extensions.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Include=".\qingtui.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectCapability Include="DynamicDependentFile" />
+		<ProjectCapability Include="DynamicFileNesting" />
+	</ItemGroup>
+	
+</Project>

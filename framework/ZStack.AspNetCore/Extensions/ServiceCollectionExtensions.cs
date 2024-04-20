@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using NewLife.Reflection;
 using System.Reflection;
 using ZStack.AspNetCore;
 using ZStack.AspNetCore.Attributes;

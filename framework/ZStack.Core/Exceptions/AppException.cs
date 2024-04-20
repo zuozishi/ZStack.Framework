@@ -1,4 +1,4 @@
-﻿namespace ZStack.AspNetCore.Exceptions;
+﻿namespace ZStack.Core.Exceptions;
 
 /// <summary>
 /// 应用异常类
@@ -20,7 +20,7 @@ public class AppException : Exception
     /// <param name="message"></param>
     public AppException(string message) : this(500, message)
     {
-        
+
     }
 
     /// <summary>

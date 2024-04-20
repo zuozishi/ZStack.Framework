@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using ZStack.AspNetCore.Components;
 
 namespace ZStack.AspNetCore.UnifyResult;
 

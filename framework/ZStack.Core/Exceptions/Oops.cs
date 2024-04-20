@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ZStack.AspNetCore.Exceptions;
+namespace ZStack.Core.Exceptions;
 
 /// <summary>
 /// 抛异常静态类

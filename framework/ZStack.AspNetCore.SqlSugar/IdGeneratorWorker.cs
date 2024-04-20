@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using NewLife.Caching;
-using ZStack.AspNetCore.Exceptions;
 using ZStack.AspNetCore.Options;
+using ZStack.Core.Exceptions;
 
 namespace ZStack.AspNetCore.SqlSugar;
 
