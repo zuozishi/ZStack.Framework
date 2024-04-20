@@ -44,6 +44,7 @@ public class SqlSugarService : ISqlSugarService
             _initializer.SetDbAop(config, db);
         });
         _initializer.InitDatabase(config, scope);
+        _logger.LogInformation("注册数据库上下文, configId={configId}, dbType={DbType}", configId, config.DbType);
         _scopes.AddOrUpdate(configId, scope, (_, _) => scope);
         return scope;
     }
