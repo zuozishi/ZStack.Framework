@@ -34,7 +34,13 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         if (!type.GetCustomAttributes<SugarTable>().Any())
             return;
         if (config.DbSettings.EnableUnderLine && !entity.DbTableName.Contains('_'))
-            entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName); // 驼峰转下划线
+        {
+            // 如果所有字符都是大写，则转小写
+            if (entity.DbTableName.All(char.IsUpper))
+                entity.DbTableName = entity.DbTableName.ToLower();
+            else
+                entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName); // 驼峰转下划线
+        }
     }
 
     public virtual void DbConfig_EntityService(DbConnectionConfig config, PropertyInfo type, EntityColumnInfo column)
@@ -45,7 +51,13 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         if (new NullabilityInfoContext().Create(type).WriteState is NullabilityState.Nullable)
             column.IsNullable = true;
         if (config.DbSettings.EnableUnderLine && !column.IsIgnore && !column.DbColumnName.Contains('_'))
-            column.DbColumnName = UtilMethods.ToUnderLine(column.DbColumnName); // 驼峰转下划线
+        {
+            // 如果所有字符都是大写，则转小写
+            if (column.DbColumnName.All(char.IsUpper))
+                column.DbColumnName = column.DbColumnName.ToLower();
+            else
+                column.DbColumnName = UtilMethods.ToUnderLine(column.DbColumnName); // 驼峰转下划线
+        }
     }
 
     public virtual void InitDatabase(DbConnectionConfig config, SqlSugarScope db)
