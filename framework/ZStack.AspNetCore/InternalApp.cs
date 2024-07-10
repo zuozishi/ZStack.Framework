@@ -133,6 +133,8 @@ internal static class InternalApp
                 configuration.AddIniFile(file, optional: true, reloadOnChange: true);
             }
         }
+        configuration.AddEnvironmentVariables();
+        configuration.AddCommandLine(Environment.GetCommandLineArgs());
     }
 
     /// <summary>
