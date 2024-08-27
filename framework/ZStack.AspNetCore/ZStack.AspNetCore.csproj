@@ -9,11 +9,11 @@
 	</ItemGroup>
 	
   <ItemGroup>
-		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
 		<PackageReference Include="Mapster" Version="7.4.0" />
-		<PackageReference Include="NewLife.Redis" Version="5.7.2024.709" />
+		<PackageReference Include="NewLife.Redis" Version="5.7.2024.801" />
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
 	</ItemGroup>
 
   <ItemGroup>
