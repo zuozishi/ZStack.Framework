@@ -27,11 +27,20 @@ public static class HangireSetup
         services.AddHangfireConsoleExtensions();
         services.AddHangfireServer(config =>
         {
-            config.HeartbeatInterval = options.Server.HeartbeatInterval;
-            config.ServerCheckInterval = options.Server.ServerCheckInterval;
-            config.SchedulePollingInterval = options.Server.SchedulePollingInterval;
-            config.ServerName = options.Server.ServerName;
             config.WorkerCount = options.Server.WorkerCount;
+            config.Queues = options.Server.Queues;
+            config.StopTimeout = options.Server.StopTimeout;
+            config.ShutdownTimeout = options.Server.ShutdownTimeout;
+            config.SchedulePollingInterval = options.Server.SchedulePollingInterval;
+            config.HeartbeatInterval = options.Server.HeartbeatInterval;
+            config.ServerTimeout = options.Server.ServerTimeout;
+            config.ServerCheckInterval = options.Server.ServerCheckInterval;
+            config.CancellationCheckInterval = options.Server.CancellationCheckInterval;
+            config.FilterProvider = options.Server.FilterProvider;
+            config.Activator = options.Server.Activator;
+            config.TimeZoneResolver = options.Server.TimeZoneResolver;
+            config.TaskScheduler = options.Server.TaskScheduler;
+            config.ServerName = options.Server.ServerName;
         });
         return services;
     }
@@ -43,7 +52,8 @@ public static class HangireSetup
     /// <returns></returns>
     public static IApplicationBuilder RegisterHangireJobs(this IApplicationBuilder app)
     {
-        var jobs = app.ApplicationServices.GetServices<IHangfireJob>();
+        using var scope = app.ApplicationServices.CreateScope();
+        var jobs = scope.ServiceProvider.GetServices<IHangfireJob>();
         foreach (var job in jobs)
         {
             App.Logger.Information("注册定时任务：{JobId} [{Type}][{Cron}]", job.JobId, job.GetType().FullName, job.Cron);

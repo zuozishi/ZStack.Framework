@@ -9,21 +9,9 @@
             全局应用类
             </summary>
         </member>
-        <member name="P:ZStack.AspNetCore.App.RootServices">
+        <member name="P:ZStack.AspNetCore.App.ServiceProvider">
             <summary>
-            存储根服务
-            </summary>
-        </member>
-        <member name="M:ZStack.AspNetCore.App.GetOptions``1">
-            <summary>
-            获取选项
-            </summary>
-            <typeparam name="TOptions"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="P:ZStack.AspNetCore.App.Settings">
-            <summary>
-            应用全局配置
+            存储根服务，可能为空
             </summary>
         </member>
         <member name="P:ZStack.AspNetCore.App.Logger">
@@ -31,19 +19,9 @@
             应用日志记录器
             </summary>
         </member>
-        <member name="P:ZStack.AspNetCore.App.User">
-            <summary>
-            获取请求上下文用户
-            </summary>
-        </member>
         <member name="P:ZStack.AspNetCore.App.Configuration">
             <summary>
             全局配置选项
-            </summary>
-        </member>
-        <member name="P:ZStack.AspNetCore.App.WebHostEnvironment">
-            <summary>
-            获取Web主机环境，如，是否是开发环境，生产环境等
             </summary>
         </member>
         <member name="P:ZStack.AspNetCore.App.HostEnvironment">
@@ -71,75 +49,223 @@
             获取请求上下文
             </summary>
         </member>
-        <member name="P:ZStack.AspNetCore.App.UnmanagedObjects">
+        <member name="P:ZStack.AspNetCore.App.Components">
             <summary>
-            未托管的对象集合
+            组件列表
             </summary>
         </member>
-        <member name="T:ZStack.AspNetCore.ClaimConst">
+        <member name="M:ZStack.AspNetCore.App.GetOptions``1">
             <summary>
-            Claim相关常量
+            获取选项
             </summary>
+            <typeparam name="TOptions"></typeparam>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.UserId">
+        <member name="M:ZStack.AspNetCore.App.GetRequiredService``1">
             <summary>
-            用户Id
+            获取请求生存周期的服务
             </summary>
+            <typeparam name="TService"></typeparam>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.Account">
+        <member name="M:ZStack.AspNetCore.App.GetRequiredService(System.Type)">
             <summary>
-            账号
+            获取请求生存周期的服务
             </summary>
+            <param name="type"></param>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.RealName">
+        <member name="M:ZStack.AspNetCore.App.GetService``1">
             <summary>
-            真实姓名
+            获取请求生存周期的服务
             </summary>
+            <typeparam name="TService"></typeparam>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.NickName">
+        <member name="M:ZStack.AspNetCore.App.GetService(System.Type)">
             <summary>
-            昵称
+            获取请求生存周期的服务
             </summary>
+            <param name="type"></param>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.AccountType">
+        <member name="M:ZStack.AspNetCore.App.GetServices``1">
             <summary>
-            账号类型
+            获取请求生存周期的服务集合
             </summary>
+            <typeparam name="TService"></typeparam>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.TenantId">
+        <member name="M:ZStack.AspNetCore.App.GetServices(System.Type)">
             <summary>
-            租户Id
+            获取请求生存周期的服务集合
             </summary>
+            <param name="type"></param>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.OrgId">
+        <member name="M:ZStack.AspNetCore.App.GetServiceLifetime(System.Type)">
             <summary>
-            组织机构Id
+            获取服务注册的生命周期类型
             </summary>
+            <param name="serviceType"></param>
+            <returns></returns>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.OrgName">
+        <member name="M:ZStack.AspNetCore.App.PrintToMiniProfiler(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            组织机构名称
+            打印验证信息到 MiniProfiler
             </summary>
+            <param name="category">分类</param>
+            <param name="state">状态</param>
+            <param name="message">消息</param>
+            <param name="isError">是否为警告消息</param>
         </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.OrgType">
+        <member name="M:ZStack.AspNetCore.App.CanBeMiniProfiler">
             <summary>
-            组织机构类型
+            判断是否启用 MiniProfiler
             </summary>
-        </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.OpenId">
-            <summary>
-            微信OpenId
-            </summary>
-        </member>
-        <member name="F:ZStack.AspNetCore.ClaimConst.LoginMode">
-            <summary>
-            登录模式PC、APP
-            </summary>
+            <returns></returns>
         </member>
         <member name="T:ZStack.AspNetCore.Components.CacheComponent">
             <summary>
             缓存组件
             </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.Components.Penetrates.AddWebComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Type,System.Object)">
+            <summary>
+            添加主机组件
+            </summary>
+            <param name="builder"></param>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:ZStack.AspNetCore.Components.Penetrates.AddServiceComponent(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Object)">
+            <summary>
+            添加服务组件
+            </summary>
+            <param name="services"></param>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:ZStack.AspNetCore.Components.Penetrates.AddApplicationComponent(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Type,System.Object)">
+            <summary>
+            添加中间件组件
+            </summary>
+            <param name="app"></param>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+        </member>
+        <member name="M:ZStack.AspNetCore.Components.Penetrates.AddComponent(System.Type,System.Object,System.ComponentContext)">
+            <summary>
+            添加组件
+            </summary>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="F:ZStack.AspNetCore.InternalApp.HostEnvironment">
+            <summary>
+            主机环境
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.InternalApp.Configuration">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.InternalApp.ServiceDescriptors">
+            <summary>
+            服务容器
+            </summary>
+        </member>
+        <member name="F:ZStack.AspNetCore.InternalApp.ServiceProvider">
+            <summary>
+            服务提供器
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.InternalApp.Logger">
+            <summary>
+            应用日志记录器
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.InternalApp.Assemblies">
+            <summary>
+            程序集
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.InternalApp.EffectiveTypes">
+            <summary>
+            程序集类型
+            </summary>
+        </member>
+        <member name="P:ZStack.AspNetCore.InternalApp.Components">
+            <summary>
+            组件列表
+            </summary>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.ConfigureHostApplication(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Serilog.LoggerConfiguration})">
+            <summary>
+            配置主机应用
+            </summary>
+            <param name="builder"></param>
+            <param name="loggerConfiguration"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.ConfigureSerilog(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Serilog.LoggerConfiguration})">
+            <summary>
+            配置Serilog
+            </summary>
+            <param name="builder"></param>
+            <param name="configure"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.ConfigureHostEnvironment(Microsoft.Extensions.Hosting.IHostEnvironment)">
+            <summary>
+            配置主机环境
+            </summary>
+            <param name="environment"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.ConfigureConfiguration(Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.Extensions.Configuration.IConfigurationManager)">
+            <summary>
+            配置选项
+            </summary>
+            <param name="environment"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.ConfigureApplication(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            配置应用
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.GetOptions``1">
+            <summary>
+            获取配置选项
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="configuration"></param>
+            <param name="sectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.GetOptions(System.Type)">
+            <summary>
+            获取配置选项
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZStack.AspNetCore.InternalApp.GetServiceLifetime(System.Type)">
+            <summary>
+            获取服务注册的生命周期类型
+            </summary>
+            <param name="serviceType"></param>
+            <returns></returns>
         </member>
         <member name="T:ZStack.AspNetCore.Options.CacheOptions">
             <summary>
@@ -161,55 +287,309 @@
             缓存类型
             </summary>
         </member>
-        <member name="M:NewLife.Caching.CacheExtension.Keys(NewLife.Caching.ICache,System.String)">
+        <member name="T:System.DependsOnAttribute">
             <summary>
-            根据前缀获取所有的Key
+            组件依赖配置特性
             </summary>
-            <param name="cache"></param>
-            <param name="prefix"></param>
+        </member>
+        <member name="F:System.DependsOnAttribute._dependComponents">
+            <summary>
+            依赖组件列表
+            </summary>
+        </member>
+        <member name="M:System.DependsOnAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:System.DependsOnAttribute.#ctor(System.Type[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dependComponents">依赖组件列表</param>
+            <remarks>支持字符串类型程序集/类型配置</remarks>
+        </member>
+        <member name="P:System.DependsOnAttribute.DependComponents">
+            <summary>
+            依赖组件列表
+            </summary>
+        </member>
+        <member name="T:System.ComponentContext">
+            <summary>
+            组件上下文
+            </summary>
+        </member>
+        <member name="M:System.ComponentContext.#ctor(System.Type)">
+            <summary>
+            组件上下文
+            </summary>
+        </member>
+        <member name="P:System.ComponentContext.ComponentType">
+            <summary>
+            组件类型
+            </summary>
+        </member>
+        <member name="P:System.ComponentContext.CalledContext">
+            <summary>
+            上级组件上下文
+            </summary>
+        </member>
+        <member name="P:System.ComponentContext.RootContext">
+            <summary>
+            根组件上下文
+            </summary>
+        </member>
+        <member name="P:System.ComponentContext.DependComponents">
+            <summary>
+            依赖组件列表
+            </summary>
+        </member>
+        <member name="P:System.ComponentContext.Properties">
+            <summary>
+            上下文数据
+            </summary>
+        </member>
+        <member name="P:System.ComponentContext.IsRoot">
+            <summary>
+            是否是根组件
+            </summary>
+        </member>
+        <member name="M:System.ComponentContext.SetProperty``1(System.Object)">
+            <summary>
+            设置组件属性参数
+            </summary>
+            <typeparam name="TComponent"></typeparam>
+            <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.InjectZStack(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Microsoft.AspNetCore.Builder.WebApplicationBuilder,Furion.InjectOptions},System.Action{Serilog.LoggerConfiguration},System.Type[],System.Type[])">
+        <member name="M:System.ComponentContext.SetProperty(System.Type,System.Object)">
+            <summary>
+            设置组件属性参数
+            </summary>
+            <param name="componentType"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ComponentContext.SetProperty(System.String,System.Object)">
+            <summary>
+            设置组件属性参数
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.ComponentContext.GetProperty``2">
+            <summary>
+            获取组件属性参数
+            </summary>
+            <typeparam name="TComponent"></typeparam>
+            <typeparam name="TComponentOptions"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:System.ComponentContext.GetProperty``1(System.Type)">
+            <summary>
+            获取组件属性参数
+            </summary>
+            <typeparam name="TComponentOptions"></typeparam>
+            <param name="componentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ComponentContext.GetProperty``1(System.String)">
+            <summary>
+            获取组件属性参数
+            </summary>
+            <typeparam name="TComponentOptions"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.ComponentContext.GetProperties">
+            <summary>
+            获取组件所有依赖参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:System.IApplicationComponent">
+            <summary>
+            中间件组件
+            </summary>
+        </member>
+        <member name="T:System.IComponent">
+            <summary>
+            组件依赖接口
+            </summary>
+        </member>
+        <member name="T:System.IServiceComponent">
+            <summary>
+            服务组件
+            </summary>
+        </member>
+        <member name="T:System.IWebComponent">
+            <summary>
+            Web组件
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Builder.ComponentApplicationBuilderExtensions">
+            <summary>
+            组件应用中间件拓展类
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ComponentApplicationBuilderExtensions.UseComponent``1(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Object)">
+            <summary>
+            注册依赖组件
+            </summary>
+            <typeparam name="TComponent">派生自 <see cref="T:System.IApplicationComponent"/></typeparam>
+            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <param name="env"><see cref="T:Microsoft.AspNetCore.Hosting.IWebHostEnvironment"/></param>
+            <param name="options">组件参数</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ComponentApplicationBuilderExtensions.UseComponent``2(Microsoft.AspNetCore.Builder.IApplicationBuilder,``1)">
+            <summary>
+            注册依赖组件
+            </summary>
+            <typeparam name="TComponent">派生自 <see cref="T:System.IApplicationComponent"/></typeparam>
+            <typeparam name="TComponentOptions">组件参数</typeparam>
+            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <param name="env"><see cref="T:Microsoft.AspNetCore.Hosting.IWebHostEnvironment"/></param>
+            <param name="options">组件参数</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ComponentApplicationBuilderExtensions.UseComponent(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Type,System.Object)">
+            <summary>
+            注册依赖组件
+            </summary>
+            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <param name="env"><see cref="T:Microsoft.AspNetCore.Hosting.IWebHostEnvironment"/></param>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ApplicationBuilderExtension.UseZStackInject(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Boolean,System.Type[],System.Type[])">
+            <summary>
+            中间件注入（带Swagger）
+            </summary>
+            <param name="app"></param>
+            <param name="routePrefix">空字符串将为首页</param>
+            <param name="scan">自动扫描注册组件</param>
+            <param name="components">手动注册组件列表</param>
+            <param name="ignoreComponents">忽略自动注册组件列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.ApplicationBuilderExtension.UseComponents(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Boolean,System.Type[],System.Type[])">
+            <summary>
+            自动注册中间件组件
+            </summary>
+            <param name="app"></param>
+            <param name="scan">自动扫描注册组件</param>
+            <param name="components">手动注册组件列表</param>
+            <param name="ignoreComponents">忽略自动注册组件列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.WebApplicationBuilderExtensions.Inject(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Serilog.LoggerConfiguration},System.Boolean,System.Type[],System.Type[])">
             <summary>
             服务注入
             </summary>
             <param name="builder"></param>
             <param name="configure"></param>
             <param name="loggerConfigure"></param>
+            <param name="scan">自动扫描注册组件</param>
+            <param name="components">手动注册组件列表</param>
+            <param name="ignoreComponents">忽略自动注册组件列表</param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.UseZStackInject(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.Action{Furion.UseInjectOptions})">
+        <member name="M:Microsoft.Extensions.Hosting.ComponentHostApplicationBuilderExtensions.AddComponent``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Object)">
             <summary>
-            中间件注入
+            注册主机组件
             </summary>
-            <param name="app"></param>
-            <param name="routePrefix"></param>
-            <param name="configure"></param>
+            <typeparam name="TComponent"><see cref="T:System.IWebComponent"/></typeparam>
+            <param name="builder"><see cref="T:Microsoft.Extensions.Hosting.IHostApplicationBuilder"/></param>
+            <param name="options">组件参数</param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.AddZStackSerilog(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Serilog.LoggerConfiguration})">
+        <member name="M:Microsoft.Extensions.Hosting.ComponentHostApplicationBuilderExtensions.AddComponent``2(Microsoft.Extensions.Hosting.IHostApplicationBuilder,``1)">
             <summary>
-            注册Serilog
+            注册主机组件
             </summary>
-            <param name="builder"></param>
-            <param name="configure"></param>
+            <typeparam name="TComponent"><see cref="T:System.IWebComponent"/></typeparam>
+            <typeparam name="TComponentOptions">组件参数</typeparam>
+            <param name="builder"><see cref="T:Microsoft.Extensions.Hosting.IHostApplicationBuilder"/></param>
+            <param name="options">组件参数</param>
+            <returns></returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.AddZStackComponents(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Type[],System.Type[])">
+        <member name="M:Microsoft.Extensions.Hosting.ComponentHostApplicationBuilderExtensions.AddComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Type,System.Object)">
             <summary>
-            注册ZStack服务组件
+            注册主机组件
             </summary>
-            <param name="builder"></param>
+            <param name="builder"><see cref="T:Microsoft.Extensions.Hosting.IHostApplicationBuilder"/></param>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions">
+            <summary>
+            组件应用服务集合拓展类
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddComponent``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Object)">
+            <summary>
+            注册依赖组件
+            </summary>
+            <typeparam name="TComponent"></typeparam>
+            <param name="services"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddComponent``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,``1)">
+            <summary>
+            注册依赖组件
+            </summary>
+            <typeparam name="TComponent">派生自 <see cref="T:System.IServiceComponent"/></typeparam>
+            <typeparam name="TComponentOptions">组件参数</typeparam>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
+            <param name="options">组件参数</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddComponent(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Object)">
+            <summary>
+            注册依赖组件
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
+            <param name="componentType">组件类型</param>
+            <param name="options">组件参数</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddComponents(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Type[],System.Type[])">
+            <summary>
+            自动注册服务组件
+            </summary>
+            <param name="services"></param>
+            <param name="autoLoad"></param>
             <param name="components"></param>
             <param name="ignoreComponents"></param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Builder.ZStackSetup.UseZStackComponents(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Type[],System.Type[])">
+        <member name="T:Microsoft.Extensions.Logging.LoogerExtensions">
             <summary>
-            注册ZStack服务中间件
+            日志扩展
             </summary>
-            <param name="app"></param>
-            <param name="components"></param>
-            <param name="ignoreComponents"></param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoogerExtensions.CreateProflierScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            创建一个性能分析的作用域
+            </summary>
+            <param name="logger"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NewLife.Caching.CacheExtension.Search(NewLife.Caching.ICache,System.String)">
+            <summary>
+            模糊搜索Key，支持?和*
+            </summary>
+            <param name="cache"></param>
+            <param name="pattern"></param>
             <returns></returns>
         </member>
     </members>

@@ -23,6 +23,7 @@ public interface ISqlSugarInitializer
     /// <summary>
     /// 配置过滤器
     /// </summary>
+    /// <param name="config"></param>
     /// <param name="db"></param>
     void SetDbAop(DbConnectionConfig config, SqlSugarClient db);
 }

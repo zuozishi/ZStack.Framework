@@ -1,41 +1,42 @@
 <Project>
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<NoWarn>1701;1702;1591;8632</NoWarn>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <IncludeSymbols>true</IncludeSymbols>
-		    <IncludeSource>true</IncludeSource>
-        <Authors>Zuozishi</Authors>
-			  <Version>1.0.1.11</Version>
-		    <Company />
-        <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
-		    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		    <IncludeSymbols>true</IncludeSymbols>
-		    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-		    <PackageProjectUrl>https://github.com/zuozishi/ZStack.Framework</PackageProjectUrl>
-		    <PackageReadmeFile>README.md</PackageReadmeFile>
-		    <PackageIcon>icon.png</PackageIcon>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <DebugType>embedded</DebugType>
-    </PropertyGroup>
+  <PropertyGroup>
+		<IsPackable>true</IsPackable>
+    <Authors>Zuozishi</Authors>
+		<Version>2.1.7</Version>
+		<Company />
+    <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeSymbols>true</IncludeSymbols>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/zuozishi/ZStack.Framework</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<DebugType>embedded</DebugType>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Include="..\icon.png" Pack="true" PackagePath="\"/>
+  <ItemGroup>
+    <None Include="..\icon.png" Pack="true" PackagePath="\"/>
 		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
     

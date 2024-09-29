@@ -10,7 +10,7 @@ public static class PerformanceTracker
     /// <summary>
     /// 开始性能追踪单元
     /// </summary>
-    /// <param name="callback">结束回调</param>
+    /// <param name="notify">结束回调</param>
     /// <returns></returns>
     public static IDisposable CreateScope(Action<TimeSpan> notify)
     {
@@ -24,7 +24,6 @@ public static class PerformanceTracker
 /// <summary>
 /// 性能追踪单元
 /// </summary>
-/// <param name="notify"></param>
 public class PerformanceTrackerScope : IDisposable
 {
     private readonly Action<TimeSpan> _notify;

@@ -6,7 +6,7 @@
 
 ```c#
 // 创建控制台应用程序依赖注入容器
-DependencyInjection.CreateConsoleAppServiceProvider(
+DI.CreateConsoleAppServiceProvider(
     // 服务配置
     Action<ServiceCollection> servicesConfigure,
     // 添加日志

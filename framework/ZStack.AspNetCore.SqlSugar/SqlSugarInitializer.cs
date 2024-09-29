@@ -34,7 +34,13 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         if (!type.GetCustomAttributes<SugarTable>().Any())
             return;
         if (config.DbSettings.EnableUnderLine && !entity.DbTableName.Contains('_'))
-            entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName); // 驼峰转下划线
+        {
+            // 如果所有字符都是大写，则转小写
+            if (entity.DbTableName.All(char.IsUpper))
+                entity.DbTableName = entity.DbTableName.ToLower();
+            else
+                entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName); // 驼峰转下划线
+        }
     }
 
     public virtual void DbConfig_EntityService(DbConnectionConfig config, PropertyInfo type, EntityColumnInfo column)
@@ -45,7 +51,13 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         if (new NullabilityInfoContext().Create(type).WriteState is NullabilityState.Nullable)
             column.IsNullable = true;
         if (config.DbSettings.EnableUnderLine && !column.IsIgnore && !column.DbColumnName.Contains('_'))
-            column.DbColumnName = UtilMethods.ToUnderLine(column.DbColumnName); // 驼峰转下划线
+        {
+            // 如果所有字符都是大写，则转小写
+            if (column.DbColumnName.All(char.IsUpper))
+                column.DbColumnName = column.DbColumnName.ToLower();
+            else
+                column.DbColumnName = UtilMethods.ToUnderLine(column.DbColumnName); // 驼峰转下划线
+        }
     }
 
     public virtual void InitDatabase(DbConnectionConfig config, SqlSugarScope db)
@@ -60,7 +72,7 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         // 初始化表结构
         if (config.TableSettings.EnableInitTable)
         {
-            var entityTypes = FurionApp.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))
+            var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))
                 .WhereIF(config.TableSettings.EnableIncreTable, u => u.IsDefined(typeof(IncreTableAttribute), false)).ToList();
 
             if (config.ConfigId?.ToString() == SqlSugarConst.MainConfigId) // 默认库（有系统表特性、没有日志表和租户表特性）
@@ -80,9 +92,8 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         // 初始化种子数据
         if (config.SeedSettings.EnableInitSeed)
         {
-            var seedDataTypes = FurionApp.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarEntitySeedData<>))))
+            var seedDataTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarEntitySeedData<>))))
                 .WhereIF(config.SeedSettings.EnableIncreSeed, u => u.IsDefined(typeof(IncreSeedAttribute), false)).ToList();
-
             foreach (var seedType in seedDataTypes)
             {
                 var entityType = seedType.GetInterfaces().First().GetGenericArguments().First();
@@ -102,19 +113,36 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                 var seedData = ((IEnumerable)hasDataMethod?.Invoke(instance, null)!)?.Cast<object>();
                 if (seedData == null) continue;
 
-                var entityInfo = db.EntityMaintenance.GetEntityInfo(entityType);
-                if (entityInfo.Columns.Any(u => u.IsPrimarykey))
+                var seedDataAttr = hasDataMethod?.GetCustomAttribute<SeedDataAttribute>()
+                    ?? seedType.GetCustomAttribute<SeedDataAttribute>()
+                    ?? new();
+                var entityInfo = db.CopyNew().EntityMaintenance.GetEntityInfo(entityType);
+                if (seedDataAttr.ByConditional)
+                {
+                    // 按指定条件进行增加和更新
+                    foreach (var item in seedData)
+                    {
+                        var conds = ((IEnumerable)seedType.GetMethod("GetConditionals")?.Invoke(instance, [item])!).Cast<ConditionalModel>();
+                        var entity = db.CopyNew().QueryableByObject(entityType).Where([.. conds]).First();
+                        if (entity == null)
+                            db.CopyNew().InsertableByObject(item).ExecuteCommand();
+                        else if (seedDataAttr.Update && entity.Diff(item, true).HasChange)
+                            db.CopyNew().UpdateableByObject(entity).ExecuteCommand();
+                    }
+                }
+                else if (entityInfo.Columns.Any(u => u.IsPrimarykey))
                 {
                     // 按主键进行批量增加和更新
-                    var storage = db.StorageableByObject(seedData.ToList()).ToStorage();
+                    var storage = db.CopyNew().StorageableByObject(seedData.ToList()).ToStorage();
                     storage.AsInsertable.ExecuteCommand();
-                    storage.AsUpdateable.ExecuteCommand();
+                    if (seedDataAttr.Update)
+                        storage.AsUpdateable.ExecuteCommand();
                 }
                 else
                 {
                     // 无主键则只进行插入
-                    if (!db.Queryable(entityInfo.DbTableName, entityInfo.DbTableName).Any())
-                        db.InsertableByObject(seedData.ToList()).ExecuteCommand();
+                    if (!db.CopyNew().Queryable(entityInfo.DbTableName, entityInfo.DbTableName).Any())
+                        db.CopyNew().InsertableByObject(seedData.ToList()).ExecuteCommand();
                 }
             }
         }
@@ -134,7 +162,7 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         if (config.AopSettings.EnableSqlLog)
         {
             Logger.LogInformation("【执行SQL】{SQL}", UtilMethods.GetSqlString(config.DbType, sql, parameters));
-            FurionApp.PrintToMiniProfiler("SqlSugar", "Info", sql + Environment.NewLine + db.Utilities.SerializeObject(parameters.ToDictionary(it => it.ParameterName, it => it.Value)));
+            App.PrintToMiniProfiler("SqlSugar", "Info", sql + Environment.NewLine + db.Utilities.SerializeObject(parameters.ToDictionary(it => it.ParameterName, it => it.Value)));
         }
     }
 
@@ -149,7 +177,7 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                     Message: {Message}
                     StackTrace: {StackTrace}
                     """, sql, ex.Message, ex.StackTrace);
-            FurionApp.PrintToMiniProfiler("SqlSugar", "Error", $"{ex.Message}{Environment.NewLine}{ex.Sql}{Environment.NewLine}");
+            App.PrintToMiniProfiler("SqlSugar", "Error", $"{ex.Message}{Environment.NewLine}{ex.Sql}{Environment.NewLine}");
         }
     }
 
@@ -158,7 +186,7 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         if (config.AopSettings.EnableSlowSqlLog && db.Ado.SqlExecutionTime.TotalMilliseconds > config.AopSettings.SlowSqlTime)
         {
             Logger.LogWarning("【慢SQL】{SQL}", UtilMethods.GetSqlString(config.DbType, sql, parameters));
-            FurionApp.PrintToMiniProfiler("SqlSugar", "Warn", sql + Environment.NewLine + db.Utilities.SerializeObject(parameters.ToDictionary(it => it.ParameterName, it => it.Value)));
+            App.PrintToMiniProfiler("SqlSugar", "Warn", sql + Environment.NewLine + db.Utilities.SerializeObject(parameters.ToDictionary(it => it.ParameterName, it => it.Value)));
         }
     }
 

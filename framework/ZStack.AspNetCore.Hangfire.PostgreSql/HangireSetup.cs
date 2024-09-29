@@ -11,7 +11,7 @@ public static class HangireSetup
     this IServiceCollection services,
         Action<IGlobalConfiguration>? configuration = null)
     {
-        services.AddConfigurableOptions<HangfireOptions>();
+        services.AddZStackOptions<HangfireOptions>();
         var options = App.GetOptions<HangfireOptions>();
         services.AddZStackHangire(options, config =>
         {

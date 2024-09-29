@@ -9,6 +9,6 @@ internal class AutoSubscriberService(IServiceProvider _sp) : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var subscriber = _sp.GetRequiredService<AutoSubscriber>();
-        await subscriber.SubscribeAsync(Furion.App.EffectiveTypes.ToArray(), stoppingToken);
+        await subscriber.SubscribeAsync(App.EffectiveTypes.ToArray(), stoppingToken);
     }
 }

@@ -1,12 +1,11 @@
-﻿using Furion.ConfigurableOptions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Options;
 
 namespace ZStack.AspNetCore.SqlSugar.Options;
 
 /// <summary>
 /// 数据库配置选项
 /// </summary>
-public class DbConnectionOptions : IConfigurableOptions<DbConnectionOptions>
+public class DbConnectionOptions : IConfigureOptions<DbConnectionOptions>
 {
     /// <summary>
     /// 执行超时时间(秒)
@@ -18,7 +17,7 @@ public class DbConnectionOptions : IConfigurableOptions<DbConnectionOptions>
     /// </summary>
     public List<DbConnectionConfig> ConnectionConfigs { get; set; } = [];
 
-    public void PostConfigure(DbConnectionOptions options, IConfiguration configuration)
+    public void Configure(DbConnectionOptions options)
     {
         foreach (var dbConfig in options.ConnectionConfigs)
         {

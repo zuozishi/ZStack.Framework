@@ -21,7 +21,7 @@ public static class CacheExtension
             redis.Db = options.Redis?.Db ?? 0;
             if (!string.IsNullOrEmpty(options.Redis?.Prefix))
                 pattern = options.Redis?.Prefix + pattern;
-            keys = redis.Execute(rds => rds.Execute<string[]>("KEYS", pattern));
+            keys = redis.Execute(rds => rds.Execute<string[]>("KEYS", pattern)) ?? [];
         }
         else
         {

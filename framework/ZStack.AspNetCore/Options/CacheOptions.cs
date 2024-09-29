@@ -5,7 +5,7 @@ namespace ZStack.AspNetCore.Options;
 /// <summary>
 /// 缓存配置类
 /// </summary>
-public class CacheOptions : IConfigurableOptions
+public class CacheOptions
 {
     /// <summary>
     /// 缓存类型

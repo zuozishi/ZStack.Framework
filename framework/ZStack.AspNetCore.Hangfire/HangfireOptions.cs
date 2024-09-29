@@ -1,10 +1,9 @@
-﻿using Furion.ConfigurableOptions;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.Console;
 
 namespace ZStack.AspNetCore.Hangfire;
 
-public class HangfireOptions : IConfigurableOptions
+public class HangfireOptions
 {
     public BackgroundJobServerOptions Server { get; set; } = new();
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace ZStack.AspNetCore.SqlSugar;
+﻿namespace ZStack.AspNetCore.SqlSugar;
 
 /// <summary>
 /// SqlSugar 实体仓储

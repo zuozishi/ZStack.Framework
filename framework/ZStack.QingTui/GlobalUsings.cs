@@ -1,0 +1,10 @@
+﻿global using Flurl;
+global using Flurl.Http;
+global using HeyRed.Mime;
+global using Microsoft.Extensions.Logging;
+global using System.Text.Encodings.Web;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using ZStack.Core.Exceptions;
+global using ZStack.Core.Serialization;
+global using ZStack.Extensions;

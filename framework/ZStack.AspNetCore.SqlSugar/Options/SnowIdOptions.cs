@@ -1,10 +1,8 @@
-﻿using Furion.ConfigurableOptions;
-
-namespace ZStack.AspNetCore.SqlSugar.Options;
+﻿namespace ZStack.AspNetCore.SqlSugar.Options;
 
 /// <summary>
 /// 雪花Id配置选项
 /// </summary>
-public sealed class SnowIdOptions : IdGeneratorOptions, IConfigurableOptions
+public sealed class SnowIdOptions : IdGeneratorOptions
 {
 }

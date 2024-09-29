@@ -44,7 +44,7 @@ public abstract class HangfireJobBase<T>(IServiceProvider serviceProvider) : IHa
         GC.SuppressFinalize(this);
     }
 
-    public ValueTask DisposeAsync()
+    public virtual ValueTask DisposeAsync()
     {
         GC.SuppressFinalize(this);
         return ValueTask.CompletedTask;

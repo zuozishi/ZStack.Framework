@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<PackageId>ZStack.AspNetCore.QingTui</PackageId>
+		<Description>ZStack框架 轻推SDK</Description>
+		<PackageIcon>qingtui.png</PackageIcon>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include=".\qingtui.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+	  <ProjectReference Include="..\ZStack.QingTui\ZStack.QingTui.csproj" />
+	</ItemGroup>
+
+</Project>

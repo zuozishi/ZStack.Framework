@@ -9,16 +9,14 @@ public class CacheComponent : IServiceComponent
 {
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
-        services.AddConfigurableOptions<CacheOptions>();
-        var options = FurionApp.GetOptions<CacheOptions>();
+        services.AddZStackOptions<CacheOptions>();
+        var options = App.GetOptions<CacheOptions>();
         switch (options.CacheType)
         {
             case CacheTypes.Redis:
                 if (options.Redis == null)
                     throw new Exception("Redis配置不能为空");
-                Cache.Default = string.IsNullOrEmpty(options.Redis.Prefix)
-                    ? new FullRedis(options.Redis)
-                    : new PrefixedRedis(options.Redis);
+                Cache.Default = new FullRedis(options.Redis);
                 break;
         }
         services.AddSingleton(Cache.Default);

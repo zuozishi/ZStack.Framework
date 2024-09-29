@@ -12,4 +12,10 @@ public interface ISqlSugarEntitySeedData<TEntity>
     /// </summary>
     /// <returns></returns>
     IEnumerable<TEntity> HasData();
+
+    /// <summary>
+    /// 条件数据
+    /// </summary>
+    /// <returns></returns>
+    IEnumerable<ConditionalModel> GetConditionals(TEntity data);
 }
