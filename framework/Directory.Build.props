@@ -10,7 +10,7 @@
   <PropertyGroup>
 		<IsPackable>true</IsPackable>
     <Authors>Zuozishi</Authors>
-		<Version>2.1.7</Version>
+		<Version>2.1.8</Version>
 		<Company />
     <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
