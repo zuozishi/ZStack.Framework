@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON schema for ZStack.AspNetCore OpenApiComponent",
+  "type": "object",
+  "properties": {
+    "OpenApi": {
+      "type": "object",
+      "properties": {
+        "Enable": {
+          "type": "boolean",
+          "title": "启用",
+          "description": "默认 true",
+          "default": true
+        },
+        "EnableScalar": {
+          "type": "boolean",
+          "title": "启用Scalar",
+          "description": "默认 true",
+          "default": true
+        },
+        "Groups": {
+          "type": "object",
+          "title": "分组"
+        }
+      }
+    }
+  }
+}

@@ -8,4 +8,6 @@ public static class SqlSugarConst
     /// SqlSugar二级缓存
     /// </summary>
     public const string SqlSugar = "sys_sqlSugar:";
+
+    public const string ActiveName = "SqlSugar";
 }

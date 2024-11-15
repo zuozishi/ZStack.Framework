@@ -1,4 +1,7 @@
-﻿namespace ZStack.AspNetCore.UnifyResult;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace ZStack.AspNetCore.UnifyResult;
 
 /// <summary>
 /// 统一返回结果
@@ -6,33 +9,25 @@
 /// <typeparam name="T"></typeparam>
 public class RESTfulResult<T>
 {
-    /// <summary>
-    /// 状态码
-    /// </summary>
+    [Required]
+    [Description("状态码")]
     public int Code { get; set; }
 
-    /// <summary>
-    /// 成功状态
-    /// </summary>
+    [Required]
+    [Description("成功状态")]
     public bool Success { get; set; }
 
-    /// <summary>
-    /// 数据
-    /// </summary>
+    [Description("数据")]
     public T? Result { get; set; }
 
-    /// <summary>
-    /// 错误信息
-    /// </summary>
+    [Required]
+    [Description("错误信息")]
     public string Message { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 附加数据
-    /// </summary>
+    [Description("附加数据")]
     public object? Extras { get; set; }
 
-    /// <summary>
-    /// 跟踪ID
-    /// </summary>
+    [Required]
+    [Description("跟踪Id")]
     public string TraceId { get; set; } = string.Empty;
 }

@@ -159,15 +159,17 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
 
     public virtual void Aop_OnLogExecuting(DbConnectionConfig config, SqlSugarClient db, string sql, SugarParameter[] parameters)
     {
+        string sqlText = UtilMethods.GetSqlString(config.DbType, sql, parameters);
+        SqlSugarActivitySource.CommandStart(db, sqlText);
         if (config.AopSettings.EnableSqlLog)
         {
-            Logger.LogInformation("【执行SQL】{SQL}", UtilMethods.GetSqlString(config.DbType, sql, parameters));
-            App.PrintToMiniProfiler("SqlSugar", "Info", sql + Environment.NewLine + db.Utilities.SerializeObject(parameters.ToDictionary(it => it.ParameterName, it => it.Value)));
+            Logger.LogInformation("【执行SQL】{SQL}", sqlText);
         }
     }
 
     public virtual void Aop_OnError(DbConnectionConfig config, SqlSugarClient db, SqlSugarException ex)
     {
+        SqlSugarActivitySource.SetException(db, ex);
         if (config.AopSettings.EnableErrorSqlLog)
         {
             string sql = UtilMethods.GetSqlString(config.DbType, ex.Sql, (SugarParameter[]?)ex.Parametres ?? []);
@@ -177,16 +179,15 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                     Message: {Message}
                     StackTrace: {StackTrace}
                     """, sql, ex.Message, ex.StackTrace);
-            App.PrintToMiniProfiler("SqlSugar", "Error", $"{ex.Message}{Environment.NewLine}{ex.Sql}{Environment.NewLine}");
         }
     }
 
     public virtual void Aop_OnLogExecuted(DbConnectionConfig config, SqlSugarClient db, string sql, SugarParameter[] parameters)
     {
+        SqlSugarActivitySource.CommandStop(db);
         if (config.AopSettings.EnableSlowSqlLog && db.Ado.SqlExecutionTime.TotalMilliseconds > config.AopSettings.SlowSqlTime)
         {
             Logger.LogWarning("【慢SQL】{SQL}", UtilMethods.GetSqlString(config.DbType, sql, parameters));
-            App.PrintToMiniProfiler("SqlSugar", "Warn", sql + Environment.NewLine + db.Utilities.SerializeObject(parameters.ToDictionary(it => it.ParameterName, it => it.Value)));
         }
     }
 

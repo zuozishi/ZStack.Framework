@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using StackExchange.Profiling;
 using System.Reflection;
 using System.Security.Claims;
 using ILogger = Serilog.ILogger;
@@ -128,35 +127,31 @@ public partial class App
         => InternalApp.GetServiceLifetime(serviceType);
 
     /// <summary>
-    /// 打印验证信息到 MiniProfiler
+    /// 使用Scope服务提供器
     /// </summary>
-    /// <param name="category">分类</param>
-    /// <param name="state">状态</param>
-    /// <param name="message">消息</param>
-    /// <param name="isError">是否为警告消息</param>
-    public static void PrintToMiniProfiler(string category, string state, string? message = null, bool isError = false)
+    /// <param name="action"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static async Task UseScope(Func<IServiceProvider, Task> action)
     {
-        if (!CanBeMiniProfiler()) return;
-
-        // 打印消息
-        var titleCaseCategory = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(category);
-        var customTiming = MiniProfiler.Current?.CustomTiming(category, string.IsNullOrWhiteSpace(message) ? $"{titleCaseCategory} {state}" : message, state);
-        if (customTiming == null) return;
-
-        // 判断是否是警告消息
-        if (isError) customTiming.Errored = true;
+        if (InternalApp.ServiceProvider == null)
+            throw new InvalidOperationException("服务提供器未初始化！");
+        using var scope = InternalApp.ServiceProvider.CreateScope();
+        await action(scope.ServiceProvider);
     }
 
     /// <summary>
-    /// 判断是否启用 MiniProfiler
+    /// 使用Scope服务提供器
     /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="action"></param>
     /// <returns></returns>
-    internal static bool CanBeMiniProfiler()
+    public static async Task UseScopeService<T>(Func<T, IServiceProvider, Task> action) where T : notnull
     {
-        // 减少不必要的监听
-        if (HttpContext == null
-            || !(HttpContext.Request.Headers.TryGetValue("request-from", out var value) && value == "swagger")) return false;
-
-        return true;
+        await UseScope(async sp =>
+        {
+            var svc = sp.GetRequiredService<T>();
+            await action(svc, sp);
+        });
     }
 }

@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON schema for ZStack.AspNetCore.QingTui",
+  "type": "object",
+  "properties": {
+    "QingTui": {
+      "type": "object",
+      "properties": {
+        "Host": {
+          "type": "string",
+          "title": "接口地址",
+          "description": "默认 https://open.qingtui.com",
+          "default": "https://open.qingtui.com"
+        },
+        "Clients": {
+          "type": "array",
+          "title": "客户端配置",
+          "items": {
+            "type": "object",
+            "properties": {
+              "DisplayName": {
+                "type": "string",
+                "title": "应用名称"
+              },
+              "AppId": {
+                "type": "string",
+                "title": "应用Id"
+              },
+              "Secret": {
+                "type": "string",
+                "title": "应用密钥"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 using ZStack.Core.Exceptions;
 
 namespace ZStackWebApplication.Controller;
@@ -8,34 +9,21 @@ namespace ZStackWebApplication.Controller;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class TestController : ControllerBase
+//[ApiExplorerSettings(GroupName = "v2")]
+public class TestController(ILogger<TestController> _logger, ISqlSugarClient _db) : ControllerBase
 {
+    private static readonly HttpClient HttpClient = new();
+
     /// <summary>
     /// 测试方法
     /// </summary>
-    /// <param name="q"></param>
     /// <returns></returns>
     /// <exception cref="AppException"></exception>
     [HttpGet]
-    public async Task<object> Get([FromQuery] string? q)
+    public async Task<int> Get(CancellationToken cancellationToken = default)
     {
-        await Task.Delay(1);
-        if (q == "123")
-            throw new AppException(400, "测试错误");
-        return new
-        {
-            A = q,
-            B = DateTime.Now,
-            C = DateTime.Now.Date,
-            D = TestEnum.B,
-            E = Oops.Bah("测试")
-        };
+        var res = await HttpClient.GetStringAsync("https://git.ctmcc.cn/explore", cancellationToken);
+        var total = await _db.Ado.GetIntAsync("SELECT COUNT(1) FROM scraper_gfriends");
+        return total;
     }
-}
-
-public enum TestEnum
-{
-    A = 1,
-    B = 2,
-    C = 3
 }

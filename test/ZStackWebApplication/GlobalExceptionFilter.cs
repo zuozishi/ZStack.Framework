@@ -13,7 +13,7 @@ public class GlobalExceptionFilter : IExceptionFilter, IActionFilter
 
     public void OnActionExecuting(ActionExecutingContext context)
     {
-        
+
     }
 
     public void OnException(ExceptionContext context)

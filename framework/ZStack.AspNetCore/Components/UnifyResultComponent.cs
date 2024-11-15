@@ -1,7 +1,7 @@
 ﻿namespace ZStack.AspNetCore.Components;
 
 /// <summary>
-/// 统一结果组件
+/// 统一接口响应组件
 /// </summary>
 [DependsOn(typeof(ApiControllerComponent))]
 public class UnifyResultComponent : IServiceComponent

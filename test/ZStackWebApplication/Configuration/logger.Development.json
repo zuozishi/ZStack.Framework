@@ -1,4 +1,4 @@
-{
+﻿{
     "Serilog": {
       "MinimumLevel": {
         "Default": "Information",
@@ -21,6 +21,26 @@
           "Name": "Hangfire",
           "Args": {
             "restrictedToMinimumLevel": "Information"
+          }
+        },
+        {
+          "Name": "OpenTelemetry",
+          "Args": {
+            "Endpoint": "http://localhost:4317",
+            "Protocol": "Grpc",
+            "ResourceAttributes": {
+              "service.name": "WebApp"
+            }
+          }
+        },
+        {
+          "Name": "OpenTelemetry",
+          "Args": {
+            "Endpoint": "http://localhost:5079",
+            "Protocol": "Grpc",
+            "ResourceAttributes": {
+              "service.name": "WebApp"
+            }
           }
         }
       ]

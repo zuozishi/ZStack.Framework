@@ -116,6 +116,8 @@ internal static class InternalApp
         var files = new Matcher()
             .AddInclude("*.json")
             .AddInclude("*.ini")
+            .AddInclude("*.yml")
+            .AddInclude("*.yaml")
             .AddExclude("*.schema.json")
             .GetResultsInFullPath(configurationDirectory);
         foreach (var file in files)
@@ -131,6 +133,11 @@ internal static class InternalApp
             else if (fileName.EndsWith(".ini", StringComparison.OrdinalIgnoreCase))
             {
                 configuration.AddIniFile(file, optional: true, reloadOnChange: true);
+            }
+            else if (fileName.EndsWith(".yml", StringComparison.OrdinalIgnoreCase) ||
+                fileName.EndsWith(".yaml", StringComparison.OrdinalIgnoreCase))
+            {
+                configuration.AddYamlFile(file, optional: true, reloadOnChange: true);
             }
         }
         configuration.AddEnvironmentVariables();
