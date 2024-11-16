@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileSystemGlobbing;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Serilog.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Reflection;
 using ZStack.AspNetCore.Attributes;
 using ZStack.Core.Utils;
-using ILogger = Serilog.ILogger;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace ZStack.AspNetCore;
 
@@ -34,9 +33,14 @@ internal static class InternalApp
     internal static IServiceProvider? ServiceProvider;
 
     /// <summary>
+    /// 日志提供器
+    /// </summary>
+    internal static ILoggerProvider LoggerProvider { get; private set; } = new SerilogLoggerProvider(Log.Logger, dispose: false);
+
+    /// <summary>
     /// 应用日志记录器
     /// </summary>
-    internal static ILogger Logger { get; private set; } = Log.Logger.ForContext<App>();
+    internal static ILogger Logger { get; private set; } = LoggerProvider.CreateLogger("App");
 
     /// <summary>
     /// 程序集
@@ -80,7 +84,6 @@ internal static class InternalApp
     internal static void ConfigureSerilog(WebApplicationBuilder builder, Action<LoggerConfiguration>? configure = null)
     {
         Log.Logger = SerilogLogger.CreateConfigurationLogger(builder.Configuration, configure);
-        Logger = Log.Logger.ForContext<App>();
         builder.Host.UseSerilog(Log.Logger);
     }
 

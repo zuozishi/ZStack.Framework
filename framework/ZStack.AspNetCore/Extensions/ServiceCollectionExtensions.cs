@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using System.Reflection;
+﻿using System.Reflection;
 using ZStack.AspNetCore;
 using ZStack.AspNetCore.Attributes;
 
@@ -55,7 +53,7 @@ public static class ServiceCollectionExtensions
                 });
         componentList.ForEach((type, _) =>
         {
-            App.Logger.Information("注册服务组件: {Component}", type);
+            App.Logger.LogInformation("注册服务组件: {Component}", type);
             services.AddComponent(type);
         });
         return services;

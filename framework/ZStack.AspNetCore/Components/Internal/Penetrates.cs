@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 namespace ZStack.AspNetCore.Components;

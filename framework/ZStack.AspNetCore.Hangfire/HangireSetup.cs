@@ -2,6 +2,7 @@
 using Hangfire.Console;
 using Hangfire.Console.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 using ZStack.AspNetCore;
 using ZStack.AspNetCore.Hangfire;
 
@@ -56,7 +57,7 @@ public static class HangireSetup
         var jobs = scope.ServiceProvider.GetServices<IHangfireJob>();
         foreach (var job in jobs)
         {
-            App.Logger.Information("注册定时任务：{JobId} [{Type}][{Cron}]", job.JobId, job.GetType().FullName, job.Cron);
+            App.Logger.LogInformation("注册定时任务：{JobId} [{Type}][{Cron}]", job.JobId, job.GetType().FullName, job.Cron);
             RecurringJob.AddOrUpdate(job.JobId, () => job.RunAsync(), job.Cron, new RecurringJobOptions
             {
                 TimeZone = job.TimeZone

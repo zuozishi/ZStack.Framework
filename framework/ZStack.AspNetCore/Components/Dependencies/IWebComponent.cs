@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace System;
+﻿namespace System;
 
 /// <summary>
 /// Web组件

@@ -52,7 +52,7 @@ public static class ApplicationBuilderExtension
                 });
         componentList.ForEach((type, _) =>
         {
-            App.Logger.Information("注册中间件组件: {Component}", type);
+            App.Logger.LogInformation("注册中间件组件: {Component}", type);
             app.UseComponent(type);
         });
         return app;

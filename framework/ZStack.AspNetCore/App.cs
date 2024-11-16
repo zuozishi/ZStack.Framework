@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using System.Security.Claims;
-using ILogger = Serilog.ILogger;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace ZStack.AspNetCore;
 
@@ -16,6 +14,11 @@ public partial class App
     /// 存储根服务，可能为空
     /// </summary>
     public static IServiceProvider? ServiceProvider => InternalApp.ServiceProvider;
+
+    /// <summary>
+    /// 日志提供器
+    /// </summary>
+    public static ILoggerProvider LoggerProvider => InternalApp.LoggerProvider;
 
     /// <summary>
     /// 应用日志记录器
