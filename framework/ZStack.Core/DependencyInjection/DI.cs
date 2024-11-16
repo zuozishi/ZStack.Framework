@@ -40,7 +40,7 @@ public static class DI
     /// <param name="services"></param>
     public static void AutoAddServices(IServiceCollection services)
     {
-        var types = Reflection.GetTypes();
+        var types = Reflection.GetExportedTypes();
         var injectTypes = types
             .Where(x => x.IsAssignableTo(typeof(IPrivateDependency)) && !x.IsAbstract)
             .OrderBy(x => x.GetCustomAttribute<InjectionAttribute>()?.Order ?? 0)

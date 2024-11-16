@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "JSON schema for ZStack.AspNetCore.OpenTelemetry",
   "type": "object",
@@ -30,37 +30,6 @@
           "title": "追踪配置",
           "items": {
             "type": "string"
-          }
-        },
-        "OtlpExporters": {
-          "type": "array",
-          "title": "OTLP导出器",
-          "items": {
-            "type": "object",
-            "required": [
-              "Name",
-              "Endpoint"
-            ],
-            "properties": {
-              "Name": {
-                "type": "string",
-                "title": "导出器名称"
-              },
-              "Endpoint": {
-                "type": "string",
-                "title": "OTLP服务地址"
-              },
-              "Protocol": {
-                "type": "string",
-                "title": "协议",
-                "description": "默认 Grpc",
-                "enum": [
-                  "Grpc",
-                  "HttpProtobuf"
-                ],
-                "default": "Grpc"
-              }
-            }
           }
         }
       }

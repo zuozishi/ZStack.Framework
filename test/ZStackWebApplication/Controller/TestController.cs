@@ -22,7 +22,8 @@ public class TestController(ILogger<TestController> _logger, ISqlSugarClient _db
     [HttpGet]
     public async Task<int> Get(CancellationToken cancellationToken = default)
     {
-        var res = await HttpClient.GetStringAsync("https://git.ctmcc.cn/explore", cancellationToken);
+        var res = await HttpClient.GetStringAsync("https://live.bilibili.com/blackboard/live-clinic.html", cancellationToken);
+        _logger.LogInformation("Response Size: {Size}", res.Length);
         var total = await _db.Ado.GetIntAsync("SELECT COUNT(1) FROM scraper_gfriends");
         return total;
     }

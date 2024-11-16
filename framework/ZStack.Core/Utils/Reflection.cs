@@ -18,11 +18,11 @@ public static class Reflection
         => AppDomain.CurrentDomain.GetAssemblies();
 
     /// <summary>
-    /// 获取程序集类型
+    /// 获取程序集公开类型
     /// </summary>
     /// <returns></returns>
-    public static Type[] GetTypes()
-        => GetAssemblies().SelectMany(x => x.GetTypes()).ToArray();
+    public static Type[] GetExportedTypes()
+        => GetAssemblies().SelectMany(x => x.GetExportedTypes()).ToArray();
 
     /// <summary>
     /// 加载 ZStack 程序集

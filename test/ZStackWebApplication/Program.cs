@@ -1,7 +1,13 @@
-﻿var builder = WebApplication.CreateBuilder(args)
-    .Inject();
+﻿using OpenTelemetry.Trace;
+
+var builder = WebApplication.CreateBuilder(args).Inject();
 
 builder.Services.AddRazorPages();
+
+builder.Services.ConfigureOpenTelemetryTracerProvider(p =>
+{
+    p.AddSource("SqlSugar");
+});
 
 var app = builder.Build();
 
