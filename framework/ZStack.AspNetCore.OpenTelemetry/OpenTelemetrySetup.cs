@@ -16,6 +16,8 @@ public static class OpenTelemetrySetup
         var options = App.GetOptions<OpenTelemetryOptions>();
         var entryAssemblyName = Assembly.GetEntryAssembly()!.GetName();
         options.ServiceName ??= App.HostEnvironment?.ApplicationName ?? entryAssemblyName.Name;
+        if (!string.IsNullOrWhiteSpace(App.Configuration!["OTEL_SERVICE_NAME"]))
+            options.ServiceName = App.Configuration["OTEL_SERVICE_NAME"];
         options.ServiceVersion ??= entryAssemblyName.Version?.ToString();
         var builder = services.AddOpenTelemetry()
             .ConfigureResource(config =>
