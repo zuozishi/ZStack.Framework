@@ -13,6 +13,11 @@ public class DbConnectionOptions : IConfigureOptions<DbConnectionOptions>
     public int CommandTimeOut { get; set; }
 
     /// <summary>
+    /// SqlSugarClient 配置
+    /// </summary>
+    public Action<DbConnectionConfig, SqlSugarClient>? OnSqlSugarClientConfigure { get; set; }
+
+    /// <summary>
     /// 数据库集合
     /// </summary>
     public List<DbConnectionConfig> ConnectionConfigs { get; set; } = [];

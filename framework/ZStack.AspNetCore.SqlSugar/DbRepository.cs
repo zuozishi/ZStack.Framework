@@ -4,9 +4,9 @@
 /// SqlSugar 实体仓储
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
+public class DbRepository<T> : SimpleClient<T> where T : class, new()
 {
-    public SqlSugarRepository()
+    public DbRepository()
     {
         var sqlSugarService = App.GetRequiredService<ISqlSugarService>();
 

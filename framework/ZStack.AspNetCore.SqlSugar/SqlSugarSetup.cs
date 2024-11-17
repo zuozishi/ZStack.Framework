@@ -25,14 +25,11 @@ public static class SqlSugarSetup
 
         // 自定义 SqlSugar 雪花ID算法
         SnowFlakeSingle.WorkId = App.GetOptions<SnowIdOptions>().WorkerId;
-        StaticConfig.CustomSnowFlakeFunc = () =>
-        {
-            return YitIdHelper.NextId();
-        };
+        StaticConfig.CustomSnowFlakeFunc = YitIdHelper.NextId;
 
         services.AddSingleton<ISqlSugarInitializer, TInitializer>();
         services.AddSingleton<ISqlSugarService, SqlSugarService>();
         services.AddSingleton<ISqlSugarClient>(sp => sp.GetRequiredService<ISqlSugarService>().Get());
-        services.AddSingleton(typeof(SqlSugarRepository<>));
+        services.AddSingleton(typeof(DbRepository<>));
     }
 }
