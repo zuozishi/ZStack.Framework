@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using ZStack.Core.Utils;
 using ZStack.Extensions.Attributes;
 using ZStack.Extensions.Models;
 
-namespace ZStack.Extensions;
+namespace System;
 
 /// <summary>
 /// 对象拓展方法
@@ -15,14 +16,14 @@ public static class ObjectExtension
         => new()
         {
             WriteIndented = true,
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
 
     public static JsonSerializerOptions JsonSerializerOptions
         => new()
         {
             WriteIndented = false,
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
 
     /// <summary>

@@ -1,9 +1,9 @@
-﻿namespace ZStack.Extensions;
+﻿namespace System;
 
 /// <summary>
 /// DateTime扩展方法
 /// </summary>
-public static class DateTimeExtension
+public static class DateTimeExtensions
 {
     /// <summary>
     /// 获取时间戳（秒）

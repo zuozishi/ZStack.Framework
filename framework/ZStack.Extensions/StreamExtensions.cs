@@ -5,7 +5,7 @@ namespace System.IO;
 /// <summary>
 /// Stream扩展方法
 /// </summary>
-public static class StreamExtension
+public static class StreamExtensions
 {
     /// <summary>
     /// 计算SHA1哈希值

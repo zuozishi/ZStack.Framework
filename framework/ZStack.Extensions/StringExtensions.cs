@@ -3,12 +3,12 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using ZStack.Core.Utils;
 
-namespace ZStack.Extensions;
+namespace System;
 
 /// <summary>
 /// 字符串拓展方法
 /// </summary>
-public static class StringExtension
+public static class StringExtensions
 {
     /// <summary>
     /// 获取MD5

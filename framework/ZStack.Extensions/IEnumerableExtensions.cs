@@ -1,9 +1,9 @@
-﻿namespace ZStack.Extensions;
+﻿namespace System.Collections.Generic;
 
 /// <summary>
 /// 集合拓展方法
 /// </summary>
-public static class IEnumerableExtension
+public static class IEnumerableExtensions
 {
     /// <summary>
     /// 遍历集合

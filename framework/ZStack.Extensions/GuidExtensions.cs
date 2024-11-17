@@ -1,6 +1,6 @@
-﻿namespace ZStack.Extensions;
+﻿namespace System;
 
-public static class GuidExtension
+public static class GuidExtensions
 {
     public static string ToUUID32(this Guid guid)
         => guid.ToString("N");

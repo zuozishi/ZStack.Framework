@@ -1,7 +1,6 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
-namespace ZStack.Extensions;
+namespace System.Reflection;
 
 public static class ReflectionExtensions
 {
