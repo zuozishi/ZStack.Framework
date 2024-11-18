@@ -18,13 +18,8 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
         config.ConfigureExternalServices = configureExternalServices;
         config.InitKeyType = InitKeyType.Attribute;
         config.IsAutoCloseConnection = true;
-        config.MoreSettings = new ConnMoreSettings
-        {
-            IsAutoRemoveDataCache = true,
-            IsAutoDeleteQueryFilter = true, // 启用删除查询过滤器
-            IsAutoUpdateQueryFilter = true, // 启用更新查询过滤器
-            SqlServerCodeFirstNvarchar = true // 采用Nvarchar
-        };
+        config.MoreSettings ??= new();
+        config.MoreSettings.SqlServerCodeFirstNvarchar = true;
     }
 
     public virtual void DbConfig_EntityNameService(DbConnectionConfig config, Type type, EntityInfo entity)
