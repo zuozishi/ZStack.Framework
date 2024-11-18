@@ -7,7 +7,7 @@ public static class SqlSugarSetup
     /// </summary>
     /// <param name="services"></param>
     public static void AddZStackSqlSugar(this IServiceCollection services)
-        => AddZStackSqlSugar<SqlSugarInitializer>(services);
+        => AddZStackSqlSugar<DefaultSqlSugarInitializer>(services);
 
     /// <summary>
     /// SqlSugar 上下文初始化

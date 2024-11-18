@@ -1,9 +1,14 @@
 ﻿namespace ZStack.AspNetCore.SqlSugar;
 
-public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSugarInitializer
+public class DefaultSqlSugarInitializer : ISqlSugarInitializer
 {
-    public DbConnectionOptions Options { get; } = App.GetOptions<DbConnectionOptions>();
-    public ILogger Logger { get; } = logger;
+    public DbConnectionOptions Options => App.GetOptions<DbConnectionOptions>();
+    public ILogger Logger { get; set; }
+
+    public DefaultSqlSugarInitializer()
+    {
+        Logger = App.GetRequiredService<ILoggerFactory>().CreateLogger(GetType().Name);
+    }
 
     public virtual void SetDbConfig(DbConnectionConfig config)
     {
@@ -199,7 +204,7 @@ public class SqlSugarInitializer(ILogger<SqlSugarInitializer> logger) : ISqlSuga
                     if (id == null || (long)id == 0)
                         entityInfo.SetValue(YitIdHelper.NextId());
                 }
-                else if (propertyType == typeof(Guid) || propertyType == typeof(long?))
+                else if (propertyType == typeof(Guid))
                 {
                     if (id == null || (Guid)id == Guid.Empty)
                         entityInfo.SetValue(Guid.NewGuid());
