@@ -12,26 +12,22 @@ public static class CacheExtension
     /// <returns></returns>
     public static IEnumerable<string> Search(this ICache cache, string pattern)
     {
-        var options = App.GetOptions<CacheOptions>();
         IEnumerable<string> keys;
-        if (options.CacheType == CacheTypes.Redis)
+        if (cache is MemoryCache memoryCache)
         {
-            var redis = cache as FullRedis
-                ?? throw new NotSupportedException();
-            redis.Db = options.Redis?.Db ?? 0;
-            if (!string.IsNullOrEmpty(options.Redis?.Prefix))
-                pattern = options.Redis?.Prefix + pattern;
-            keys = redis.Execute(rds => rds.Execute<string[]>("KEYS", pattern)) ?? [];
-        }
-        else
-        {
-            keys = (cache.Keys ?? []);
+            keys = memoryCache.Keys;
             if (!string.IsNullOrEmpty(pattern))
             {
                 var reg = pattern.Replace("?", ".").Replace("*", ".*");
                 keys = keys.Where(k => Regex.IsMatch(k, reg));
             }
+            return keys;
         }
-        return keys;
+        else if (cache is FullRedis redis)
+        {
+            keys = redis.Search(pattern, int.MaxValue);
+            return keys;
+        }
+        else throw new NotSupportedException($"不支持的缓存类型 {cache.GetType().Name}");
     }
 }
