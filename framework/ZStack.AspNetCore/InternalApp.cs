@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog.Extensions.Logging;
 using System.Collections.Concurrent;
@@ -71,7 +72,6 @@ internal static class InternalApp
         Action<LoggerConfiguration>? loggerConfiguration = null)
     {
         ConfigureConfiguration(builder.Environment, builder.Configuration);
-        ConfigureSerilog(builder, loggerConfiguration);
         ConfigureHostEnvironment(builder.Environment);
         ConfigureServices(builder.Services);
     }
@@ -84,6 +84,8 @@ internal static class InternalApp
     internal static void ConfigureSerilog(WebApplicationBuilder builder, Action<LoggerConfiguration>? configure = null)
     {
         Log.Logger = SerilogLogger.CreateConfigurationLogger(builder.Configuration, configure);
+        LoggerProvider = new SerilogLoggerProvider(Log.Logger, dispose: false);
+        Logger = LoggerProvider.CreateLogger("App");
         builder.Host.UseSerilog(Log.Logger);
     }
 
