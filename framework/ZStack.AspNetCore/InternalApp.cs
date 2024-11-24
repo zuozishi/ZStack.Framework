@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileSystemGlobbing;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog.Extensions.Logging;
 using System.Collections.Concurrent;

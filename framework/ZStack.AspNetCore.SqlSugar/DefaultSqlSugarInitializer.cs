@@ -2,7 +2,7 @@
 
 public class DefaultSqlSugarInitializer : ISqlSugarInitializer
 {
-    public DbConnectionOptions Options => App.GetOptions<DbConnectionOptions>();
+    public DbConnectionOptions Options { get; } = App.GetOptions<DbConnectionOptions>();
     public ILogger Logger { get; set; }
 
     public DefaultSqlSugarInitializer()

@@ -6,5 +6,4 @@ global using System.Reflection;
 global using Yitter.IdGenerator;
 global using ZStack.AspNetCore.SqlSugar;
 global using ZStack.AspNetCore.SqlSugar.Options;
-global using ZStack.Extensions;
 global using App = ZStack.AspNetCore.App;
