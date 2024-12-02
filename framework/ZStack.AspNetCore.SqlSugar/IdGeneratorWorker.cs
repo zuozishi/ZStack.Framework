@@ -32,7 +32,7 @@ public class IdGeneratorWorker(ILogger<IdGeneratorWorker> _logger, IOptions<Cach
         YitIdHelper.SetIdGenerator(_snowIdOptions.Value);
         return Task.Run(async () =>
         {
-            while (stoppingToken.IsCancellationRequested)
+            while (!stoppingToken.IsCancellationRequested)
             {
                 await Task.Delay(5000, stoppingToken);
                 GetLook(workerId);
