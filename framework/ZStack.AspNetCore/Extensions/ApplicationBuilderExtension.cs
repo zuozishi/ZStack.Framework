@@ -74,9 +74,9 @@ public static class ApplicationBuilderExtension
         {
             var type = startup.GetType();
 
-            // 获取所有符合依赖注入格式的方法，如返回值 void，且第一个参数是 IApplicationBuilder 类型
+            // 获取所有符合依赖注入格式的方法，如返回值 void 或 Task，且第一个参数是 IApplicationBuilder 类型
             var configureMethods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .Where(u => (u.ReturnType == typeof(void) || u.ReflectedType == typeof(Task))
+                .Where(u => (u.ReturnType == typeof(void) || u.ReturnType == typeof(Task))
                     && u.GetParameters().Length > 0
                     && u.GetParameters().First().ParameterType == typeof(IApplicationBuilder));
 
