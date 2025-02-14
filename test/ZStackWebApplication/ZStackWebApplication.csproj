@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
     <!--<PackageReference Include="MySqlConnector" Version="2.4.0" />-->
     <PackageReference Include="Npgsql" Version="9.0.2" />
     <PackageReference Include="Npgsql.OpenTelemetry" Version="9.0.2" />

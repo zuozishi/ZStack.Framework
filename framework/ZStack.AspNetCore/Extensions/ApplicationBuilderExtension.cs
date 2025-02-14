@@ -76,7 +76,7 @@ public static class ApplicationBuilderExtension
 
             // 获取所有符合依赖注入格式的方法，如返回值 void，且第一个参数是 IApplicationBuilder 类型
             var configureMethods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .Where(u => u.ReturnType == typeof(void)
+                .Where(u => (u.ReturnType == typeof(void) || u.ReflectedType == typeof(Task))
                     && u.GetParameters().Length > 0
                     && u.GetParameters().First().ParameterType == typeof(IApplicationBuilder));
 
@@ -85,7 +85,9 @@ public static class ApplicationBuilderExtension
             // 自动安装属性调用
             foreach (var method in configureMethods)
             {
-                method.Invoke(startup, ResolveMethodParameterInstances(app, method));
+                var returnObj = method.Invoke(startup, ResolveMethodParameterInstances(app, method));
+                if (returnObj is Task task)
+                    task.Wait();
             }
         }
 

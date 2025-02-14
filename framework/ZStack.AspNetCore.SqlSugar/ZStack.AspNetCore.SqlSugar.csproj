@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.175" />
+    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.177" />
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
   </ItemGroup>
 
