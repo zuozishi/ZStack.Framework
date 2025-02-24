@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Scalar.AspNetCore;
 
 namespace ZStack.AspNetCore.Components;
@@ -42,7 +43,10 @@ public class OpenApiComponent : IServiceComponent, IApplicationComponent
         {
             endpoints.MapOpenApi();
             if (options.EnableScalar)
+            {
                 endpoints.MapScalarApiReference();
+                endpoints.MapGet("/scalar", () => Results.Redirect("/scalar/default")).ExcludeFromDescription();
+            }
         });
     }
 }
