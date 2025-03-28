@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.9.4" />
+    <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.11.0" />
   </ItemGroup>
 
   <ItemGroup>
