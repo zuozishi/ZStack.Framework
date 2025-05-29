@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ZStack.Extensions\ZStack.Extensions.csproj" />
+    <ProjectReference Include="..\ZStack.Core\ZStack.Core.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

@@ -116,3 +116,34 @@ typeof(List<int>).IsImplementFromGeneric(typeof(IEnumerable<>));
 "".IsNullOrEmpty(); // true
 "abc".IsNullOrEmpty(); // false
 ```
+
+### 工具类
+
+**DataValidator.cs**
+
+```c#
+// 验证是否为有效的手机号
+DataValidator.IsValidMobile(string mobile);
+
+// 验证是否为有效的邮箱
+DataValidator.IsValidEmail(string email);
+
+// 验证是否为有效的身份证号
+DataValidator.IsValidIdCard(string idCard);
+```
+
+**MD5.cs**
+
+```c#
+// 获取MD5字符串
+MD5.GetMD5(string input);
+MD5.GetMD5(byte[] bytes);
+MD5.GetMD5(Stream stream);
+```
+
+**DataUtils.cs**
+
+```c#
+// 对比对象是否相等
+bool IsEqual(object? value1, object? value2);
+```

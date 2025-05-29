@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 using System.Reflection;
 using ZStack.Core.Utils;
 
@@ -10,30 +9,6 @@ namespace ZStack.Core.DependencyInjection;
 /// </summary>
 public static class DI
 {
-    /// <summary>
-    /// 创建控制台应用程序依赖注入容器
-    /// </summary>
-    /// <param name="servicesConfigure"></param>
-    /// <param name="addLogger"></param>
-    /// <param name="loggerConfigure"></param>
-    /// <returns></returns>
-    public static IServiceProvider CreateConsoleAppServiceProvider(
-        Action<ServiceCollection> servicesConfigure,
-        bool addLogger = true,
-        Action<LoggerConfiguration>? loggerConfigure = null)
-    {
-        var services = new ServiceCollection();
-        if (addLogger)
-        {
-            var logger = SerilogLogger.CreateConsoleAppLogger(loggerConfigure);
-            services.AddSingleton<ILogger>(logger);
-            services.AddLogging(configure => configure.AddSerilog(logger));
-        }
-        servicesConfigure(services);
-        services.AddAutoDependencyInjection();
-        return services.BuildServiceProvider();
-    }
-
     /// <summary>
     /// 自动配置服务
     /// </summary>

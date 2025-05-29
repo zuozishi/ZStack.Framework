@@ -21,6 +21,10 @@ public static class ApplicationBuilderExtension
     {
         InternalApp.ServiceProvider = app.ApplicationServices;
         app.UseComponents(autoLoadComponents, components, ignoreComponents);
+
+        if (InternalApp.HostEnvironment?.IsDevelopment() ?? false)
+            app.ShowAppInfo();
+
         return app;
     }
 

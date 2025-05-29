@@ -1,4 +1,4 @@
-﻿namespace ZStack.Core.Utils;
+﻿namespace ZStack.Extensions.Utils;
 
 /// <summary>
 /// 数据工具类

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ZStack.Core.Utils;
+namespace ZStack.Extensions.Utils;
 
 /// <summary>
 /// MD5工具类

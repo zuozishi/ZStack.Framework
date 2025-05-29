@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ZStack.Core.Utils;
+namespace ZStack.Extensions.Utils;
 
 /// <summary>
 /// 数据验证器

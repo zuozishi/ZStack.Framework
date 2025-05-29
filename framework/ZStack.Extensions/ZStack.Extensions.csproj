@@ -3,9 +3,4 @@
 		<PackageId>ZStack.Extensions</PackageId>
 		<Description>ZStack框架 拓展方法库</Description>
 	</PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ZStack.Core\ZStack.Core.csproj" />
-  </ItemGroup>
-
 </Project>

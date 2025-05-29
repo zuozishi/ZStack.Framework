@@ -91,8 +91,8 @@ public class Startup : AppStartup
 
 ```mermaid
 graph TD;
-    ZStack.Core --> ZStack.Extensions;
-    ZStack.Extensions --ASP .NET Core--> ZStack.AspNetCore;
+    ZStack.Extensions --> ZStack.Core;
+    ZStack.Core --ASP .NET Core--> ZStack.AspNetCore;
     ZStack.AspNetCore --> ZStack.AspNetCore.SqlSugar;
     ZStack.AspNetCore --> ZStack.AspNetCore.EventBus;
     ZStack.AspNetCore --> ZStack.AspNetCore.Hangfire;
