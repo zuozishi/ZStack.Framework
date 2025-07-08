@@ -28,6 +28,7 @@ public partial class QingTuiApiClient
         _logger = Options.Logger;
         _tokenPersister = Options.TokenPersister ?? new LocalTokenPersister();
         RestClient = new FlurlClient(Options.Host);
+        RestClient.AllowAnyHttpStatus();
         RestClient.BeforeCall(BeforeCall);
     }
 

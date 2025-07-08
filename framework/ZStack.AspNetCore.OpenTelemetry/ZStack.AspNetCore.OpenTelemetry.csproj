@@ -9,7 +9,7 @@
 	  <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
 	  <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
 	  <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
-	  <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.1.1" />
+	  <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.2.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
