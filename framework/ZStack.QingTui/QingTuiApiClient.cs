@@ -74,22 +74,29 @@ public partial class QingTuiApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<JsApiTicketResp> GetJsApiTicketAsync(CancellationToken cancellationToken = default)
+    public async Task<string> GetJsApiTicketAsync(CancellationToken cancellationToken = default)
     {
+        string? cachedTicket = _tokenPersister.GetJsTicket(AppId);
+        if (!string.IsNullOrEmpty(cachedTicket))
+        {
+            _logger?.LogInformation("获取JsApiTicket成功, ticket={Ticket} (缓存)", cachedTicket);
+            return cachedTicket;
+        }
         var res = await RestClient.Request("/js/ticket/get")
             .GetJsonAsync<JsApiTicketResp>(cancellationToken: cancellationToken);
         if (res.ErrorCode != null)
         {
             _logger?.LogError("获取JsApiTicket失败, appId={AppId}, errCode={ErrorCode}, errMsg={ErrMsg}", AppId, res.ErrorCode, res.ErrMsg);
-            return res;
+            throw Oops.Oh($"获取JsApiTicket失败, errCode={res.ErrorCode}, errMsg={res.ErrMsg}");
         }
         if (string.IsNullOrEmpty(res.Ticket))
         {
             _logger?.LogError("获取JsApiTicket失败, appId={AppId}, ticket响应为空", AppId);
-            return res;
+            throw Oops.Oh("获取JsApiTicket失败, ticket响应为空");
         }
         _logger?.LogInformation("获取JsApiTicket成功, ticket={Ticket}", res.Ticket);
-        return res;
+        _tokenPersister.SaveJsTicket(AppId, res.Ticket, res.ExpiresIn);
+        return res.Ticket;
     }
 
     /// <summary>
@@ -107,7 +114,7 @@ public partial class QingTuiApiClient
         // 保留#号以前的内容
         string url = originUrl.Split('#')[0];
         // 调用轻推JS-SDK接口的临时票据
-        string jsapi_ticket = (await GetJsApiTicketAsync(cancellationToken)).Ticket;
+        string jsapi_ticket = await GetJsApiTicketAsync(cancellationToken);
         // 拼接字符串
         string temp = $"jsapi_ticket={jsapi_ticket}&noncestr={nonceStr}&timestamp={timestamp}&url={url}";
         // 由SHA1工具方法生成本地签名
