@@ -1,4 +1,8 @@
-﻿namespace ZStack.QingTui;
+﻿using System.Security.Cryptography;
+using System.Text;
+using ZStack.QingTui.Response;
+
+namespace ZStack.QingTui;
 
 /// <summary>
 /// 轻推API客户端
@@ -66,6 +70,58 @@ public partial class QingTuiApiClient
     }
 
     /// <summary>
+    /// 获取jsapi_ticket
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<JsApiTicketResp> GetJsApiTicketAsync(CancellationToken cancellationToken = default)
+    {
+        var res = await RestClient.Request("/js/ticket/get")
+            .GetJsonAsync<JsApiTicketResp>(cancellationToken: cancellationToken);
+        if (res.ErrorCode != null)
+        {
+            _logger?.LogError("获取JsApiTicket失败, appId={AppId}, errCode={ErrorCode}, errMsg={ErrMsg}", AppId, res.ErrorCode, res.ErrMsg);
+            return res;
+        }
+        if (string.IsNullOrEmpty(res.Ticket))
+        {
+            _logger?.LogError("获取JsApiTicket失败, appId={AppId}, ticket响应为空", AppId);
+            return res;
+        }
+        _logger?.LogInformation("获取JsApiTicket成功, ticket={Ticket}", res.Ticket);
+        return res;
+    }
+
+    /// <summary>
+    /// 生成JS-SDK签名信息
+    /// </summary>
+    /// <param name="originUrl"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<JsSignatureResult> GetJsSignatureAsync(string originUrl, CancellationToken cancellationToken = default)
+    {
+        // 时间戳服务器端本地生成
+        long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        // 随机字符串，可以自行随机生成
+        string nonceStr = Guid.NewGuid().ToString();
+        // 保留#号以前的内容
+        string url = originUrl.Split('#')[0];
+        // 调用轻推JS-SDK接口的临时票据
+        string jsapi_ticket = (await GetJsApiTicketAsync(cancellationToken)).Ticket;
+        // 拼接字符串
+        string temp = $"jsapi_ticket={jsapi_ticket}&noncestr={nonceStr}&timestamp={timestamp}&url={url}";
+        // 由SHA1工具方法生成本地签名
+        string signature = GetSha1(temp);
+        return new JsSignatureResult
+        {
+            AppId = AppId,
+            Timestamp = timestamp,
+            NonceStr = nonceStr,
+            Signature = signature
+        };
+    }
+
+    /// <summary>
     /// 请求前处理
     /// </summary>
     /// <param name="call"></param>
@@ -81,5 +137,11 @@ public partial class QingTuiApiClient
             token = _tokenPersister.GetToken(AppId);
         }
         call.Request.Url.SetQueryParam("access_token", token);
+    }
+
+    private static string GetSha1(string input)
+    {
+        byte[] hashBytes = SHA1.HashData(Encoding.UTF8.GetBytes(input));
+        return Convert.ToHexStringLower(hashBytes);
     }
 }
