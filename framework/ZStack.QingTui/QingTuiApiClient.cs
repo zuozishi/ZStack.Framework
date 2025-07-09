@@ -78,10 +78,7 @@ public partial class QingTuiApiClient
     {
         string? cachedTicket = _tokenPersister.GetJsTicket(AppId);
         if (!string.IsNullOrEmpty(cachedTicket))
-        {
-            _logger?.LogInformation("获取JsApiTicket成功, ticket={Ticket} (缓存)", cachedTicket);
             return cachedTicket;
-        }
         var res = await RestClient.Request("/js/ticket/get")
             .GetJsonAsync<JsApiTicketResp>(cancellationToken: cancellationToken);
         if (res.ErrorCode != null)
