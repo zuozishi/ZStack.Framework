@@ -30,10 +30,11 @@ public class DefaultSqlSugarInitializer : ISqlSugarInitializer
     public virtual void DbConfig_EntityNameService(DbConnectionConfig config, Type type, EntityInfo entity)
     {
         entity.IsDisabledDelete = true; // 禁止删除非 sqlsugar 创建的列
+        var sugarTableAttr = type.GetCustomAttribute<SugarTable>();
         // 只处理贴了特性[SugarTable]表
-        if (!type.GetCustomAttributes<SugarTable>().Any())
+        if (sugarTableAttr is null)
             return;
-        if (config.DbSettings.EnableUnderLine && !entity.DbTableName.Contains('_'))
+        if (config.DbSettings.EnableUnderLine && string.IsNullOrEmpty(sugarTableAttr.TableName))
         {
             // 如果所有字符都是大写，则转小写
             if (entity.DbTableName.All(char.IsUpper))
@@ -45,12 +46,13 @@ public class DefaultSqlSugarInitializer : ISqlSugarInitializer
 
     public virtual void DbConfig_EntityService(DbConnectionConfig config, PropertyInfo type, EntityColumnInfo column)
     {
+        var sugarColumnAttr = type.GetCustomAttribute<SugarColumn>();
         // 只处理贴了特性[SugarColumn]列
-        if (!type.GetCustomAttributes<SugarColumn>().Any())
+        if (sugarColumnAttr is null)
             return;
         if (new NullabilityInfoContext().Create(type).WriteState is NullabilityState.Nullable)
             column.IsNullable = true;
-        if (config.DbSettings.EnableUnderLine && !column.IsIgnore && !column.DbColumnName.Contains('_'))
+        if (config.DbSettings.EnableUnderLine && !column.IsIgnore && string.IsNullOrEmpty(sugarColumnAttr.ColumnName))
         {
             // 如果所有字符都是大写，则转小写
             if (column.DbColumnName.All(char.IsUpper))
