@@ -17,15 +17,17 @@ public static class AppHostBuilder
     /// </summary>
     /// <param name="args"></param>
     /// <param name="serilogConfiguration"></param>
+    /// <param name="consoleLoggerTemplate"></param>
     /// <returns></returns>
-    public static HostApplicationBuilder CreateHostBuilder(string[]? args = null, Action<LoggerConfiguration>? serilogConfiguration = null)
+    public static HostApplicationBuilder CreateHostBuilder(string[]? args = null, Action<LoggerConfiguration>? serilogConfiguration = null, string? consoleLoggerTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}][{ShortSourceContext}] {Message:lj}{NewLine}{Exception}")
     {
         var builder = Host.CreateApplicationBuilder(args);
         ConfigureConfiguration(builder.Environment, builder.Configuration);
 
-        Log.Logger = SerilogLogger.CreateConsoleAppLogger(configure =>
+        Log.Logger = SerilogLogger.CreateConfigurationLogger(builder.Configuration, configure =>
         {
-            configure.ReadFrom.Configuration(builder.Configuration);
+            if (!string.IsNullOrEmpty(consoleLoggerTemplate))
+                configure.WriteTo.Console(outputTemplate: consoleLoggerTemplate);
             serilogConfiguration?.Invoke(configure);
         });
         builder.Logging.ClearProviders();
