@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Serilog.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Reflection;
-using ZStack.AspNetCore.Attributes;
+using ZStack.Core.Attributes;
 using ZStack.Core.Utils;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 

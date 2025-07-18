@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace ZStack.Core;
@@ -27,6 +28,7 @@ public static class AppHostBuilder
             configure.ReadFrom.Configuration(builder.Configuration);
             serilogConfiguration?.Invoke(configure);
         });
+        builder.Logging.ClearProviders();
         builder.Logging.AddSerilog(Log.Logger);
 
         builder.Services.AddAutoDependencyInjection();

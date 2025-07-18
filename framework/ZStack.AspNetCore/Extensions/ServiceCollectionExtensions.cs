@@ -7,25 +7,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// 注册配置选项
-    /// </summary>
-    /// <typeparam name="TOptions"></typeparam>
-    /// <param name="services"></param>
-    /// <param name="sectionName"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddZStackOptions<TOptions>(this IServiceCollection services, string? sectionName = null) where TOptions : class, new()
-    {
-        var typeName = typeof(TOptions).Name;
-        string _sectionName = sectionName ??
-            typeof(TOptions).GetCustomAttribute<OptionsSectionAttribute>()?.Key ??
-            (typeName.EndsWith("Options", StringComparison.OrdinalIgnoreCase) ? typeName[..^7] : typeName);
-        services.AddOptions<TOptions>()
-            .Bind(InternalApp.Configuration!.GetSection(_sectionName))
-            .ValidateDataAnnotations();
-        return services;
-    }
-
-    /// <summary>
     /// 自动注册服务组件
     /// </summary>
     /// <param name="services"></param>
