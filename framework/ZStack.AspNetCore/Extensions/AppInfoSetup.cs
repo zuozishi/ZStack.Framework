@@ -12,7 +12,7 @@ public static class AppInfoSetup
     /// </summary>
     /// <param name="app"></param>
     /// <returns></returns>
-    public static IApplicationBuilder ShowAppInfo(this IApplicationBuilder app)
+    public static IApplicationBuilder PrintAppEndpoints(this IApplicationBuilder app)
     {
         var serverAddressesFeature = app.ApplicationServices.GetRequiredService<IServer>().Features
             .Get<Hosting.Server.Features.IServerAddressesFeature>();
@@ -45,6 +45,7 @@ public static class AppInfoSetup
                 if (host is "*" or "+" or "0.0.0.0" or "[::]")
                 {
                     // 处理通配符地址
+                    result.Add($"{scheme}://localhost:{port}");
                     result.AddRange(ipAddresses.Select(ip => $"{scheme}://{ip}:{port}"));
                 }
                 else if (IPAddress.TryParse(host, out var ip))

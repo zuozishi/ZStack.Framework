@@ -8,7 +8,7 @@
   <PropertyGroup>
 		<IsPackable>true</IsPackable>
     <Authors>Zuozishi</Authors>
-		<Version>9.1.5</Version>
+		<Version>9.1.6</Version>
 		<Company />
     <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>

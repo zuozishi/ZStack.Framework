@@ -6,7 +6,7 @@ namespace Microsoft.AspNetCore.Builder;
 public static class ApplicationBuilderExtension
 {
     /// <summary>
-    /// 中间件注入（带Swagger）
+    /// 中间件注入
     /// </summary>
     /// <param name="app"></param>
     /// <param name="autoLoadComponents">自动扫描注册组件</param>
@@ -23,7 +23,7 @@ public static class ApplicationBuilderExtension
         app.UseComponents(autoLoadComponents, components, ignoreComponents);
 
         if (InternalApp.HostEnvironment?.IsDevelopment() ?? false)
-            app.ShowAppInfo();
+            app.PrintAppEndpoints();
 
         return app;
     }
@@ -54,11 +54,18 @@ public static class ApplicationBuilderExtension
                     if (ignoreComponents != null && ignoreComponents.Contains(type)) return;
                     componentList.Add(type);
                 });
-        componentList.ForEach((type, _) =>
-        {
-            App.Logger.LogInformation("注册中间件组件: {Component}", type);
-            app.UseComponent(type);
-        });
+        componentList
+            .OrderBy(t =>
+            {
+                // 获取组件顺序
+                var orderAttribute = t.GetCustomAttribute<ComponentOrderAttribute>();
+                return orderAttribute?.Order ?? 0;
+            })
+            .ForEach((type, _) =>
+            {
+                App.Logger.LogInformation("注册中间件组件: {Component}", type);
+                app.UseComponent(type);
+            });
         return app;
     }
 

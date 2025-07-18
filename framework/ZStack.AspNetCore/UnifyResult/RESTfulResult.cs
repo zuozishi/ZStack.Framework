@@ -11,6 +11,7 @@ public class RESTfulResult<T>
 {
     [Required]
     [Description("状态码")]
+    [DefaultValue(200)]
     public int Code { get; set; }
 
     [Required]
@@ -22,6 +23,7 @@ public class RESTfulResult<T>
 
     [Required]
     [Description("错误信息")]
+    [DefaultValue("success")]
     public string Message { get; set; } = string.Empty;
 
     [Description("附加数据")]
@@ -29,5 +31,6 @@ public class RESTfulResult<T>
 
     [Required]
     [Description("跟踪Id")]
+    [DefaultValue("<跟踪Id>")]
     public string TraceId { get; set; } = string.Empty;
 }
