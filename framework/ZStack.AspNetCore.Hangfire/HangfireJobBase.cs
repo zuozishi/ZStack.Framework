@@ -3,20 +3,31 @@ using Hangfire.Console.Extensions;
 using Hangfire.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ZStack.Core.Exceptions;
 
 namespace ZStack.AspNetCore.Hangfire;
 
-public abstract class HangfireJobBase<T>(IServiceProvider serviceProvider) : IHangfireJob
+public abstract class HangfireJobBase<T> : IHangfireJob
 {
-    public readonly IServiceProvider ServiceProvider = serviceProvider;
+    public readonly IServiceProvider ServiceProvider;
 
-    public readonly ILogger<T> Logger = serviceProvider.GetRequiredService<ILogger<T>>();
+    public readonly ILogger<T> Logger;
 
-    public readonly IProgressBarFactory ProgressBarFactory = serviceProvider.GetRequiredService<IProgressBarFactory>();
+    public readonly IProgressBarFactory ProgressBarFactory;
 
-    public readonly IJobManager JobManager = serviceProvider.GetRequiredService<IJobManager>();
+    public readonly IJobManager JobManager;
 
-    public readonly PerformingContext? PerformingContext = serviceProvider.GetService<PerformingContext>();
+    public readonly PerformingContext? PerformingContext;
+
+    public HangfireJobBase()
+    {
+        ServiceProvider = App.ServiceProvider
+            ?? throw Oops.Oh("无法获取应用程序服务提供者(ServiceProvider)，请确保应用已正确初始化。");
+        Logger = ServiceProvider.GetRequiredService<ILogger<T>>();
+        ProgressBarFactory = ServiceProvider.GetRequiredService<IProgressBarFactory>();
+        JobManager = ServiceProvider.GetRequiredService<IJobManager>();
+        PerformingContext = ServiceProvider.GetService<PerformingContext>();
+    }
 
     public abstract string JobId { get; }
 

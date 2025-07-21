@@ -1,13 +1,8 @@
 ﻿namespace ZStack.Core;
 
-public class RefAsync<T>
+public class RefAsync<T>(T value)
 {
-    public T Value { get; set; }
-
-    public RefAsync(T value)
-    {
-        Value = value;
-    }
+    public T Value { get; set; } = value;
 
     public override string ToString()
     {
