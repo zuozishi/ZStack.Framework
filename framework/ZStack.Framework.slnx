@@ -2,10 +2,10 @@
   <Folder Name="/Hangfire/">
     <Project Path="ZStack.AspNetCore.Hangfire.MemoryStorage/ZStack.AspNetCore.Hangfire.MemoryStorage.csproj" />
     <Project Path="ZStack.AspNetCore.Hangfire.PostgreSql/ZStack.AspNetCore.Hangfire.PostgreSql.csproj" />
-    <Project Path="ZStack.AspNetCore.Hangfire.Redis/ZStack.AspNetCore.Hangfire.Redis.csproj" />
     <Project Path="ZStack.AspNetCore.Hangfire/ZStack.AspNetCore.Hangfire.csproj" />
   </Folder>
   <Folder Name="/QingTui/">
+    <Project Path="ZStack.AspNetCore.Hangfire.Redis/ZStack.AspNetCore.Hangfire.Redis.csproj" />
     <Project Path="ZStack.AspNetCore.QingTui/ZStack.AspNetCore.QingTui.csproj" />
     <Project Path="ZStack.QingTui/ZStack.QingTui.csproj" />
   </Folder>
