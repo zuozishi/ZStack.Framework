@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -8,7 +8,7 @@
   <PropertyGroup>
 		<IsPackable>true</IsPackable>
     <Authors>Zuozishi</Authors>
-		<Version>9.1.10</Version>
+		<Version>10.0.0</Version>
 		<Company />
     <RepositoryUrl>https://github.com/zuozishi/ZStack.Framework</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
