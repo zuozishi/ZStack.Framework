@@ -1,0 +1,28 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "Microsoft.EntityFrameworkCore": "Error",
+        "Microsoft.EntityFrameworkCore.Model.Validation": "Error",
+        "Microsoft.Hosting.Lifetime": "Information",
+        "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}][{ShortSourceContext}] {Message:l}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "Hangfire",
+        "Args": {
+          "restrictedToMinimumLevel": "Information"
+        }
+      }
+    ]
+  }
+}

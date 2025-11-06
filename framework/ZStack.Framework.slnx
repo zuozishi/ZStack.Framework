@@ -10,12 +10,13 @@
     <Project Path="ZStack.QingTui/ZStack.QingTui.csproj" />
   </Folder>
   <Folder Name="/Test/">
-    <Project Path="../test/ZStackWebApplication/ZStackWebApplication.csproj" />
+    <Project Path="../test/WebApplication/WebApplication.csproj" Id="e27dc6da-f662-4963-be53-d2add4db000b" />
   </Folder>
   <Folder Name="/解决方案项/">
     <File Path="../.gitignore" />
     <File Path="../README.md" />
     <File Path="Directory.Build.props" />
+    <File Path="publish.ps1" />
   </Folder>
   <Project Path="ZStack.AspNetCore.EventBus/ZStack.AspNetCore.EventBus.csproj" />
   <Project Path="ZStack.AspNetCore.OpenTelemetry/ZStack.AspNetCore.OpenTelemetry.csproj" />

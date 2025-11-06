@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.207" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+  </ItemGroup>
+	
+</Project>
