@@ -50,7 +50,7 @@ internal static class InternalApp
     /// <summary>
     /// 程序集类型
     /// </summary>
-    internal static IEnumerable<Type> EffectiveTypes { get; private set; } = Assemblies.SelectMany(asm => asm.GetTypes());
+    internal static IEnumerable<Type> EffectiveTypes { get; private set; } = Reflection.GetAssembliesTypes();
 
     /// <summary>
     /// 组件列表

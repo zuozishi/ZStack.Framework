@@ -22,7 +22,18 @@ public static class Reflection
     /// </summary>
     /// <returns></returns>
     public static Type[] GetExportedTypes()
-        => GetAssemblies().SelectMany(x => x.GetExportedTypes()).ToArray();
+    {
+        return [.. GetAssemblies().SelectMany(asm => {
+            try
+            {
+                return asm.GetExportedTypes();
+            }
+            catch
+            {
+                return [];
+            }
+        })];
+    }
 
     /// <summary>
     /// 加载 ZStack 程序集
@@ -56,5 +67,23 @@ public static class Reflection
                 continue;
             AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName);
         }
+    }
+
+    /// <summary>
+    /// 获取所有程序集的类型
+    /// </summary>
+    /// <returns></returns>
+    public static Type[] GetAssembliesTypes()
+    {
+        return [.. GetAssemblies().SelectMany(asm => {
+            try
+            {
+                return asm.GetTypes();
+            }
+            catch
+            {
+                return [];
+            }
+        })];
     }
 }
