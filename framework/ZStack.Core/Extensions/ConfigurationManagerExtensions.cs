@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.Extensions.Configuration;
 
-public static class ConfigurationManagerEensions
+public static class ConfigurationManagerExtensions
 {
     public static IConfigurationManager AddDirectory(this IConfigurationManager configuration, string configurationDirectory, IHostEnvironment environment)
     {
