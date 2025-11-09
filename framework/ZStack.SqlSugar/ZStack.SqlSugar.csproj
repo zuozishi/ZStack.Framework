@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>ZStack.SqlSugar</PackageId>
+		<Description>ZStack框架 SqlSugar插件</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.207" />
+		<PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ZStack.Core\ZStack.Core.csproj" />
+	</ItemGroup>
+
+</Project>

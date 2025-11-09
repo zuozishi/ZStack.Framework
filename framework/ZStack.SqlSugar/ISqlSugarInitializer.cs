@@ -1,4 +1,6 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿using ZStack.SqlSugar.Options;
+
+namespace ZStack.SqlSugar;
 
 public interface ISqlSugarInitializer
 {

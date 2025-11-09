@@ -1,35 +1,29 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿using ZStack.AspNetCore;
+using ZStack.AspNetCore.SqlSugar;
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class SqlSugarSetup
 {
     /// <summary>
-    /// SqlSugar 上下文初始化
+    /// 添加SqlSugar及分布式Id生成器
     /// </summary>
     /// <param name="services"></param>
-    public static void AddZStackSqlSugar(this IServiceCollection services)
-        => AddZStackSqlSugar<DefaultSqlSugarInitializer>(services);
+    /// <returns></returns>
+    public static IServiceCollection AddZStackSqlSugarWithSnowIdGenerator(this IServiceCollection services)
+    {
+        services.AddZStackSqlSugar(App.Configuration!);
+        services.AddSnowIdGenerator();
+        return services;
+    }
 
     /// <summary>
-    /// SqlSugar 上下文初始化
+    /// 添加分布式Id生成器
     /// </summary>
     /// <param name="services"></param>
-    public static void AddZStackSqlSugar<TInitializer>(this IServiceCollection services)
-        where TInitializer : class, ISqlSugarInitializer
+    /// <returns></returns>
+    public static IServiceCollection AddSnowIdGenerator(this IServiceCollection services)
     {
-        services.AddZStackOptions<SnowIdOptions>();
-        services.AddZStackOptions<DbConnectionOptions>();
-        services.AddHostedService<IdGeneratorWorker>();
-
-        // 注册雪花Id
-        YitIdHelper.SetIdGenerator(App.GetOptions<SnowIdOptions>());
-
-        // 自定义 SqlSugar 雪花ID算法
-        SnowFlakeSingle.WorkId = App.GetOptions<SnowIdOptions>().WorkerId;
-        StaticConfig.CustomSnowFlakeFunc = YitIdHelper.NextId;
-
-        services.AddSingleton<ISqlSugarInitializer, TInitializer>();
-        services.AddSingleton<ISqlSugarService, SqlSugarService>();
-        services.AddSingleton<ISqlSugarClient>(sp => sp.GetRequiredService<ISqlSugarService>().Get());
-        services.AddSingleton(typeof(DbRepository<>));
+        return services.AddHostedService<IdGeneratorWorker>();
     }
 }

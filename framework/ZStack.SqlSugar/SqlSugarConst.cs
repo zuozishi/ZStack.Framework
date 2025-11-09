@@ -1,4 +1,4 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿namespace ZStack.SqlSugar;
 
 public static class SqlSugarConst
 {

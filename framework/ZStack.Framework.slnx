@@ -24,4 +24,5 @@
   <Project Path="ZStack.AspNetCore/ZStack.AspNetCore.csproj" />
   <Project Path="ZStack.Core/ZStack.Core.csproj" />
   <Project Path="ZStack.Extensions/ZStack.Extensions.csproj" />
+  <Project Path="ZStack.SqlSugar/ZStack.SqlSugar.csproj" Id="b2a4be28-ba28-458b-8874-bb2215b25e87" />
 </Solution>

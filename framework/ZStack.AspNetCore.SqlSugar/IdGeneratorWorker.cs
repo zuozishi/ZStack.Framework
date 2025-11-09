@@ -1,9 +1,12 @@
 ﻿using Mapster;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NewLife.Caching;
+using Yitter.IdGenerator;
 using ZStack.AspNetCore.Options;
 using ZStack.Core.Exceptions;
+using ZStack.SqlSugar.Options;
 
 namespace ZStack.AspNetCore.SqlSugar;
 

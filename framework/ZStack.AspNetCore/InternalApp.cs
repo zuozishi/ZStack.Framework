@@ -173,21 +173,7 @@ internal static class InternalApp
         }
         if (Configuration != null)
         {
-            string sectionName = typeof(T).Name;
-            if (typeof(T).GetCustomAttribute<OptionsSectionAttribute>() != null)
-                sectionName = typeof(T).GetCustomAttribute<OptionsSectionAttribute>()!.Key;
-            else if (typeof(T).Name.EndsWith("Options", StringComparison.OrdinalIgnoreCase))
-                sectionName = typeof(T).Name[..^7];
-            var options = new T();
-            if (sectionName == null)
-                Configuration.Bind(options);
-            else
-                Configuration.Bind(sectionName, options);
-            if (options is IConfigureOptions<T> configureOptions)
-                configureOptions.Configure(options);
-            else if (options is IPostConfigureOptions<T> postConfigureOptions)
-                postConfigureOptions.PostConfigure(sectionName, options);
-            return options;
+            return Configuration.GetOtions<T>();
         }
         return new T();
     }

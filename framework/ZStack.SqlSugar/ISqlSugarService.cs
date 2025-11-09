@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using ZStack.SqlSugar.Options;
 
-namespace ZStack.AspNetCore.SqlSugar;
+namespace ZStack.SqlSugar;
 
 public interface ISqlSugarService
 {

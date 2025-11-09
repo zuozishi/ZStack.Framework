@@ -1,4 +1,4 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿namespace ZStack.SqlSugar;
 
 /// <summary>
 /// 实体种子数据接口

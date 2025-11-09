@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+    <ProjectReference Include="..\ZStack.SqlSugar\ZStack.SqlSugar.csproj" />
   </ItemGroup>
 
 </Project>

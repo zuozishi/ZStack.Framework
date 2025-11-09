@@ -1,4 +1,4 @@
-﻿namespace ZStack.AspNetCore.SqlSugar.Options;
+﻿namespace ZStack.SqlSugar.Options;
 
 /// <summary>
 /// 雪花Id配置选项

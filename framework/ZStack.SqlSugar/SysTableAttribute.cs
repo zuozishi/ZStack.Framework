@@ -1,4 +1,4 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿namespace ZStack.SqlSugar;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class SysTableAttribute : Attribute

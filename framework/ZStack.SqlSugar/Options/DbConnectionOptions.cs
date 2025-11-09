@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace ZStack.AspNetCore.SqlSugar.Options;
+namespace ZStack.SqlSugar.Options;
 
 /// <summary>
 /// 数据库配置选项

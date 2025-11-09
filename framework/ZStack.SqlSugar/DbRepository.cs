@@ -1,4 +1,4 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿namespace ZStack.SqlSugar;
 
 /// <summary>
 /// SqlSugar 实体仓储
@@ -6,10 +6,8 @@
 /// <typeparam name="T"></typeparam>
 public class DbRepository<T> : SimpleClient<T> where T : class, new()
 {
-    public DbRepository()
+    public DbRepository(ISqlSugarService sqlSugarService)
     {
-        var sqlSugarService = App.GetRequiredService<ISqlSugarService>();
-
         Context = sqlSugarService.Get();
 
         // 若实体贴有系统表特性，则返回默认库连接

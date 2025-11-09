@@ -1,6 +1,6 @@
 ﻿using NewLife.Caching;
 
-namespace ZStack.AspNetCore.SqlSugar;
+namespace ZStack.SqlSugar;
 
 /// <summary>
 /// SqlSugar二级缓存 NewLife.Caching 实现

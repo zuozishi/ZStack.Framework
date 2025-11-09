@@ -1,13 +1,19 @@
-﻿namespace ZStack.AspNetCore.SqlSugar;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using ZStack.Core.Utils;
+using ZStack.SqlSugar.Options;
+
+namespace ZStack.SqlSugar;
 
 public class DefaultSqlSugarInitializer : ISqlSugarInitializer
 {
-    public DbConnectionOptions Options { get; } = App.GetOptions<DbConnectionOptions>();
+    public DbConnectionOptions Options { get; }
     public ILogger Logger { get; set; }
 
-    public DefaultSqlSugarInitializer()
+    public DefaultSqlSugarInitializer(IServiceProvider sp)
     {
-        Logger = App.GetRequiredService<ILoggerFactory>().CreateLogger(GetType().Name);
+        Options = sp.GetRequiredService<IOptions<DbConnectionOptions>>().Value;
+        Logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger(GetType().Name);
     }
 
     public virtual void SetDbConfig(DbConnectionConfig config)
@@ -64,6 +70,8 @@ public class DefaultSqlSugarInitializer : ISqlSugarInitializer
 
     public virtual void InitDatabase(DbConnectionConfig config, SqlSugarScope db)
     {
+        var exportedTypes = Reflection.GetExportedTypes();
+
         // 初始化/创建数据库
         if (config.DbSettings.EnableInitDb)
         {
@@ -74,7 +82,8 @@ public class DefaultSqlSugarInitializer : ISqlSugarInitializer
         // 初始化表结构
         if (config.TableSettings.EnableInitTable)
         {
-            var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))
+
+            var entityTypes = exportedTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))
                 .WhereIF(config.TableSettings.EnableIncreTable, u => u.IsDefined(typeof(IncreTableAttribute), false)).ToList();
 
             if (config.ConfigId?.ToString() == SqlSugarConst.MainConfigId) // 默认库（有系统表特性、没有日志表和租户表特性）
@@ -94,7 +103,7 @@ public class DefaultSqlSugarInitializer : ISqlSugarInitializer
         // 初始化种子数据
         if (config.SeedSettings.EnableInitSeed)
         {
-            var seedDataTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarEntitySeedData<>))))
+            var seedDataTypes = exportedTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarEntitySeedData<>))))
                 .WhereIF(config.SeedSettings.EnableIncreSeed, u => u.IsDefined(typeof(IncreSeedAttribute), false)).ToList();
             foreach (var seedType in seedDataTypes)
             {

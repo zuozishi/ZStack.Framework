@@ -1,7 +1,7 @@
 ﻿using Mapster;
 using System.Linq.Expressions;
 
-namespace ZStack.AspNetCore.SqlSugar;
+namespace ZStack.SqlSugar;
 
 /// <summary>
 /// 分页泛型集合

@@ -1,20 +1,23 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
 using ZStack.Core.Exceptions;
+using ZStack.SqlSugar.Options;
 
-namespace ZStack.AspNetCore.SqlSugar;
+namespace ZStack.SqlSugar;
 
 public class SqlSugarService : ISqlSugarService
 {
-    public DbConnectionOptions Options { get; } = App.GetOptions<DbConnectionOptions>();
+    public DbConnectionOptions Options { get; }
 
     private readonly ILogger _logger;
     private readonly ISqlSugarInitializer _initializer;
     private readonly ConcurrentDictionary<string, SqlSugarScope> _scopes = [];
 
-    public SqlSugarService(ILogger<SqlSugarService> logger, ISqlSugarInitializer initializer)
+    public SqlSugarService(ILogger<SqlSugarService> logger, ISqlSugarInitializer initializer, IOptions<DbConnectionOptions> options)
     {
         _logger = logger;
         _initializer = initializer;
+        Options = options.Value;
         if (Options.ConnectionConfigs.GroupBy(x => x.ConfigId).Any(x => x.Count() > 1))
             throw Oops.Bah("存在重复的数据库配置项, 请检查 ConfigId 是否重复");
     }

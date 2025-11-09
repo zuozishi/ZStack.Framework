@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using System.Diagnostics;
 
-namespace ZStack.AspNetCore.SqlSugar;
+namespace ZStack.SqlSugar;
 
 internal static class SqlSugarActivitySource
 {

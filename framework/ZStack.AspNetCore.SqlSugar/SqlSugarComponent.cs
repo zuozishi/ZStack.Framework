@@ -8,6 +8,6 @@ public class SqlSugarComponent : IServiceComponent
 {
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
-        services.AddZStackSqlSugar();
+        services.AddZStackSqlSugarWithSnowIdGenerator();
     }
 }
