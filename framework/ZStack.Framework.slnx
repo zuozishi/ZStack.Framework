@@ -2,12 +2,16 @@
   <Folder Name="/Hangfire/">
     <Project Path="ZStack.AspNetCore.Hangfire.MemoryStorage/ZStack.AspNetCore.Hangfire.MemoryStorage.csproj" />
     <Project Path="ZStack.AspNetCore.Hangfire.PostgreSql/ZStack.AspNetCore.Hangfire.PostgreSql.csproj" />
+    <Project Path="ZStack.AspNetCore.Hangfire.Redis/ZStack.AspNetCore.Hangfire.Redis.csproj" />
     <Project Path="ZStack.AspNetCore.Hangfire/ZStack.AspNetCore.Hangfire.csproj" />
   </Folder>
   <Folder Name="/QingTui/">
-    <Project Path="ZStack.AspNetCore.Hangfire.Redis/ZStack.AspNetCore.Hangfire.Redis.csproj" />
     <Project Path="ZStack.AspNetCore.QingTui/ZStack.AspNetCore.QingTui.csproj" />
     <Project Path="ZStack.QingTui/ZStack.QingTui.csproj" />
+  </Folder>
+  <Folder Name="/SqlSugar/">
+    <Project Path="ZStack.AspNetCore.SqlSugar/ZStack.AspNetCore.SqlSugar.csproj" />
+    <Project Path="ZStack.SqlSugar/ZStack.SqlSugar.csproj" Id="b2a4be28-ba28-458b-8874-bb2215b25e87" />
   </Folder>
   <Folder Name="/Test/">
     <Project Path="../test/WebApplication/WebApplication.csproj" Id="e27dc6da-f662-4963-be53-d2add4db000b" />
@@ -20,9 +24,7 @@
   </Folder>
   <Project Path="ZStack.AspNetCore.EventBus/ZStack.AspNetCore.EventBus.csproj" />
   <Project Path="ZStack.AspNetCore.OpenTelemetry/ZStack.AspNetCore.OpenTelemetry.csproj" />
-  <Project Path="ZStack.AspNetCore.SqlSugar/ZStack.AspNetCore.SqlSugar.csproj" />
   <Project Path="ZStack.AspNetCore/ZStack.AspNetCore.csproj" />
   <Project Path="ZStack.Core/ZStack.Core.csproj" />
   <Project Path="ZStack.Extensions/ZStack.Extensions.csproj" />
-  <Project Path="ZStack.SqlSugar/ZStack.SqlSugar.csproj" Id="b2a4be28-ba28-458b-8874-bb2215b25e87" />
 </Solution>
