@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.207" />
+    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.210" />
   </ItemGroup>
 
   <ItemGroup>
