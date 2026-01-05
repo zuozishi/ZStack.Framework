@@ -542,4 +542,50 @@ public partial class QingTuiApiClient
     }
 
     #endregion
+
+    #region 富文本消息
+
+    /// <summary>
+    /// 群发富文本消息
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<string> SendRichMessageAsync(object message, CancellationToken cancellationToken = default)
+    {
+        var resp = await RestClient.Request("/v1/message/service/send")
+        .PostJsonAsync(new
+        {
+            msgtype = "richmsg",
+            richMsg = message
+        }, cancellationToken: cancellationToken);
+        var res = await resp.GetJsonAsync<SendRichMessageResp>();
+        if (res.ErrorCode != null && res.ErrorCode != 0)
+            throw Oops.Throw(res.ErrorCode.Value, res.ErrMsg ?? "无响应");
+        return res.MessageId ?? throw Oops.Bah("无响应");
+    }
+
+    /// <summary>
+    /// 给部分人发送富文本消息
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="openIds"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<string> SendRichMessageAsync(object message, IEnumerable<string> openIds, CancellationToken cancellationToken = default)
+    {
+        var resp = await RestClient.Request("/v1/message/mass/send")
+        .PostJsonAsync(new
+        {
+            touser = openIds,
+            msgtype = "richmsg",
+            richMsg = message
+        }, cancellationToken: cancellationToken);
+        var res = await resp.GetJsonAsync<SendRichMessageResp>();
+        if (res.ErrorCode != null && res.ErrorCode != 0)
+            throw Oops.Throw(res.ErrorCode.Value, res.ErrMsg ?? "无响应");
+        return res.MessageId ?? throw Oops.Bah("无响应");
+    }
+
+    #endregion
 }

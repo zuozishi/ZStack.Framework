@@ -1,4 +1,4 @@
-var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args).Inject();
+﻿var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args).Inject();
 
 builder.Services.AddRazorPages();
 

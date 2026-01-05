@@ -24,6 +24,7 @@ public class OpenApiComponent : IServiceComponent, IApplicationComponent
         {
             services.AddOpenApi(group.Key, c =>
             {
+                c.ShouldInclude = context => (context.GroupName ?? "default") == group.Key;
                 c.AddDocumentTransformer((document, context, cancellationToken)
                     =>
                 {

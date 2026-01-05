@@ -7,10 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.210" />
+    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.211" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\framework\ZStack.AspNetCore.QingTui\ZStack.AspNetCore.QingTui.csproj" />
     <ProjectReference Include="..\..\framework\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
   </ItemGroup>
 	
