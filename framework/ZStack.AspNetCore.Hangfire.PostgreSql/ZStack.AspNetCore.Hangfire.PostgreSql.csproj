@@ -5,11 +5,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hangfire.PostgreSql" Version="1.20.13" />
+		<PackageReference Include="Hangfire.PostgreSql" Version="1.21.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ZStack.AspNetCore.Hangfire\ZStack.AspNetCore.Hangfire.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.201" />
 	</ItemGroup>
 
 </Project>

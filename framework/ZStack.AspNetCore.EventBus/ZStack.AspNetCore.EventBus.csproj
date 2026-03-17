@@ -5,13 +5,17 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyNetQ" Version="7.8.0" />
+    <PackageReference Include="EasyNetQ" Version="8.1.2" />
     <PackageReference Include="EasyNetQ.DI.Microsoft" Version="7.8.0" />
     <PackageReference Include="EasyNetQ.Management.Client" Version="3.0.1" />
   </ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.201" />
 	</ItemGroup>
 
 </Project>

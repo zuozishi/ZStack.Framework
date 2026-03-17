@@ -5,13 +5,17 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.211" />
+    <PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.213" />
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
     <ProjectReference Include="..\ZStack.SqlSugar\ZStack.SqlSugar.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.201" />
   </ItemGroup>
 
 </Project>
