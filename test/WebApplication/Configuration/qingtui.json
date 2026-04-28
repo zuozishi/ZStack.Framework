@@ -1,0 +1,16 @@
+﻿{
+  "QingTuiClient": {
+    "Clients": [
+      {
+        "DisplayName": "健康检查",
+        "AppId": "2800230483",
+        "Secret": "6fdb6d648ab84b199e5dd7992fb4ee1d"
+      },
+      {
+        "DisplayName": "数字天工",
+        "AppId": "9780384959",
+        "Secret": "dbbe160ad3a64277a36256d2ed500e21"
+      }
+    ]
+  }
+}
