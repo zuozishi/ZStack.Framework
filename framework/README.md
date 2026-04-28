@@ -2,105 +2,91 @@
 
 .NET基础库： ![Nuget](https://img.shields.io/nuget/v/ZStack.Core?label=ZStack.Core) ![Nuget](https://img.shields.io/nuget/v/ZStack.Extensions?label=ZStack.Extensions)
 
-ASP .NET Core基础库： ![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore?label=ZStack.AspNetCore)
+ASP.NET Core基础库： ![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore?label=ZStack.AspNetCore)
 
-ASP .NET Core组件库：![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore.SqlSugar?label=ZStack.AspNetCore.SqlSugar) ![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore.EventBus?label=ZStack.AspNetCore.EventBus) ![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore.Hangfire?label=ZStack.AspNetCore.Hangfire)
+ASP.NET Core组件库：![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore.SqlSugar?label=ZStack.AspNetCore.SqlSugar) ![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore.EventBus?label=ZStack.AspNetCore.EventBus) ![Nuget](https://img.shields.io/nuget/v/ZStack.AspNetCore.Hangfire?label=ZStack.AspNetCore.Hangfire)
 
-## 1. 开始使用
+## 项目结构
 
-### 1.1 使用脚手架创建项目
+```mermaid
+graph TD;
+    ZStack.Extensions --> ZStack.Core;
+    ZStack.Core --> ZStack.AspNetCore;
+    ZStack.AspNetCore --> ZStack.AspNetCore.OpenTelemetry;
+    ZStack.AspNetCore --> ZStack.AspNetCore.EventBus;
+    ZStack.AspNetCore --> ZStack.AspNetCore.Hangfire;
+    ZStack.AspNetCore.Hangfire --> ZStack.AspNetCore.Hangfire.MemoryStorage;
+    ZStack.AspNetCore.Hangfire --> ZStack.AspNetCore.Hangfire.Redis;
+    ZStack.AspNetCore.Hangfire --> ZStack.AspNetCore.Hangfire.PostgreSql;
+    ZStack.AspNetCore --> ZStack.AspNetCore.SqlSugar;
+    ZStack.AspNetCore.SqlSugar --> ZStack.SqlSugar;
+    ZStack.AspNetCore --> ZStack.AspNetCore.QingTui;
+    ZStack.AspNetCore.QingTui --> ZStack.QingTui;
+```
 
+| 项目 | 说明 |
+| ---- | ---- |
+| [ZStack.Extensions](./ZStack.Extensions/) | 扩展方法库：字符串、日期、集合、对象等扩展 |
+| [ZStack.Core](./ZStack.Core/) | 核心库：DI、日志(Serilog)、配置、异常、性能追踪 |
+| [ZStack.AspNetCore](./ZStack.AspNetCore/) | ASP.NET Core基础库：组件系统、规范化结果、OpenAPI |
+| [ZStack.AspNetCore.EventBus](./ZStack.AspNetCore.EventBus/) | 事件总线：基于EasyNetQ的消息发布与订阅 |
+| [ZStack.AspNetCore.Hangfire](./ZStack.AspNetCore.Hangfire/) | 任务调度：基于Hangfire的定时任务框架 |
+| [ZStack.AspNetCore.SqlSugar](./ZStack.AspNetCore.SqlSugar/) | SqlSugar组件：自动注册与分布式ID生成 |
+| [ZStack.SqlSugar](./ZStack.SqlSugar/) | SqlSugar基础库：多库管理、仓储、分页 |
+| [ZStack.AspNetCore.QingTui](./ZStack.AspNetCore.QingTui/) | 轻推组件：多应用管理与Token持久化 |
+| [ZStack.QingTui](./ZStack.QingTui/) | 轻推基础库：消息、通讯录、JS-SDK |
+| [ZStack.AspNetCore.OpenTelemetry](./ZStack.AspNetCore.OpenTelemetry/) | 遥测组件：Metrics与Tracing集成 |
 
-### 1.2 手动创建项目
+## 开始使用
 
-#### *控制台程序*
+### 控制台程序
 
-1. 添加NuGet程序包 `ZStack.Extensions`
+1. 添加NuGet包 `ZStack.Extensions`
 
 2. Program.cs
 
-```c#
+```csharp
 global using Microsoft.Extensions.DependencyInjection;
 global using Serilog;
 global using ZStack.Core;
 
-var sp = DependencyInjection.CreateConsoleAppServiceProvider(configure => { });
-
-var logger = sp.GetRequiredService<ILogger>()
-    .ForContext<Program>();
-
+var sp = AppHostBuilder.CreateHostBuilder(args).Build().Services;
+var logger = sp.GetRequiredService<ILogger<Program>>();
 logger.Information("Hello, World!");
 ```
 
-#### *ASP .NET Core*
+### ASP.NET Core
 
-1. 添加NuGet程序包 `ZStack.AspNetCore`
+1. 添加NuGet包 `ZStack.AspNetCore`
 
-2. GlobalUsings.cs
+2. Program.cs
 
-```c#
-global using Furion;
-global using ZStack.AspNetCore;
-global using App = ZStack.AspNetCore.App;
-```
-
-3. Program.cs
-
-```c#
-var builder = WebApplication.CreateBuilder(args).InjectZStack();
-
+```csharp
+var builder = WebApplication.CreateBuilder(args).Inject();
 var app = builder.Build();
-
+app.UseZStackInject();
 app.Run();
 ```
 
-4. Startup.cs
+3. Startup.cs
 
-```c#
-/// <summary>
-/// 应用启动配置
-/// </summary>
+```csharp
+[AppStartup(Order = 1)]
 public class Startup : AppStartup
 {
-    /// <summary>
-    /// 服务配置
-    /// </summary>
-    /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllersWithViews().AddInject();
+        services.AddControllersWithViews();
     }
 
-    /// <summary>
-    /// 中间件配置
-    /// </summary>
-    /// <param name="app"></param>
-    /// <param name="env"></param>
     public void Configure(IApplicationBuilder app, IHostEnvironment env)
     {
-        ...
         app.UseRouting();
-        ...
-
-        app.UseZStackInject();
+        app.UseAuthorization();
     }
 }
 ```
 
-## 2. 项目结构
+### 配置
 
-```mermaid
-graph TD;
-    ZStack.Core --> ZStack.Extensions;
-    ZStack.Extensions --ASP .NET Core--> ZStack.AspNetCore;
-    ZStack.AspNetCore --> ZStack.AspNetCore.SqlSugar;
-    ZStack.AspNetCore --> ZStack.AspNetCore.EventBus;
-    ZStack.AspNetCore --> ZStack.AspNetCore.Hangfire;
-    ZStack.AspNetCore.Hangfire --> ..MemoryStorage;
-    ZStack.AspNetCore.Hangfire --> ..Redis;
-    ZStack.AspNetCore.Hangfire --> ..PostgreSql;
-```
-
-* [ZStack.Core](./framework/ZStack.Core/)：ZStack框架 核心库
-* [ZStack.Extensions](./framework/ZStack.Extensions/)：ZStack框架 拓展方法库
-* [ZStack.AspNetCore](./framework/ZStack.AspNetCore/)：ZStack框架 ASP .NET Core基础库
+在 `Configuration/` 目录下放置 JSON/INI/YAML 配置文件，框架会自动加载。环境特定文件（如 `app.Development.json`）会自动按环境筛选。
