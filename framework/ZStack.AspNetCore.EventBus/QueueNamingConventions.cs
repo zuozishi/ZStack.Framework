@@ -13,18 +13,18 @@ public class QueueNamingConventions : Conventions
         {
             var attr = GetQueueAttribute(type);
 
-            return string.IsNullOrEmpty(attr.ExchangeName)
+            return string.IsNullOrEmpty(attr.Name)
                 ? $"{prefix}:{type.Namespace}.{type.Name}"
-                : attr.ExchangeName;
+                : attr.Name;
         };
 
         QueueTypeConvention = type =>
         {
             var attr = GetQueueAttribute(type);
 
-            return string.IsNullOrEmpty(attr.QueueType)
+            return string.IsNullOrEmpty(attr.Type)
                 ? null
-                : attr.QueueType;
+                : attr.Type;
         };
 
         TopicNamingConvention = _ => "";
@@ -33,7 +33,7 @@ public class QueueNamingConventions : Conventions
         {
             var attr = GetQueueAttribute(type);
 
-            if (string.IsNullOrEmpty(attr.QueueName))
+            if (string.IsNullOrEmpty(attr.Name))
             {
                 var typeName = typeNameSerializer.Serialize(type);
 
@@ -43,8 +43,8 @@ public class QueueNamingConventions : Conventions
             }
 
             return string.IsNullOrEmpty(subscriptionId)
-                ? attr.QueueName
-                : $"{attr.QueueName}_{subscriptionId}";
+                ? attr.Name
+                : $"{attr.Name}_{subscriptionId}";
         };
         RpcRoutingKeyNamingConvention = typeNameSerializer.Serialize;
 

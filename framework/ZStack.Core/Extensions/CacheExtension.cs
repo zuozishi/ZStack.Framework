@@ -25,7 +25,7 @@ public static class CacheExtension
         }
         else if (cache is FullRedis redis)
         {
-            keys = redis.Search(pattern, int.MaxValue);
+            keys = redis.Search(pattern);
             return keys;
         }
         else throw new NotSupportedException($"不支持的缓存类型 {cache.GetType().Name}");
