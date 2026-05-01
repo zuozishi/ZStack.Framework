@@ -20,17 +20,12 @@ public static class EventBusSetup
         var options = App.GetOptions<EventBusOptions>();
         service.AddZStackOptions<EventBusOptions>();
         service.AddSingleton<IConventions, QueueNamingConventions>();
-        service.RegisterEasyNetQ(_ =>
+        service.AddEasyNetQ(_ =>
         {
             configure?.Invoke(options);
             return options;
         });
         service.AddSingleton<MessageDispatcher>();
-        service.AddSingleton(sp => new AutoSubscriber(sp.GetRequiredService<IBus>(), options.Prefix)
-        {
-            AutoSubscriberMessageDispatcher = sp.GetRequiredService<MessageDispatcher>(),
-            GenerateSubscriptionId = c => $"{c.ConcreteType.Name}.{c.MessageType.Name}",
-        });
         service.AddHostedService<AutoSubscriberService>();
         if (!string.IsNullOrEmpty(options.ManagementUrl))
         {
