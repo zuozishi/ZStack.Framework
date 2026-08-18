@@ -4,17 +4,17 @@
 		<Description>ZStack.AspNetCore框架 OpenTelemetry遥测插件</Description>
 	</PropertyGroup>
 	<ItemGroup>
-	  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.16.0" />
-	  <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.16.0" />
-	  <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.16.0" />
-	  <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.16.0" />
-	  <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.15.1" />
+	  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.17.0" />
+	  <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.17.0" />
+	  <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.17.0" />
+	  <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.17.0" />
+	  <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.17.0" />
 	  <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.2.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\ZStack.AspNetCore\ZStack.AspNetCore.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.300" />
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.400" />
 	</ItemGroup>
 </Project>
