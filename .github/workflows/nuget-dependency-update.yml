@@ -1,0 +1,66 @@
+name: nuget-dependency-update
+
+on:
+  schedule:
+    # Monday 00:30 Asia/Shanghai (Sunday 16:30 UTC).
+    - cron: '30 16 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: nuget-dependency-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TZ: Asia/Shanghai
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: 安装 dotnet-outdated
+        run: dotnet tool install --global dotnet-outdated-tool --version 4.8.1
+
+      - name: 检测并升级 NuGet 包
+        run: dotnet outdated ./framework/ZStack.Framework.slnx --upgrade
+
+      - name: 检查是否有依赖变更
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- framework test; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 创建或更新依赖升级 PR
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ${{ github.event.repository.default_branch }}
+          branch: automation/nuget-updates
+          delete-branch: true
+          commit-message: 'chore(deps): update NuGet packages'
+          title: 'chore(deps): update NuGet packages'
+          body: |
+            此 PR 由每周依赖检查任务自动创建。
+
+            - 检查并升级 `framework/ZStack.Framework.slnx` 中的 NuGet 包
+            - 通过现有 CI 后再合并
+          labels: dependencies,dotnet,automated

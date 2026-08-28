@@ -1,6 +1,6 @@
 @ZStackWebApi_HostAddress = http://localhost:5266
 
-GET {{ZStackWebApi_HostAddress}}/api/weatherforecast/
+GET {{ZStackWebApi_HostAddress}}/api/health
 Accept: application/json
 
 ###

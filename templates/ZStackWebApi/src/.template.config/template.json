@@ -1,23 +1,137 @@
 {
-    "$schema": "http://json.schemastore.org/template",
-    "author": "Zuozishi",
-    "classifications": [
-        "C#",
-        ".NET",
-        "Web",
-        "ASP.NET",
-        "MVC",
-        "ZStack.Framework"
-    ],
-    "name": "ZStack.Framework WebApi",
-    "shortName": "zstack-webapi",
-    "identity": "ZStack.Framework.Template.WebApi",
-    "defaultName": "ZStackWebApi",
-    "tags": {
-        "language": "csharp",
-        "type": "project"
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Zuozishi",
+  "classifications": [
+    "C#",
+    ".NET",
+    "Web",
+    "ASP.NET Core",
+    "ZStack.Framework",
+    "Components"
+  ],
+  "name": "ZStack.Framework ASP.NET Core Web API",
+  "shortName": "zstack-webapi",
+  "identity": "ZStack.Framework.Template.WebApi",
+  "defaultName": "ZStackWebApi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ZStackWebApi",
+  "description": "创建一个基于 ZStack.Framework 的 ASP.NET Core Web API，并按需选择组件示例。",
+  "preferNameDirectory": true,
+  "symbols": {
+    "components": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "enableQuotelessLiterals": true,
+      "displayName": "ZStack 组件",
+      "description": "可重复传入 --components 组合多个组件。",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "仅创建基础 Web API，不添加可选组件。"
+        },
+        {
+          "choice": "cache",
+          "description": "缓存组件，默认使用进程内存储。"
+        },
+        {
+          "choice": "eventbus",
+          "description": "事件总线组件，基于 RabbitMQ/EasyNetQ。"
+        },
+        {
+          "choice": "hangfire",
+          "description": "后台任务组件。"
+        },
+        {
+          "choice": "sqlsugar",
+          "description": "SqlSugar 数据访问组件。"
+        },
+        {
+          "choice": "opentelemetry",
+          "description": "OpenTelemetry Metrics 与 Tracing 组件。"
+        },
+        {
+          "choice": "qingtui",
+          "description": "轻推 API 客户端组件。"
+        }
+      ],
+      "defaultValue": "none"
     },
-    "sourceName": "ZStackWebApi",
-    "description": "ZStack.Framework WebApi项目",
-    "preferNameDirectory": true
+    "hangfireStorage": {
+      "type": "parameter",
+      "datatype": "choice",
+      "enableQuotelessLiterals": true,
+      "displayName": "Hangfire 存储",
+      "description": "仅在选择 hangfire 组件时生效；Redis/PostgreSQL 需要填写连接字符串。",
+      "isEnabled": "components == hangfire",
+      "choices": [
+        {
+          "choice": "memory",
+          "description": "内存存储，适合本地开发和示例。"
+        },
+        {
+          "choice": "redis",
+          "description": "Redis 存储。"
+        },
+        {
+          "choice": "postgresql",
+          "description": "PostgreSQL 存储。"
+        }
+      ],
+      "defaultValue": "memory"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "modifiers": [
+        {
+          "condition": "components != cache",
+          "exclude": [
+            "Configuration/cache.json",
+            "Examples/CacheExampleController.cs"
+          ]
+        },
+        {
+          "condition": "components != eventbus",
+          "exclude": [
+            "Configuration/eventbus.json",
+            "Examples/EventBusExampleController.cs"
+          ]
+        },
+        {
+          "condition": "components != hangfire",
+          "exclude": [
+            "Configuration/hangfire.json",
+            "Examples/HangfireExampleJob.cs"
+          ]
+        },
+        {
+          "condition": "components != sqlsugar",
+          "exclude": [
+            "Configuration/sqlsugar.json",
+            "Examples/SqlSugarExampleController.cs"
+          ]
+        },
+        {
+          "condition": "components != opentelemetry",
+          "exclude": [
+            "Configuration/opentelemetry.json",
+            "Examples/OpenTelemetryExampleController.cs"
+          ]
+        },
+        {
+          "condition": "components != qingtui",
+          "exclude": [
+            "Configuration/qingtui.json",
+            "Examples/QingTuiExampleController.cs"
+          ]
+        }
+      ]
+    }
+  ]
 }

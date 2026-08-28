@@ -1,6 +1,4 @@
-﻿var sp = DependencyInjection.CreateConsoleAppServiceProvider(configure => { });
+using var host = AppHostBuilder.CreateHostBuilder(args).Build();
 
-var logger = sp.GetRequiredService<ILogger>()
-    .ForContext<Program>();
-
-logger.Information("Hello, World!");
+var logger = host.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Hello from ZStack.Core console template!");

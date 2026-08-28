@@ -1,6 +1,8 @@
 {
-    "$schema": "http://gitee.com/Zuozishi/ZStack.Framework/raw/net8/schemas/hangfire.schema.json",
-    "Hangfire": {
-        "ConnectionString": ""
+  "Hangfire": {
+    "ConnectionString": "",
+    "Server": {
+      "WorkerCount": 1
     }
+  }
 }

@@ -1,0 +1,12 @@
+{
+  "QingTuiClient": {
+    "Host": "https://open.qingtui.com",
+    "Clients": [
+      {
+        "DisplayName": "示例应用",
+        "AppId": "your_app_id",
+        "Secret": "your_secret"
+      }
+    ]
+  }
+}

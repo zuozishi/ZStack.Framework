@@ -1,0 +1,142 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+      - '[0-9]*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TZ: Asia/Shanghai
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: 检出 tag
+        uses: actions/checkout@v4
+
+      - name: 设置 dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: 读取并校验版本
+        id: version
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "tag 必须使用 vMAJOR.MINOR.PATCH 或 MAJOR.MINOR.PATCH 格式，实际为：$GITHUB_REF_NAME" >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: 还原 framework 与模板
+        run: |
+          dotnet restore ./framework/ZStack.Framework.slnx
+          dotnet restore ./templates/ZStack.Framework.Templates.sln
+
+      - name: 同步模板中的 framework 版本
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' project; do
+            sed -i -E "s/(<PackageReference[[:space:]]+Include=\"ZStack[^\"]*\"[[:space:]]+Version=\")[^\"]+/\1${VERSION}/g" "$project"
+          done < <(find templates -type f -name '*.csproj' -print0)
+
+      - name: 编译 framework
+        run: dotnet build ./framework/ZStack.Framework.slnx --configuration Release --no-restore
+
+      - name: 测试 framework
+        run: dotnet test ./framework/ZStack.Framework.slnx --configuration Release --no-restore --no-build --verbosity normal
+
+      - name: 编译模板
+        run: dotnet build ./templates/ZStack.Framework.Templates.sln --configuration Release --no-restore
+
+      - name: 准备发布目录
+        shell: bash
+        run: mkdir -p artifacts
+
+      - name: 打包 framework
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' project; do
+            dotnet pack "$project" \
+              --configuration Release \
+              --no-restore \
+              --no-build \
+              --output artifacts \
+              -p:Version="$VERSION" \
+              -p:PackageVersion="$VERSION" \
+              -p:SymbolPackageFormat=snupkg
+          done < <(find framework -type f -name '*.csproj' -print0 | sort -z)
+
+      - name: 打包脚手架模板包
+        run: |
+          dotnet pack ./templates/ZStack.Framework.Templates.sln \
+            --configuration Release \
+            --no-restore \
+            --no-build \
+            --output artifacts \
+            -p:Version="$VERSION" \
+            -p:PackageVersion="$VERSION"
+
+      - name: 检查发布包
+        shell: bash
+        run: |
+          shopt -s nullglob
+          packages=(artifacts/*.nupkg)
+          if (( ${#packages[@]} == 0 )); then
+            echo '未生成任何 NuGet 包。' >&2
+            exit 1
+          fi
+          printf '将发布以下包：\n'
+          printf '%s\n' "${packages[@]}"
+
+      - name: 检查脚手架包
+        shell: bash
+        run: |
+          set -euo pipefail
+          for package in \
+            "artifacts/ZStack.Framework.Templates.ConsoleApp.${VERSION}.nupkg" \
+            "artifacts/ZStack.Framework.Templates.WebApi.${VERSION}.nupkg"; do
+            if [[ ! -f "$package" ]]; then
+              echo "缺少脚手架 NuGet 包：$package" >&2
+              exit 1
+            fi
+          done
+
+      - name: 发布到 NuGet
+        shell: bash
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [[ -z "${NUGET_API_KEY:-}" ]]; then
+            echo '未配置 secrets.NUGET_API_KEY。' >&2
+            exit 1
+          fi
+          dotnet nuget push artifacts/*.nupkg \
+            --source 'https://api.nuget.org/v3/index.json' \
+            --api-key "$NUGET_API_KEY" \
+            --skip-duplicate
+
+      - name: 创建 GitHub Release 并上传包
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" artifacts/* \
+            --title "ZStack.Framework $VERSION" \
+            --generate-notes

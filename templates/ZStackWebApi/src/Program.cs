@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args)
-    .InjectZStack();
+    .Inject();
 
 var app = builder.Build();
+
+app.UseZStackInject();
 
 app.Run();

@@ -1,0 +1,40 @@
+{
+  "DbConnection": {
+    "CommandTimeOut": 30,
+    "ConnectionConfigs": [
+      {
+        "ConfigId": "Main",
+        "DbType": "Sqlite",
+        "ConnectionString": "Data Source=app.db",
+        "IsAutoCloseConnection": true,
+        "DbSettings": {
+          "EnableInitDb": true,
+          "EnableUnderLine": true
+        },
+        "TableSettings": {
+          "EnableInitTable": true,
+          "EnableIncreTable": false
+        },
+        "SeedSettings": {
+          "EnableInitSeed": true,
+          "EnableIncreSeed": false
+        },
+        "AopSettings": {
+          "EnableIdAutoFill": true,
+          "EnableSqlLog": false,
+          "EnableErrorSqlLog": true,
+          "EnableSlowSqlLog": false,
+          "SlowSqlTime": 5000,
+          "CreateTimeFields": [
+            "CreateTime",
+            "CreatedTime"
+          ],
+          "UpdateTimeFields": [
+            "UpdateTime",
+            "UpdatedTime"
+          ]
+        }
+      }
+    ]
+  }
+}

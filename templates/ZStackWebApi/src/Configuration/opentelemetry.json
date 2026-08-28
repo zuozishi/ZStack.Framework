@@ -1,0 +1,13 @@
+{
+  "OpenTelemetry": {
+    "ServiceName": "ZStackWebApi",
+    "ServiceNameSpace": "ZStack",
+    "ServiceVersion": "1.0.0",
+    "Metrics": [
+      "ZStackWebApi.Example"
+    ],
+    "Traces": [
+      "ZStackWebApi.Example"
+    ]
+  }
+}

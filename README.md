@@ -90,3 +90,11 @@ public class Startup : AppStartup
 ### 配置
 
 在 `Configuration/` 目录下放置 JSON/INI/YAML 配置文件，框架会自动加载。环境特定文件（如 `app.Development.json`）会自动按环境筛选。
+
+## CI/CD
+
+- 普通 push 和 Pull Request 只执行还原、编译、测试和打包，不会发布 NuGet。
+- 模板 CI 会额外还原、编译并验证 `templates/*/src` 中的脚手架项目。
+- 每周一凌晨依赖任务会检查 `framework/ZStack.Framework.slnx` 中的 NuGet 包，并自动创建或更新依赖升级 PR。
+- 发布时创建并推送版本 tag，例如 `git tag v10.9.1`、`git push origin v10.9.1`。`vMAJOR.MINOR.PATCH`（也支持不带 `v`）会触发 GitHub Release，使用 tag 版本打包所有 framework 和模板包，并发布到 NuGet。
+- 仓库需要配置 Actions Secret：`NUGET_API_KEY`。
