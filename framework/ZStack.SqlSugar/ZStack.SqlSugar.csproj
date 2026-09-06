@@ -6,7 +6,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Mapster" Version="10.0.12" />
-		<PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.217" />
+		<PackageReference Include="SqlSugarCoreNoDrive" Version="5.1.4.219" />
 		<PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
 	</ItemGroup>
 
